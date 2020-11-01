@@ -1,0 +1,35 @@
+.container{
+  position: relative;
+  z-index: 1;
+  flex: 1 0 auto;
+  padding: 5.8rem 0 5.6rem;
+  overflow: hidden;
+}
+
+.scroll{
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin: -8rem 0;
+  padding: 4rem 0;
+  list-style: none;
+  scroll-padding: 0;
+  scroll-snap-type: x mandatory;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+}
+
+.item{
+  position: relative;
+  width: 350px;
+  height: 300px;
+  margin-left: 1rem;
+  transition: opacity .2s linear;
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+  flex-shrink: 0;
+
+
+  border: 1px solid;
+}

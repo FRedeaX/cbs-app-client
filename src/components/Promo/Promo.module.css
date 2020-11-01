@@ -1,0 +1,27 @@
+.promo {
+  max-width: 960px;
+  margin: 0 auto 60px;
+}
+.container{
+  display: flex;
+}
+
+.header {
+  margin: 2.5rem 0;
+  padding: 0 15px;
+}
+
+.subtitle {
+  font-size: 17px;
+}
+
+.button {
+  cursor: pointer;
+  outline: none;
+}
+
+@media screen and (min-width: 768px) {
+  .item {
+    min-height: 200px;
+  }
+}

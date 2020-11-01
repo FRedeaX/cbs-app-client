@@ -1,0 +1,134 @@
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* .item { */
+/* font-family: var(--fontMA); */
+/* font-weight: 500; */
+/* line-height: 2rem; */
+/* } */
+
+.item:hover .subMneu {
+  visibility: visible;
+}
+
+.text {
+  position: relative;
+  font-size: 1.5rem;
+  color: var(--menuLink);
+  padding: 1.4rem 1rem;
+}
+
+.link {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.link::after,
+.span::after {
+  content: "";
+  position: absolute;
+  left: 1.1rem;
+  right: 1.1rem;
+  bottom: 1rem;
+  height: 1px;
+  /* height: 1.6px; */
+  background-color: var(--borderLink);
+  transition: transform 0.35s, transform-origin 0.35s;
+  transform: scaleX(0);
+  transform-origin: left;
+  z-index: 1;
+}
+
+.span {
+  cursor: default;
+}
+
+.subMneu {
+  max-width: 300px;
+  flex-direction: column;
+  position: absolute;
+  visibility: hidden;
+  background-color: var(--bgWhite);
+  margin-top: 0.5rem;
+  z-index: 1;
+}
+
+.subMneu .text {
+  display: block;
+  padding: 1rem;
+}
+
+.subMneu .text::after {
+  bottom: 0.6rem;
+}
+
+.secondary {
+  justify-content: flex-end;
+}
+
+.secondary__item {
+  text-align: right;
+  line-height: 1.2rem;
+}
+
+.secondary__item a {
+  font-size: 1.3rem;
+  padding: 1rem 0 1rem 1rem;
+}
+
+@media screen and (min-width: 993px) {
+  .item:hover > .link::after {
+    transform-origin: right;
+    transform: scaleX(1);
+  }
+
+  .secondary__item .link::after {
+    left: -34.2px;
+    right: 0px;
+    bottom: 5px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .list {
+    flex-direction: column;
+  }
+
+  .link {
+    display: block;
+  }
+
+  .span {
+    display: block;
+  }
+
+  .span::after {
+    transform: scaleX(0) !important;
+  }
+
+  .subMneu {
+    position: initial;
+    visibility: visible;
+    margin: 0.4rem 0 0.4rem 2rem;
+  }
+
+  .secondary__item {
+    text-align: left;
+    padding: 10px;
+  }
+
+  .secondary .text {
+    color: var(--menuLink--medium);
+    width: max-content;
+  }
+
+  .secondary__item .link::after {
+    right: 0;
+    bottom: 3px;
+  }
+}

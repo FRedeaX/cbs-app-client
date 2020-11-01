@@ -1,0 +1,21 @@
+.item {
+  /* font-family: var(--fontE); */
+  width: max-content;
+  padding-right: 0.5rem;
+}
+.item--cleanup-day .weekday {
+  width: max-content;
+  font-size: 1.26rem;
+  text-transform: none;
+}
+
+.item--cleanup-day .time {
+  font-size: 1.46rem;
+}
+
+.weekday {
+  font-size: 1.16rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  width: 1rem;
+}
