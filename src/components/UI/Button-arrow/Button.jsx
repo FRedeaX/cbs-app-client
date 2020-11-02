@@ -16,12 +16,12 @@ const Button = ({ cls, type, onClick, direction, isDirection, isVisible }) => {
     </>
   );
 };
-function areEqual(prevProps, nextProps) {
+// function areEqual(prevProps, nextProps) {
   // if (prevProps.isVisible === nextProps.isVisible) return true;
   /*
   возвращает true, если nextProps рендерит
   тот же результат что и prevProps,
   иначе возвращает false
   */
-}
-export default memo(Button, areEqual);
+// }
+export default memo(Button);

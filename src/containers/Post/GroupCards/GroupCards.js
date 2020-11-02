@@ -1,7 +1,6 @@
 import { gql, useLazyQuery } from "@apollo/client";
 import React, { memo, useEffect, useState } from "react";
-import Card from "../../components/Post/Card/Card";
-import GroupCards from "../../components/Post/Group-cards/GroupCards";
+import GroupCards from "../../../components/Post/Group-cards/GroupCards";
 
 const FETCH_TAG = gql`
   query FetchTag($tagID: String, $last: Int) {
@@ -64,19 +63,27 @@ const GroupCardsContainer = ({ tags, postsByTag }) => {
     setPosts(postsArr);
   }, [data, postsByTag, missingPost, tags.count]);
 
-  const renderCards = (nodes) => (
+  // const renderCards = (nodes) => (
+  //   <GroupCards
+  //     title={tags.name}
+  //     description={tags.description}
+  //     length={tags.count}
+  //   >
+  //     {nodes.map((postByTag) => (
+  //       <Card key={postByTag.id} data={postByTag} />
+  //     ))}
+  //   </GroupCards>
+  // );
+
+  return (
     <GroupCards
+      data={posts ? posts : postsByTag}
       title={tags.name}
       description={tags.description}
       length={tags.count}
-    >
-      {nodes.map((postByTag) => (
-        <Card key={postByTag.id} data={postByTag} />
-      ))}
-    </GroupCards>
+    />
   );
-
-  return posts ? renderCards(posts) : renderCards(postsByTag);
+  // return posts ? renderCards(posts) : renderCards(postsByTag);
 };
 
 export default memo(GroupCardsContainer);
