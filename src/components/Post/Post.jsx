@@ -1,5 +1,5 @@
 import React, { Fragment, memo, useCallback, useEffect, useState } from "react";
-import GroupCardsContainer from "../../containers/GroupCards/GroupCards";
+import GroupCardsContainer from "../../containers/Post/GroupCards/GroupCards";
 import Title from "../Title/Title";
 import Card from "./Card/Card";
 import classes from "./Post.module.css";
@@ -10,7 +10,8 @@ const Post = ({ data, title, groupCards = true }) => {
   // const date = data[0].date.split("T")[0].split("-")[2];
   // const limitDate = 7;
 
-  const [innerWidth, setInnerWidth] = useState(window.innerWidth);
+  // const [innerWidth, setInnerWidth] = useState(window.innerWidth);
+  const innerWidth = window.innerWidth;
   const [isTwoColumns, setTwoColumns] = useState(null);
   
   const windowSize = useCallback(() => {
@@ -25,19 +26,19 @@ const Post = ({ data, title, groupCards = true }) => {
     windowSize()
   }, [windowSize, innerWidth, isTwoColumns, setTwoColumns]);
 
-  useEffect(() => {
-    let timeout;
-    const hendleResize = () => {
-      if (!timeout) {
-        timeout = setTimeout(function () {
-          timeout = null;
-          setInnerWidth(window.innerWidth);
-        }, 150);
-      }
-    }
-    window.addEventListener("resize", hendleResize, false);
-    return () => window.removeEventListener("resize", hendleResize,false);
-  },[])
+  // useEffect(() => {
+  //   let timeout;
+  //   const hendleResize = () => {
+  //     if (!timeout) {
+  //       timeout = setTimeout(function () {
+  //         timeout = null;
+  //         setInnerWidth(window.innerWidth);
+  //       }, 150);
+  //     }
+  //   }
+  //   window.addEventListener("resize", hendleResize, false);
+  //   return () => window.removeEventListener("resize", hendleResize,false);
+  // },[])
 
   const filterPostsByTag = (tags) =>
     data.filter((post) =>
