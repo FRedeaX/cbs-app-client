@@ -1,0 +1,30 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  transition: opacity 0.15s linear;
+  z-index: -1;
+}
+
+.overlay:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: var(--overlay-color);
+}
+
+.overlay--active {
+  opacity: 0.8;
+  z-index: 2;
+}
+
+.touch--none {
+  pointer-events: none;
+  transition: none;
+}

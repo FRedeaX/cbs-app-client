@@ -1,0 +1,63 @@
+.contols {
+  display: none;
+  outline: none;
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  transform: translateY(-50%);
+  padding: 0;
+  z-index: 2;
+}
+
+.contols::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  background-color: var(--bg-controls);
+}
+
+.contols::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA0OTEuOTk2IDQ5MS45OTYiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDQ5MS45OTYgNDkxLjk5NjsiIHhtbDpzcGFjZT0icHJlc2VydmUiPgo8Zz4KCTxnPgoJCTxwYXRoIGQ9Ik00ODQuMTMyLDEyNC45ODZsLTE2LjExNi0xNi4yMjhjLTUuMDcyLTUuMDY4LTExLjgyLTcuODYtMTkuMDMyLTcuODZjLTcuMjA4LDAtMTMuOTY0LDIuNzkyLTE5LjAzNiw3Ljg2bC0xODMuODQsMTgzLjg0OCAgICBMNjIuMDU2LDEwOC41NTRjLTUuMDY0LTUuMDY4LTExLjgyLTcuODU2LTE5LjAyOC03Ljg1NnMtMTMuOTY4LDIuNzg4LTE5LjAzNiw3Ljg1NmwtMTYuMTIsMTYuMTI4ICAgIGMtMTAuNDk2LDEwLjQ4OC0xMC40OTYsMjcuNTcyLDAsMzguMDZsMjE5LjEzNiwyMTkuOTI0YzUuMDY0LDUuMDY0LDExLjgxMiw4LjYzMiwxOS4wODQsOC42MzJoMC4wODQgICAgYzcuMjEyLDAsMTMuOTYtMy41NzIsMTkuMDI0LTguNjMybDIxOC45MzItMjE5LjMyOGM1LjA3Mi01LjA2NCw3Ljg1Ni0xMi4wMTYsNy44NjQtMTkuMjI0ICAgIEM0OTEuOTk2LDEzNi45MDIsNDg5LjIwNCwxMzAuMDQ2LDQ4NC4xMzIsMTI0Ljk4NnoiLz4KCTwvZz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K");
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+.arrow--left {
+  top: 50%;
+  left: -22px;
+}
+
+.arrow--left::before {
+  transform: rotate(90deg);
+}
+
+.arrow--left::after {
+  box-shadow: 2px 2px 8px -4px rgb(0 0 0 / 0.2);
+}
+
+.arrow--right {
+  top: 50%;
+  right: -22px;
+}
+
+.arrow--right::before {
+  transform: rotate(-90deg);
+}
+
+.arrow--right::after {
+  box-shadow: -2px 2px 8px -4px rgb(0 0 0 / 0.2);
+}
+
+.visible {
+  display: block;
+}

@@ -1,0 +1,78 @@
+import React, { Fragment } from "react";
+import {
+  Redirect,
+  Route,
+  Switch,
+  useLocation,
+  withRouter,
+} from "react-router-dom";
+import "./App.css";
+import Library from "./components/Page/Library/Library";
+import RedirectToHome from "./components/RedirectToHome";
+import ZoomImage from "./components/Zoom-image/Zoom-image";
+import Category from "./containers/Category/Category";
+import Header from "./containers/Header/Header";
+import HomePage from "./containers/HomePage/HomePage";
+import ModalRoot from "./containers/ModalRoot/ModalRoot";
+import Page from "./containers/Page/Page";
+// import NotFound from "./containers/NotFound/NotFound";
+
+const App = () => {
+  // const overlay = useSelector((state) => state.UI.overlay);
+  return <ModalSwitch />;
+};
+
+const locationInitial = {
+  hash: "",
+  pathname: "/",
+  search: "",
+  state: undefined,
+};
+
+function ModalSwitch() {
+  const location = useLocation();
+  const pathnameSplit = location.pathname.split("/");
+  let background;
+
+  // //console.log(
+  //   !location.state,
+  //   pathnameSplit[2] !== "category",
+  //   pathnameSplit[1] === "post",
+  //   overlay.isOpen //undefined
+  // );
+
+  // без этой проверки location.pathname.split("/")[2] !== "category"
+  // невозможно пройти по пути "/post/category/:slug"
+  // если переход к этой ссылке произошел из вне или по нажатию на рубрику в посте
+  if (location.state) background = location.state.background;
+  else if (
+    !location.state &&
+    pathnameSplit[2] !== "category" &&
+    pathnameSplit[1] === "post"
+    // overlay.isOpen
+  )
+    background = locationInitial;
+
+  return (
+    <Fragment>
+      <Header />
+      <Switch location={background || location}>
+        <Route path="/" exact component={HomePage} />
+        <Route path="/post" exact component={RedirectToHome} />
+        <Route path="/post/category" exact component={RedirectToHome} />
+        <Route path="/post/category/:slug" component={Category} />
+        <Route path="/post/:slug" component={ModalRoot} />
+        {/* <Route path="/post/:slug" component={ModalRoot} /> ?p=15632 */}
+        <Route path="/biblioteki" exact component={Library} />
+        <Route path="/:slug" component={Page} />
+        <Redirect to="/" />
+      </Switch>
+      {/* <Route path="/o-nas" exact component={RedirectToHome} /> */}
+
+      {background && <Route path="/post/:slug" component={ModalRoot} />}
+      <ZoomImage />
+    </Fragment>
+  );
+}
+
+export default withRouter(App);

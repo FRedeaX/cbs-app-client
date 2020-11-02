@@ -1,0 +1,41 @@
+.library-info {
+  font-size: 1.6rem;
+  margin-bottom: 3rem;
+
+  & a{
+    color: rgb(4, 90, 145);    
+  }
+}
+
+.library-info__title {
+  font-size: 2rem;
+  font-weight: 500;
+  color: #727272;
+  // margin-bottom: 1.8rem;
+  padding-bottom: 0.9rem;
+  margin-bottom: 0.9rem;
+  border-bottom: 1px solid #dbdbdb;
+}
+
+.library-info__subtitle {
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: #727272;
+  margin-bottom: 0.9rem;
+}
+
+.library-info__item {
+  padding-bottom: 0.4rem;
+  margin-bottom: 0.6rem;
+  border-bottom: 1px solid #dbdbdb;
+}
+
+.library-info__left-column {
+  display: inline-block;
+  max-width: 26rem;
+  margin-right: 1.6rem;
+}
+
+.library-info__right-column {
+  letter-spacing: 0.1rem;
+}
