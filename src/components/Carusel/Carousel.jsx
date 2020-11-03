@@ -14,23 +14,15 @@ const Carousel = ({ children, length }) => {
   const [isCenter, setCenter] = useState(false);
 
   useEffect(() => {
-    // if (length > 3) {
-    //   setRight(true);
-    // }
     if (!scrollRef.current) return;
     const scrolled = scrollRef.current;
     const wrapperWidth = scrolled.offsetWidth;
-    const articleWidth = scrolled.childNodes[0].childNodes[0].offsetWidth;
+    const articleWidth = scrolled.childNodes[0] && scrolled.childNodes[0].childNodes[0] && scrolled.childNodes[0].childNodes[0].offsetWidth;
     const margin = 20;
     const itemsWidth = (articleWidth + margin) * length;
 
     if (wrapperWidth > itemsWidth) setCenter(true);
     if (wrapperWidth < itemsWidth) setRight(true);
-
-    console.log(length, wrapperWidth > itemsWidth, wrapperWidth < itemsWidth);
-
-
-
   }, [length, setLeft, setRight]);
 
   const hendleScroll = (direction) => {

@@ -1,17 +1,25 @@
 import { gql, useQuery } from "@apollo/client";
+import React, { memo } from "react";
+import Book from "../../components/Book/Book";
 
 const FETCH_BOOKS = gql`
   query FetchBooks {
     books {
       nodes {
-        id
-        title
-        uri
         authors {
           nodes {
             id
             name
             uri
+          }
+        }
+        featuredImage {
+          node {
+            sourceUrl(size: THUMBNAIL)
+            mediaDetails {
+              height
+              width
+            }
           }
         }
         genres {
@@ -21,14 +29,17 @@ const FETCH_BOOKS = gql`
             uri
           }
         }
-        years {
+        id
+        publishers {
           nodes {
             id
             name
             uri
           }
         }
-        publishers {
+        title
+        uri
+        years {
           nodes {
             id
             name
@@ -46,8 +57,7 @@ const BookContainer = () => {
   if (loading) return null;
   if (error) return console.error(error);
 
-  console.log(data);
-  return null;
+  return <Book data={data.books.nodes} />;
 };
 
-export default BookContainer;
+export default memo(BookContainer);
