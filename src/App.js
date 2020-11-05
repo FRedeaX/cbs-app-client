@@ -7,6 +7,7 @@ import {
   withRouter,
 } from "react-router-dom";
 import "./App.css";
+import Footer from "./components/Footer/Footer";
 import Library from "./components/Page/Library/Library";
 import RedirectToHome from "./components/RedirectToHome";
 import ZoomImage from "./components/Zoom-image/Zoom-image";
@@ -71,6 +72,7 @@ function ModalSwitch() {
 
       {background && <Route path="/post/:slug" component={ModalRoot} />}
       <ZoomImage />
+      <Footer />
     </Fragment>
   );
 }
