@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, memo } from "react";
 import classes from "./Title.module.css";
 
 export const SUBTITLE = "SUBTITLE";
@@ -16,4 +16,4 @@ const Title = (props) => {
     </Fragment>
   );
 };
-export default Title;
+export default memo(Title);

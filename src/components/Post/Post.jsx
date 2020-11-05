@@ -1,6 +1,7 @@
 import React, { Fragment, memo, useCallback, useEffect, useState } from "react";
 import GroupCardsContainer from "../../containers/Post/GroupCards/GroupCards";
-import Title from "../Title/Title";
+import SectionHeader from "../SectionHeader/SectionHeader";
+import Layout from "../UI/Layout/Layout";
 import Card from "./Card/Card";
 import classes from "./Post.module.css";
 
@@ -101,13 +102,15 @@ const Post = ({ data, title, groupCards = true }) => {
     <>
       {/* {console.log('render P')} */}
       {/* <Promo /> */}
-      <section className={classes.post}>
-        <header className={classes.header}>
-          <Title HtmlTeg="h2">{title ? title : "Мероприятия"}</Title>
-        </header>
-        <div className={classes.container}>
-          {groupCards ? <RenderPostAndGroupCards /> : <RenderPostNotGroupCards/>}
-        </div>
+      <section>
+        <Layout page={ true }>          
+          <SectionHeader>
+            {title ? title : "Мероприятия"}
+          </SectionHeader>
+          <div className={classes.container}>
+            {groupCards ? <RenderPostAndGroupCards /> : <RenderPostNotGroupCards/>}
+          </div>
+        </Layout>
       </section>
     </>
   );

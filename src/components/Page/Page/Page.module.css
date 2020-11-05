@@ -1,6 +1,5 @@
 .container {
-  max-width: 960px;
-  margin: 0 auto;
+  padding: 0 15px;
 }
 
 .title {
@@ -22,6 +21,7 @@
   width: max-content;
   margin-left: auto;
 }
+
 .content h2 strong {
   font-weight: 500;
 }
