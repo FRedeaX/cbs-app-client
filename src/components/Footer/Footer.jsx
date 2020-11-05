@@ -9,7 +9,7 @@ function Footer() {
         <a
           href="https://metrika.yandex.ru/stat/?id=33186213&amp;from=informer"
           target="_blank"
-          rel="nofollow"
+          rel="noopener noreferrer"
           style={{ fontSize: '10px', color: 'initial'}}
         >
           <img
