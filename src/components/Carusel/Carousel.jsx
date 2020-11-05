@@ -71,7 +71,7 @@ const Carousel = ({ children, length }) => {
           onScroll={ hendleScrollEvent }
           className={ cx({
             scrolled: true,
-            ["scrolled--center"]: isCenter,
+            "scrolled--center": isCenter,
           })}
         >
           <div className={classes.items}>{children}</div>
@@ -81,14 +81,14 @@ const Carousel = ({ children, length }) => {
         <>
           <div
             className={cx({
-              ["shadow-left"]: true,
-              ["shadow-left--active"]: isLeft
+              "shadow-left": true,
+              "shadow-left--active": isLeft
             })}
           />
           <div
             className={cx({
-              ["shadow-right"]: true,
-              ["shadow-right--active"]: isRight
+              "shadow-right": true,
+              "shadow-right--active": isRight
             })}
           />
           { isBrowser && (
