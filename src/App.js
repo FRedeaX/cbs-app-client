@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import {
   Redirect,
   Route,
@@ -6,7 +6,7 @@ import {
   useLocation,
   withRouter,
 } from "react-router-dom";
-import "./App.css";
+import classes from "./App.module.css";
 import Footer from "./components/Footer/Footer";
 import Library from "./components/Page/Library/Library";
 import RedirectToHome from "./components/RedirectToHome";
@@ -16,7 +16,6 @@ import Header from "./containers/Header/Header";
 import HomePage from "./containers/HomePage/HomePage";
 import ModalRoot from "./containers/ModalRoot/ModalRoot";
 import Page from "./containers/Page/Page";
-// import NotFound from "./containers/NotFound/NotFound";
 
 const App = () => {
   // const overlay = useSelector((state) => state.UI.overlay);
@@ -55,25 +54,27 @@ function ModalSwitch() {
     background = locationInitial;
 
   return (
-    <Fragment>
+    <>
       <Header />
-      <Switch location={background || location}>
-        <Route path="/" exact component={HomePage} />
-        <Route path="/post" exact component={RedirectToHome} />
-        <Route path="/post/category" exact component={RedirectToHome} />
-        <Route path="/post/category/:slug" component={Category} />
-        <Route path="/post/:slug" component={ModalRoot} />
-        {/* <Route path="/post/:slug" component={ModalRoot} /> ?p=15632 */}
-        <Route path="/biblioteki" exact component={Library} />
-        <Route path="/:slug" component={Page} />
-        <Redirect to="/" />
-      </Switch>
-      {/* <Route path="/o-nas" exact component={RedirectToHome} /> */}
+      <main className={classes.main}>
+        <Switch location={background || location}>
+          <Route path="/" exact component={HomePage} />
+          <Route path="/post" exact component={RedirectToHome} />
+          <Route path="/post/category" exact component={RedirectToHome} />
+          <Route path="/post/category/:slug" component={Category} />
+          <Route path="/post/:slug" component={ModalRoot} />
+          {/* <Route path="/post/:slug" component={ModalRoot} /> ?p=15632 */}
+          <Route path="/biblioteki" exact component={Library} />
+          <Route path="/:slug" component={Page} />
+          <Redirect to="/" />
+        </Switch>
+        {/* <Route path="/o-nas" exact component={RedirectToHome} /> */}
 
-      {background && <Route path="/post/:slug" component={ModalRoot} />}
+        {background && <Route path="/post/:slug" component={ModalRoot} />}
+      </main>
       <ZoomImage />
       <Footer />
-    </Fragment>
+    </>
   );
 }
 

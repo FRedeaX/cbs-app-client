@@ -33,6 +33,12 @@
   --secondary-color: var(--gray);
 }
 
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
 html {
   font-size: 10px;
 }

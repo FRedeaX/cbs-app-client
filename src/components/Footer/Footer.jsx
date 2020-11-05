@@ -1,8 +1,29 @@
 import React from "react";
 import Layout from "../UI/Layout/Layout";
+import classes from './Footer.module.css';
 
 function Footer() {
-  return <div className="footer"><Layout page={true}>footer</Layout></div>;
+  return(
+    <div className={ classes.body }>
+      <Layout>
+        <a
+          href="https://metrika.yandex.ru/stat/?id=33186213&amp;from=informer"
+          target="_blank"
+          rel="nofollow"
+          style={{ fontSize: '10px', color: 'initial'}}
+        >
+          <img
+            src="https://informer.yandex.ru/informer/33186213/3_1_FFFFFFFF_EFEFEFFF_0_pageviews"
+            style={ { width: '88px', height: '31px', border: 0, borderRadius: 0 } }
+            alt="Яндекс.Метрика"
+            title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)"
+            class="ym-advanced-informer"
+            data-cid="33186213"
+            data-lang="ru"
+          />
+        </a>
+      </Layout>
+    </div>)
 }
 
 export default Footer;
