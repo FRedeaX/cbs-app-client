@@ -304,30 +304,118 @@ function switchjQueryCDN() {
  */
 add_action( 'init', 'register_book_post_type' );
 function register_book_post_type() {
-	register_taxonomy('taxonomyBook', array('book'), array(
-		'label'                 => 'Жанры', // определяется параметром $labels->name
+	register_taxonomy('author', array('book'), array(
+		'labels'                => array(
+			'name'              => 'Авторы',
+			'singular_name'     => 'Автор',
+			'search_items'      => 'Поиск по автору',
+			'popular_items'			=> 'Популярные авторы',
+			'all_items'         => 'Все авторы',
+			'parent_item'       => null,
+			'parent_item_colon' => null,
+			'edit_item'         => 'Редактировать данные автора',
+			'update_item'       => 'Обновить',
+			'add_new_item'      => 'Добавить нового автора',
+			'view_item'					=> 'Перейти',
+			'new_item_name'     => 'Добавить автора',
+			'choose_from_most_used' => 'Часто используемые',
+		),
+		'description'           => 'Авторы книг', // описание таксономии
+		'public'                => true,
+		'show_in_rest' 					=> true, // Таксономи в редакторе Гутенберг
+		// 'rest_base'							=> 'genres', //не обязательно для graphql?
+		// 'rest_controller_class'	=> 'genres', //не обязательно для graphql?
+		'rewrite'               => array('slug'=>'book/author', 'with_front'=>false, 'feed'=>false ),
+		'sort'									=> true,
+		'show_admin_column'     => true, // Позволить или нет авто-создание колонки таксономии в таблице ассоциированного типа записи. (с версии 3.5)
+		'show_in_graphql' => true,
+    'graphql_single_name' => 'author',
+    'graphql_plural_name' => 'authors',
+	) );
+
+	register_taxonomy('genre', array('book'), array(
 		'labels'                => array(
 			'name'              => 'Жанры',
 			'singular_name'     => 'Жанр',
 			'search_items'      => 'Искать жанр',
+			'popular_items'			=> 'Популярные жанры',
 			'all_items'         => 'Все жанры',
 			'parent_item'       => 'Родит. жанр',
 			'parent_item_colon' => 'Родит. жанр:',
 			'edit_item'         => 'Редактировать данные жанра',
 			'update_item'       => 'Обновить',
 			'add_new_item'      => 'Добавить новый жанр',
+			'view_item'					=> 'Перейти',
 			'new_item_name'     => 'Добавить жанр',
-			'menu_name'         => 'Жанры',
+			'choose_from_most_used' => 'Часто используемые',
 		),
-		'description'           => 'Рубрики для раздела вопросов', // описание таксономии
+		'description'           => 'Жанры книг', // описание таксономии
 		'public'                => true,
-		'show_in_nav_menus'     => false, // равен аргументу public
-		'show_ui'               => true, // равен аргументу public		
 		'show_in_rest' 					=> true, // Таксономи в редакторе Гутенберг
-		'show_tagcloud'         => false, // равен аргументу show_ui
+		// 'rest_base'							=> 'genres', //не обязательно для graphql?
+		// 'rest_controller_class'	=> 'genres', //не обязательно для graphql?
 		'hierarchical'          => true,
-		'rewrite'               => array('slug'=>'taxonomyBook', 'hierarchical'=>false, 'with_front'=>true, 'feed'=>false ),
+		'rewrite'               => array('slug'=>'book/genre', 'hierarchical'=>true, 'with_front'=>false, 'feed'=>false ),
+		// 'sort'									=> true,
 		'show_admin_column'     => true, // Позволить или нет авто-создание колонки таксономии в таблице ассоциированного типа записи. (с версии 3.5)
+		'show_in_graphql' => true,
+    'graphql_single_name' => 'genre',
+    'graphql_plural_name' => 'genres',
+	) );
+
+	register_taxonomy('year', array('book'), array(
+		'labels'                => array(
+			'name'              => 'Год издания',
+			'singular_name'     => 'Год издания',
+			'search_items'      => 'Поиск по году издания',
+			'all_items'         => 'Все годы издания',
+			'parent_item'       => null,
+			'parent_item_colon' => null,
+			'edit_item'         => 'Редактировать год издания',
+			'update_item'       => 'Обновить',
+			'add_new_item'      => 'Добавить новый год издания',
+			'view_item'					=> 'Перейти',
+			'new_item_name'     => 'Добавить новый год издания',
+			'choose_from_most_used' => 'Часто используемые',
+		),
+		'description'           => 'Год издания книги', // описание таксономии
+		'public'                => true,
+		'show_in_rest' 					=> true, // Таксономи в редакторе Гутенберг
+		// 'rest_base'							=> 'genres', //не обязательно для graphql?
+		// 'rest_controller_class'	=> 'genres', //не обязательно для graphql?
+		'rewrite'               => array('slug'=>'book/year', 'with_front'=>false, 'feed'=>false ),
+		// 'sort'									=> true,
+		'show_admin_column'     => true, // Позволить или нет авто-создание колонки таксономии в таблице ассоциированного типа записи. (с версии 3.5)
+		'show_in_graphql' => true,
+    'graphql_single_name' => 'year',
+    'graphql_plural_name' => 'years',
+	) );
+
+	register_taxonomy('publisher', array('book'), array(
+		'labels'                => array(
+			'name'              => 'Издательство',
+			'singular_name'     => 'Издательство',
+			'search_items'      => 'Поиск по издателям',
+			'all_items'         => 'Все издатели',
+			'parent_item'       => null,
+			'parent_item_colon' => null,
+			'edit_item'         => 'Редактировать издателя',
+			'update_item'       => 'Обновить',
+			'add_new_item'      => 'Добавить нового издателя',
+			'view_item'					=> 'Перейти',
+			'new_item_name'     => 'Добавить нового издателя',
+			'choose_from_most_used' => 'Часто используемые',
+		),
+		'public'                => true,
+		'show_in_rest' 					=> true, // Таксономи в редакторе Гутенберг
+		// 'rest_base'							=> 'genres', //не обязательно для graphql?
+		// 'rest_controller_class'	=> 'genres', //не обязательно для graphql?
+		'rewrite'               => array('slug'=>'book/publisher', 'with_front'=>false, 'feed'=>false ),
+		// 'sort'									=> true,
+		'show_admin_column'     => true, // Позволить или нет авто-создание колонки таксономии в таблице ассоциированного типа записи. (с версии 3.5)
+		'show_in_graphql' => true,
+    'graphql_single_name' => 'publisher',
+    'graphql_plural_name' => 'publishers',
 	) );
 
 	register_post_type('book', array(
@@ -354,15 +442,15 @@ function register_book_post_type() {
 		'capability_type'     => 'post',
 		'map_meta_cap'        => true,
 		'hierarchical'        => false,
-		'rewrite'             => array( 'with_front'=> false ),//array( 'slug'=>'book', 'with_front'=>false, 'pages'=>false, 'feeds'=>false, 'feed'=>false ),
+		'rewrite'             => array( 'slug'=>'book', 'with_front'=> false ),//array( 'slug'=>'book', 'with_front'=>false, 'pages'=>false, 'feeds'=>false, 'feed'=>false ),
 		'has_archive'         => false,
 		'query_var'           => true,
 		'menu_position'       => 4,
 		'show_in_graphql' 			=> true,
 		'graphql_single_name' 	=> 'book',
 		'graphql_plural_name' 	=> 'books',
-		'supports'            => array( 'title', 'editor', 'thumbnail', 'excerpt' ),
-		'taxonomies'          => array( 'taxonomyBook' ),
+		'supports'            => array( 'title', 'editor', 'thumbnail', 'excerpt', 'custom-fields' ),
+		'taxonomies'          => array( 'author', 'genre', 'year', 'publisher' ),
 	) );
 }
 

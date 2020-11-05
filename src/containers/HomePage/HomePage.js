@@ -2,6 +2,7 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import SEO from "../../components/Seo/Seo";
 import ModalRoot from "../ModalRoot/ModalRoot";
+import BookContainer from "./../Book/BookContainer";
 import PostContainer from "./../Post/Post";
 
 const HomePage = () => {
@@ -15,6 +16,7 @@ const HomePage = () => {
     <main>
       {window.location.pathname === "/" && <SEO />}
 
+      <BookContainer />
       <PostContainer />
     </main>
   );
