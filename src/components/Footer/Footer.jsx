@@ -17,7 +17,7 @@ function Footer() {
             style={ { width: '88px', height: '31px', border: 0, borderRadius: 0 } }
             alt="Яндекс.Метрика"
             title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)"
-            class="ym-advanced-informer"
+            class="ym-advanced-informer skip"
             data-cid="33186213"
             data-lang="ru"
           />
