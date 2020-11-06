@@ -12,10 +12,10 @@
   position: relative;
 }
 
-.content a:hover {
+/* .content a:hover {
   color: var(--accentColor);
   transition: color 0.15s ease-out;
-}
+} */
 
 .share {
   width: max-content;

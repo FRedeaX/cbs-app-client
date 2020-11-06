@@ -93,23 +93,27 @@ const PostContainer = () => {
     isLoaded.current = true;
   }, [data]);
 
-  const handleOnScrollHome = useCallback(() => {
-    if (!data) return;
-    if (!isMoreLoad) return;
+  const handleOnScrollHome = useCallback(
+    (event) => {
+      event.stopPropagation();
+      if (!data) return;
+      if (!isMoreLoad) return;
 
-    const scrolledToBottom =
-      Math.ceil(window.scrollY + window.innerHeight * 3) >=
-      document.body.scrollHeight;
+      const scrolledToBottom =
+        Math.ceil(window.scrollY + window.innerHeight * 3) >=
+        document.body.scrollHeight;
 
-    if (
-      scrolledToBottom &&
-      isLoaded.current &&
-      data.posts.pageInfo.hasNextPage
-    ) {
-      isLoaded.current = false;
-      fetchMoreArticles();
-    }
-  }, [data, fetchMoreArticles, isMoreLoad]);
+      if (
+        scrolledToBottom &&
+        isLoaded.current &&
+        data.posts.pageInfo.hasNextPage
+      ) {
+        isLoaded.current = false;
+        fetchMoreArticles();
+      }
+    },
+    [data, fetchMoreArticles, isMoreLoad]
+  );
 
   useEffect(() => {
     window.addEventListener("scroll", handleOnScrollHome);

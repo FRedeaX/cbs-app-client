@@ -1,31 +1,27 @@
+import classNames from 'classnames';
 import React, { useState } from "react";
 import { classJoin } from "../../../../../constant/function";
 import classesInfo from "../Contact-info.module.css";
 import classes from "./Telefon.module.css";
 
-export const Telefon = (props) => {
-  const { telefon } = props;
+export const Telefon = ({telefon, cls}) => {
   const [countTel, setCountTel] = useState(3);
 
   function renderTelefonItem(data) {
     return data
-      .filter((tel, index) => index < countTel)
+      .filter((_, index) => index < countTel)
       .map((item, index) => {
-        // if (index < countTel)
         return (
           <div
             key={index}
-            className={classJoin([classesInfo.item, classes.item])}
+            className={classNames(classesInfo.item, classes.item)}
           >
             <div className={classesInfo["left-column"]}>
               <h5 className={classes.subtitle}>{item.position}</h5>
               <span className={classes.description}>{item.name}</span>
             </div>
             <a
-              className={classJoin([
-                classesInfo["right-column"],
-                classes.number,
-              ])}
+              className={cls}
               href={`tel:833622${item.tel}`}
             >
               {item.tel}
@@ -50,11 +46,11 @@ export const Telefon = (props) => {
       <h4 className={classJoin([classesInfo.title, classes.title])}>Телефон</h4>
       <div className={classJoin([classesInfo.list, classes.list])}>
         {renderTelefonItem(telefon)}
-        {telefon.length > 1 ? (
+        {telefon.length > 1 && (
           <button className={classes.button} onClick={(e) => hendleClick(e)}>
             Показать ещё
           </button>
-        ) : null}
+        )}
       </div>
     </div>
   );

@@ -53,6 +53,14 @@ function ModalSwitch() {
   )
     background = locationInitial;
 
+  // useEffect(() => {
+  //   const hendleScroll = () => {
+  //     console.log("main");
+  //   };
+  //   window.addEventListener("scroll", hendleScroll);
+  //   return () => window.removeEventListener("scroll", hendleScroll);
+  // }, []);
+
   return (
     <>
       <Header />

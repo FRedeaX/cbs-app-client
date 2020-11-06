@@ -1,7 +1,7 @@
 import classNamesBind from "classnames/bind";
 import React, { useEffect, useRef, useState } from "react";
 import { isBrowser } from 'react-device-detect';
-import Button from "./../UI/Button-arrow/Button";
+import Button from "../UI/Button-arrow/Button";
 import classes from "./Carousel.module.css";
 
 const Carousel = ({ children, length }) => {
@@ -43,6 +43,7 @@ const Carousel = ({ children, length }) => {
   };
 
   const hendleScrollEvent = (event) => {
+    event.stopPropagation();
     const scroll = event.target.scrollLeft;
     const scrolled = scrollRef.current;
     alreadyScrolled = scroll;

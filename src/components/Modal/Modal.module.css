@@ -29,6 +29,8 @@
   text-align: center;
   /* margin: 4rem; */
   margin: 0.68em;
+  padding-bottom: 0;
+  border: none;
   /* transition: opacity, transform 0.35s; */
   transition: 0.35s;
 }

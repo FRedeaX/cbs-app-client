@@ -1,3 +1,179 @@
 /* .content {
   font-size: 18px;
 } */
+
+.body a {
+  padding: 1px 4px;
+  background-color: hsla(199, 100%, 33%, 0.08);
+  border-radius: 4px;
+  color: #0073aa;
+  transition: background-color 0.150s linear;
+}
+
+.body a:hover {
+  background-color: hsla(199, 100%, 33%, 0.18);
+}
+
+/* .body a:last-child {
+  margin-right: 0;
+} */
+
+.body a:visited {
+  color: rgb(85, 26, 139);
+  background-color: rgba(85, 26, 139, 0.08);
+}
+
+.body p,
+.body ul,
+.body ol,
+.body td {
+  margin-bottom: 20px;
+  margin-top: 0;
+  color: rgb(30, 30, 30);
+}
+
+.body a,
+.body p,
+.body ul,
+.body ol,
+.body td {
+  font-size: calc(16px + 3 * (100vw / 1600));
+  letter-spacing: 0.019em;
+  line-height: 1.5;
+}
+
+@media screen and (max-width: 767px) {
+
+  .body a,
+  .body p,
+  .body ul,
+  .body ol,
+  .body td {
+    font-size: calc(16px + (3 + 3 * 0.7) * ((100vw - 320px) / 1600));
+  }
+}
+
+.body p:last-child,
+.body ul:last-child,
+.body ol:last-child {
+  margin-bottom: 0;
+}
+
+h1:first-child,
+h2:first-child,
+h3:first-child,
+h4:first-child,
+h5:first-child,
+h6:first-child {
+  margin-top: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 500;
+  color: rgba(30, 30, 30, 0.9);
+}
+
+h1 {
+  /* font-size: 34.5px; */
+  font-size: calc(26px + 5 * (100vw / 960));
+  padding-bottom: 0.6em;
+  margin: 1em 0 1.2em;
+  border-bottom: 1px solid var(--black-14);
+}
+
+h2 {
+  font-size: calc(22px + 5 * (100vw / 960));
+  margin-bottom: 0.45em;
+}
+
+h3 {
+  font-size: 2.6rem;
+  margin-bottom: 1.3rem;
+}
+
+h4 {
+  font-size: 20px;
+  margin-bottom: 1.125rem;
+}
+
+h5 {
+  font-size: 1.9rem;
+  margin-bottom: 0.95rem;
+}
+
+h6 {
+  font-size: 1.6rem;
+  margin-bottom: 0.8rem;
+}
+
+
+/*
+ * wp-class styles
+ */
+.w-90 {
+  width: 90%;
+}
+
+.w-80 {
+  width: 80%;
+}
+
+.w-70 {
+  width: 70%;
+}
+
+.w-60 {
+  width: 60%;
+}
+
+.w-50 {
+  width: 50%;
+}
+
+.w-40 {
+  width: 40%;
+}
+
+.w-30 {
+  width: 30%;
+}
+
+.w-20 {
+  width: 20%;
+}
+
+.w-10 {
+  width: 10%;
+}
+
+.m-auto {
+  margin: auto !important;
+}
+
+.m-0 {
+  margin: 0;
+}
+
+.h-auto img {
+  height: auto;
+}
+
+.f-l,
+p img {
+  float: left;
+  margin-right: 10px;
+}
+
+.f-r {
+  float: right;
+  margin-left: 10px;
+}
+
+.o-h {
+  overflow: hidden;
+}
