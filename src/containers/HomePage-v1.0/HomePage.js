@@ -91,21 +91,25 @@ const HomePage = () => {
     isLoaded.current = true;
   }, [data]);
 
-  const handleOnScrollHome = useCallback(() => {
-    if (!data) return;
-    const scrolledToBottom =
-      Math.ceil(window.scrollY + window.innerHeight * 2) >=
-      document.body.scrollHeight;
-    if (
-      scrolledToBottom &&
-      isLoaded.current &&
-      data.posts.pageInfo.hasNextPage
-    ) {
-      isLoaded.current = false;
-      fetchMoreArticles();
-      //console.log("load");
-    }
-  }, [data, fetchMoreArticles]);
+  const handleOnScrollHome = useCallback(
+    (event) => {
+      event.stopPropagation();
+      if (!data) return;
+      const scrolledToBottom =
+        Math.ceil(window.scrollY + window.innerHeight * 2) >=
+        document.body.scrollHeight;
+      if (
+        scrolledToBottom &&
+        isLoaded.current &&
+        data.posts.pageInfo.hasNextPage
+      ) {
+        isLoaded.current = false;
+        fetchMoreArticles();
+        //console.log("load");
+      }
+    },
+    [data, fetchMoreArticles]
+  );
 
   useEffect(() => {
     //console.log("1");

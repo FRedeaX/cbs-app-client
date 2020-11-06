@@ -45,14 +45,14 @@ const Page = () => {
   // if (!data.page) return <NotFound />;
 
   return (
-    <main>
+    <>
       <SEO title={data.page.title} description={data.page.excerpt} />
-      <Layout>
+      <Layout page={true}>
         {data.page.template.templateName === "Default" && (
           <PageDefault page={data.page} />
         )}
       </Layout>
-    </main>
+    </>
   );
 };
 

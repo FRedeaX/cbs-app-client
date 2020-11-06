@@ -12,11 +12,12 @@ const HomePage = () => {
   }
 
   return (
-    <main>
+    <>
       {window.location.pathname === "/" && <SEO />}
 
+      {/* <BookContainer /> */}
       <PostContainer />
-    </main>
+    </>
   );
 };
 

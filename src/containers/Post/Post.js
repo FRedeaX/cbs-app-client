@@ -1,6 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import React, { memo, useCallback, useEffect, useRef, useState } from "react";
 import Button from "../../components/UI/Button-v2/Button";
+import Layout from "../../components/UI/Layout/Layout";
 import Loader from "../../components/UI/Loader/Loader";
 import Post from "./../../components/Post/Post";
 import classes from "./Post.module.css";
@@ -92,23 +93,27 @@ const PostContainer = () => {
     isLoaded.current = true;
   }, [data]);
 
-  const handleOnScrollHome = useCallback(() => {
-    if (!data) return;
-    if (!isMoreLoad) return;
+  const handleOnScrollHome = useCallback(
+    (event) => {
+      event.stopPropagation();
+      if (!data) return;
+      if (!isMoreLoad) return;
 
-    const scrolledToBottom =
-      Math.ceil(window.scrollY + window.innerHeight * 3) >=
-      document.body.scrollHeight;
+      const scrolledToBottom =
+        Math.ceil(window.scrollY + window.innerHeight * 3) >=
+        document.body.scrollHeight;
 
-    if (
-      scrolledToBottom &&
-      isLoaded.current &&
-      data.posts.pageInfo.hasNextPage
-    ) {
-      isLoaded.current = false;
-      fetchMoreArticles();
-    }
-  }, [data, fetchMoreArticles, isMoreLoad]);
+      if (
+        scrolledToBottom &&
+        isLoaded.current &&
+        data.posts.pageInfo.hasNextPage
+      ) {
+        isLoaded.current = false;
+        fetchMoreArticles();
+      }
+    },
+    [data, fetchMoreArticles, isMoreLoad]
+  );
 
   useEffect(() => {
     window.addEventListener("scroll", handleOnScrollHome);
@@ -128,22 +133,22 @@ const PostContainer = () => {
   };
 
   return (
-    <>
-      {/* <Layout> */}
+    <section>
       {/* {console.log("render PC")} */}
-      <Post data={data.posts.nodes} />
-      {
-        <Button
-          cls={classes["more-load"]}
-          isVisible={!isMoreLoad}
-          isDisabled={isMoreLoad}
-          onClick={hendleMoreLoad}
-        >
-          Все записи
-        </Button>
-      }
-      {/* </Layout> */}
-    </>
+      <Layout page={true}>
+        <Post data={data.posts.nodes} />
+        {
+          <Button
+            cls={classes["more-load"]}
+            isVisible={!isMoreLoad}
+            isDisabled={isMoreLoad}
+            onClick={hendleMoreLoad}
+          >
+            Все записи
+          </Button>
+        }
+      </Layout>
+    </section>
   );
 };
 

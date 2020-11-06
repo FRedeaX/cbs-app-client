@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Title, { SUBTITLE } from "../../Title/Title";
 import Layout from "../../UI/Layout/Layout";
 import { urlMap as src } from "./../../../constant/api";
@@ -127,36 +127,34 @@ const Library = () => {
     });
   };
   return (
-    <Fragment>
+    <>
       {/* {console.log("Library", filial)} */}
       <Seo title={"Библиотеки"} description={"График работы библиотек"} />
-      <main>
-        <Layout>
-          <div className={classes.title}>
-            <h2>{filial.name}</h2>
+      <Layout>
+        <div className={classes.title}>
+          <h2>{filial.name}</h2>
+        </div>
+        {/* <div className={classes.subtitle}> */}
+        <Title type={SUBTITLE} HtmlTeg={"h3"} cls={classes.subtitle}>
+          {filial.address}
+        </Title>
+        {/* </div> */}
+        <div className={classes.controls}>{renderControls()}</div>
+        <div className={classes.content}>
+          <div id="map" className={classes.map}></div>
+          <aside className={classes.aside}>
+            <ContactInfo
+              schedule={filial.schedule}
+              email={filial.email}
+              telefon={filial.telefon}
+            />
+          </aside>
+          <div className={classes.info}>
+            {filial.url && <LibraryInfo url={filial.url} />}
           </div>
-          {/* <div className={classes.subtitle}> */}
-          <Title type={SUBTITLE} HtmlTeg={"h3"} cls={classes.subtitle}>
-            {filial.address}
-          </Title>
-          {/* </div> */}
-          <div className={classes.controls}>{renderControls()}</div>
-          <div className={classes.content}>
-            <div id="map" className={classes.map}></div>
-            <aside className={classes.aside}>
-              <ContactInfo
-                schedule={filial.schedule}
-                email={filial.email}
-                telefon={filial.telefon}
-              />
-            </aside>
-            <div className={classes.info}>
-              {filial.url && <LibraryInfo url={filial.url} />}
-            </div>
-          </div>
-        </Layout>
-      </main>
-    </Fragment>
+        </div>
+      </Layout>
+    </>
   );
 };
 

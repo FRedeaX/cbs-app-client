@@ -1,6 +1,5 @@
 .container {
-  max-width: 960px;
-  margin: 0 auto;
+  padding: 0 15px;
 }
 
 .title {
@@ -13,15 +12,16 @@
   position: relative;
 }
 
-.content a:hover {
+/* .content a:hover {
   color: var(--accentColor);
   transition: color 0.15s ease-out;
-}
+} */
 
 .share {
   width: max-content;
   margin-left: auto;
 }
+
 .content h2 strong {
   font-weight: 500;
 }

@@ -7,8 +7,8 @@ const Share = ({ type, url, cls, clsLink, clsSVG }) => {
 
   return (
     <a
-      className={ style.join(" ") }
-      href={ url }
+      className={style.join(" ")}
+      href={url}
       target="_blank"
       rel="noopener noreferrer"
     >

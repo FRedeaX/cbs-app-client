@@ -58,6 +58,7 @@ const Modal = ({
   }, [toggle]);
 
   const hendleScroll = (event) => {
+    event.stopPropagation();
     if (!titleOffsetHeight.current) return;
 
     const scroll = event.target.scrollTop;
@@ -82,7 +83,7 @@ const Modal = ({
         data-close
       >
         <div className={classes.container}>
-          <header className={classes.header}>
+          <div className={classes.header}>
             <div
               className={
                 isScroll
@@ -113,9 +114,9 @@ const Modal = ({
               type="button"
               onClick={onCloseHendler}
             />
-          </header>
+          </div>
           {title && (
-            <h2
+            <h1
               className={
                 isScroll
                   ? classJoin([
@@ -141,7 +142,7 @@ const Modal = ({
                 className={classes.content}
                 dangerouslySetInnerHTML={createMarkup(content)}
               /> */}
-              <Content text={content} cls={classes.content} />
+              <Content cls={ classes.content }>{content}</Content>
             </div>
           )}
           {notFound && (
