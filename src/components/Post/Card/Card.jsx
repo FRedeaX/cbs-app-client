@@ -1,18 +1,22 @@
+import classNamesBind from "classnames/bind";
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import Category from "../Category/Category";
 import { classJoin, createMarkup } from "./../../../constant/function";
 import classes from "./Card.module.css";
 
+
 const Card = ({ data, horizontal, cls }) => {
-  const style = [classes.item, cls];
+  let cx = classNamesBind.bind(classes);
+  // const style = [classes.item, cls];
   let location = useLocation();
   return (
     <article
-      className={
-        horizontal
-          ? classJoin([classes.item, classes["item--horizontal"]])
-          : style.join(" ")
+      className={cx({
+          item: true,
+          "item--horizontal": horizontal,
+          sticky: data.isSticky
+        }, cls)
       }
     >
       {data.featuredImage && (

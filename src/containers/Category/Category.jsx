@@ -27,6 +27,7 @@ const GET_ARTICLES_BY_CATEGORY = gql`
               }
             }
             id
+            isSticky
             tags {
               nodes {
                 id

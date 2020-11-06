@@ -24,6 +24,7 @@ const FETCH_ARTICLES = gql`
           }
         }
         id
+        isSticky
         tags {
           nodes {
             count
