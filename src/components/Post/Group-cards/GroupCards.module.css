@@ -6,6 +6,10 @@
   /* padding-bottom: 20px; */
 
   box-sizing: border-box;
+  margin: 10px auto 0;
+}
+
+.container:first-child {
   margin: 0 auto 10px auto;
 }
 

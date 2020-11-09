@@ -10,7 +10,7 @@ const GroupCards = ({ data, title, description, length }) => {
       {/* {console.log("render GroupCards")} */}
       <div className={classes.head}>
         <h3 className={classes.title}>{title}</h3>
-        <span className={classes.description}>{description}</span>
+        {description && <span className={classes.description}>{description}</span>}
       </div>
       <Carousel length={ length }>
         { data.map((postByTag) => (
