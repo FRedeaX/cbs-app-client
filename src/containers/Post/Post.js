@@ -1,7 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import React, { memo, useCallback, useEffect, useRef, useState } from "react";
 import Button from "../../components/UI/Button-v2/Button";
-import Loader from "../../components/UI/Loader/Loader";
 import Post from "./../../components/Post/Post";
 import classes from "./Post.module.css";
 
@@ -119,7 +118,7 @@ const PostContainer = () => {
     if (!loading) document.body.style.minHeight = "";
   }, [loading]);
 
-  if (loading) return <Loader isFullscreen={true} />;
+  if (loading) return null; // <Loader isFullscreen={true} />;
   if (error) return console.error(error);
 
   const hendleMoreLoad = () => {

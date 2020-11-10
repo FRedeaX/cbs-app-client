@@ -17,9 +17,7 @@ const Carousel = ({ children, length }) => {
     if (!scrollRef.current) return;
     const scrolled = scrollRef.current;
     const wrapperWidth = scrolled.offsetWidth;
-    const articleWidth = scrolled.childNodes[0] && scrolled.childNodes[0].childNodes[0] && scrolled.childNodes[0].childNodes[0].offsetWidth;
-    const margin = 20;
-    const itemsWidth = (articleWidth + margin) * length;
+    const itemsWidth = scrolled.childNodes[0] && scrolled.childNodes[0].offsetWidth;
 
     if (wrapperWidth > itemsWidth) setCenter(true);
     if (wrapperWidth < itemsWidth) setRight(true);

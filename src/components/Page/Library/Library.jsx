@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
+import { asyncLoadScript } from "../../../helpers";
 import Title, { SUBTITLE } from "../../Title/Title";
 import Layout from "../../UI/Layout/Layout";
 import { urlMap as src } from "./../../../constant/api";
@@ -21,23 +22,24 @@ const Library = () => {
   // );
 
   useEffect(() => {
-    function loadScript(src) {
-      return new Promise((resolve, reject) => {
-        if (window.ymaps) {
-          return resolve();
-        }
-        let script = document.createElement("script");
-        script.src = src;
-        script.addEventListener("load", function () {
-          document.body.style.minHeight = "";
-          resolve();
-        });
-        script.addEventListener("error", function (e) {
-          reject(e);
-        });
-        document.body.appendChild(script);
-      });
-    }
+    // function loadScript(src) {
+    //   return new Promise((resolve, reject) => {
+    //     if (window.ymaps) {
+    //       return resolve();
+    //     }
+    //     let script = document.createElement("script");
+    //     script.async = true;
+    //     script.src = src;
+    //     script.addEventListener("load", function () {
+    //       document.body.style.minHeight = "";
+    //       resolve();
+    //     });
+    //     script.addEventListener("error", function (e) {
+    //       reject(e);
+    //     });
+    //     document.body.appendChild(script);
+    //   });
+    // }
 
     function init() {
       let zoom = 14;
@@ -83,7 +85,7 @@ const Library = () => {
       });
     }
 
-    loadScript(src).then(function () {
+    asyncLoadScript(src, window.ymaps).then(function () {
       window.ymaps.ready(init);
     });
   }, []);
@@ -130,7 +132,7 @@ const Library = () => {
     <Fragment>
       {/* {console.log("Library", filial)} */}
       <Seo title={"Библиотеки"} description={"График работы библиотек"} />
-      <main>
+      <div className={classes.body}>
         <Layout>
           <div className={classes.title}>
             <h2>{filial.name}</h2>
@@ -155,7 +157,7 @@ const Library = () => {
             </div>
           </div>
         </Layout>
-      </main>
+      </div>
     </Fragment>
   );
 };
