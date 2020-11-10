@@ -1,4 +1,5 @@
 .container {
+  /* width: 100%; */
   width: 97.917%;
   /* width: 97.943%; */
 
@@ -21,6 +22,16 @@
     /* width: calc(100% - 20px); */
     /* width: calc(100% + 30px);
     margin: 0 -15px; */
+  }
+}
+
+@media screen and (min-width: 961px) {
+  .container article:first-child {
+    margin-left: 0;
+  }
+
+  .container article:last-child {
+    margin-right: 0;
   }
 }
 

@@ -101,12 +101,16 @@ const Post = ({ data, title, groupCards = true }) => {
     <>
       {/* {console.log('render P')} */}
       {/* <Promo /> */}
-      <SectionHeader>
-        {title ? title : "Мероприятия"}
-      </SectionHeader>
-      <div className={classes.container}>
-        {groupCards ? <RenderPostAndGroupCards /> : <RenderPostNotGroupCards/>}
-      </div>
+      {/* <section> */}
+        {/* <Layout page={ true }>           */}
+          <SectionHeader>
+            {title ? title : "Мероприятия"}
+          </SectionHeader>
+          <div className={classes.container}>
+            {groupCards ? <RenderPostAndGroupCards /> : <RenderPostNotGroupCards/>}
+          </div>
+        {/* </Layout> */}
+      {/* </section> */}
     </>
   );
 };

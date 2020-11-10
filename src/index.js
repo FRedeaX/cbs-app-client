@@ -7,6 +7,7 @@ import {
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
 import React from "react";
+import { isBrowser, isMobile } from "react-device-detect";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
@@ -15,6 +16,7 @@ import thunk from "redux-thunk";
 import smoothscroll from "smoothscroll-polyfill";
 import App from "./App";
 import { ScrollToTop } from "./components/ScrollToTop/ScrollToTop";
+import { getTag } from "./helpers";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import rootReducer from "./store/rootReducer";
@@ -38,7 +40,7 @@ const client = new ApolloClient({
   //  typeDefs,
 });
 
-if (process.env.NODE_ENV !== "development") {
+if (process.env.NODE_ENV === "production") {
   Sentry.init({
     dsn:
       "https://bfc2b39f80b04a1687664d6696c0a265@o397370.ingest.sentry.io/5251759",
@@ -59,6 +61,10 @@ const store = createStore(
 );
 
 smoothscroll.polyfill();
+if (process.env.NODE_ENV === "production") getTag();
+
+if (isBrowser) document.documentElement.classList.add("ua_browser_desktop");
+else if (isMobile) document.documentElement.classList.add("ua_browser_mobile");
 
 const app = (
   <React.StrictMode>

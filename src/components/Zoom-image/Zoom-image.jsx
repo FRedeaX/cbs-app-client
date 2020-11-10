@@ -43,7 +43,6 @@ const ZoomImage = () => {
         img = document.createElement("img");
         img.srcset =
           "https://cbsbaikonur.ru/wp-content/uploads/2020/10/20201013@768.jpg 769w, https://cbsbaikonur.ru/wp-content/uploads/2020/10/20201013@1600.jpg 1600w";
-        // img.sizes = "(max-width: 768px) 768px, 1600px";
         img.src =
           "https://cbsbaikonur.ru/wp-content/uploads/2020/10/20201013@1600.jpg";
         img.alt =

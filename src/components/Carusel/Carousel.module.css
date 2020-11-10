@@ -39,7 +39,7 @@
   display: flex;
 }
 
-@media screen and (min-width: 961px) {
+/* @media screen and (min-width: 961px) {
   .items article:first-child {
     margin-left: 0;
   }
@@ -47,7 +47,7 @@
   .items article:last-child {
     margin-right: 0;
   }
-}
+} */
 
 .shadow-left {
   display: none;

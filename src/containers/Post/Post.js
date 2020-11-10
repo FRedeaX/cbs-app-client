@@ -1,7 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import React, { memo, useCallback, useEffect, useRef, useState } from "react";
 import Button from "../../components/UI/Button-v2/Button";
-import Layout from "../../components/UI/Layout/Layout";
 import Loader from "../../components/UI/Loader/Loader";
 import Post from "./../../components/Post/Post";
 import classes from "./Post.module.css";
@@ -136,19 +135,19 @@ const PostContainer = () => {
   return (
     <section>
       {/* {console.log("render PC")} */}
-      <Layout page={true}>
-        <Post data={data.posts.nodes} />
-        {
-          <Button
-            cls={classes["more-load"]}
-            isVisible={!isMoreLoad}
-            isDisabled={isMoreLoad}
-            onClick={hendleMoreLoad}
-          >
-            Все записи
-          </Button>
-        }
-      </Layout>
+      {/* <Layout page={true}> */}
+      <Post data={data.posts.nodes} />
+      {
+        <Button
+          cls={classes["more-load"]}
+          isVisible={!isMoreLoad}
+          isDisabled={isMoreLoad}
+          onClick={hendleMoreLoad}
+        >
+          Все записи
+        </Button>
+      }
+      {/* </Layout> */}
     </section>
   );
 };

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { asyncLoadScript } from "../../../helpers";
 import Title, { SUBTITLE } from "../../Title/Title";
 import Layout from "../../UI/Layout/Layout";
 import { urlMap as src } from "./../../../constant/api";
@@ -21,23 +22,24 @@ const Library = () => {
   // );
 
   useEffect(() => {
-    function loadScript(src) {
-      return new Promise((resolve, reject) => {
-        if (window.ymaps) {
-          return resolve();
-        }
-        let script = document.createElement("script");
-        script.src = src;
-        script.addEventListener("load", function () {
-          document.body.style.minHeight = "";
-          resolve();
-        });
-        script.addEventListener("error", function (e) {
-          reject(e);
-        });
-        document.body.appendChild(script);
-      });
-    }
+    // function loadScript(src) {
+    //   return new Promise((resolve, reject) => {
+    //     if (window.ymaps) {
+    //       return resolve();
+    //     }
+    //     let script = document.createElement("script");
+    //     script.async = true;
+    //     script.src = src;
+    //     script.addEventListener("load", function () {
+    //       document.body.style.minHeight = "";
+    //       resolve();
+    //     });
+    //     script.addEventListener("error", function (e) {
+    //       reject(e);
+    //     });
+    //     document.body.appendChild(script);
+    //   });
+    // }
 
     function init() {
       let zoom = 14;
@@ -83,7 +85,7 @@ const Library = () => {
       });
     }
 
-    loadScript(src).then(function () {
+    asyncLoadScript(src, window.ymaps).then(function () {
       window.ymaps.ready(init);
     });
   }, []);
@@ -130,30 +132,32 @@ const Library = () => {
     <>
       {/* {console.log("Library", filial)} */}
       <Seo title={"Библиотеки"} description={"График работы библиотек"} />
-      <Layout>
-        <div className={classes.title}>
-          <h2>{filial.name}</h2>
-        </div>
-        {/* <div className={classes.subtitle}> */}
-        <Title type={SUBTITLE} HtmlTeg={"h3"} cls={classes.subtitle}>
-          {filial.address}
-        </Title>
-        {/* </div> */}
-        <div className={classes.controls}>{renderControls()}</div>
-        <div className={classes.content}>
-          <div id="map" className={classes.map}></div>
-          <aside className={classes.aside}>
-            <ContactInfo
-              schedule={filial.schedule}
-              email={filial.email}
-              telefon={filial.telefon}
-            />
-          </aside>
-          <div className={classes.info}>
-            {filial.url && <LibraryInfo url={filial.url} />}
+      <div className={classes.body}>
+        <Layout>
+          <div className={classes.title}>
+            <h2>{filial.name}</h2>
           </div>
-        </div>
-      </Layout>
+          {/* <div className={classes.subtitle}> */}
+          <Title type={SUBTITLE} HtmlTeg={"h3"} cls={classes.subtitle}>
+            {filial.address}
+          </Title>
+          {/* </div> */}
+          <div className={classes.controls}>{renderControls()}</div>
+          <div className={classes.content}>
+            <div id="map" className={classes.map}></div>
+            <aside className={classes.aside}>
+              <ContactInfo
+                schedule={filial.schedule}
+                email={filial.email}
+                telefon={filial.telefon}
+              />
+            </aside>
+            <div className={classes.info}>
+              {filial.url && <LibraryInfo url={filial.url} />}
+            </div>
+          </div>
+        </Layout>
+      </div>
     </>
   );
 };

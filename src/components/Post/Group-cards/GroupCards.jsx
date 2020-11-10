@@ -1,7 +1,7 @@
 import React from "react";
 import Carousel from "../../Carusel/Carousel";
 import Card from "../Card/Card";
-import classes from "./GroupCards.module.css";
+import classes from "./Group-cards.module.css";
 
 const GroupCards = ({ data, title, description, length }) => {
   
