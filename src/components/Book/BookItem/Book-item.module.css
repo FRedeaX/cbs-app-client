@@ -32,13 +32,6 @@
   opacity: 1;
 }
 
-.image {
-  width: 100%;
-  height: 100%;
-  /* object-fit: cover; */
-  /* transition: filter 0.2s; */
-}
-
 .info {
   position: absolute;
   left: 0;
@@ -71,4 +64,5 @@
   color: var(--secondaryWhite);
   margin-top: 4px;
   margin-bottom: 0;
+  pointer-events: none;
 }

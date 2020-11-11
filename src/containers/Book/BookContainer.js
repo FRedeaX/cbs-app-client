@@ -14,27 +14,6 @@ const FETCH_BOOKS = gql`
             uri
           }
         }
-        bookGenres {
-          nodes {
-            id
-            name
-            uri
-          }
-        }
-        bookPublishers {
-          nodes {
-            id
-            name
-            uri
-          }
-        }
-        bookYears {
-          nodes {
-            id
-            name
-            uri
-          }
-        }
         featuredImage {
           node {
             sourceUrl(size: THUMBNAIL)

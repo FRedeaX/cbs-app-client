@@ -16,7 +16,6 @@ import thunk from "redux-thunk";
 import smoothscroll from "smoothscroll-polyfill";
 import App from "./App";
 import { ScrollToTop } from "./components/ScrollToTop/ScrollToTop";
-import { getTag } from "./helpers";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import rootReducer from "./store/rootReducer";
@@ -61,7 +60,7 @@ const store = createStore(
 );
 
 smoothscroll.polyfill();
-if (process.env.NODE_ENV === "production") getTag();
+// if (process.env.NODE_ENV === "production") getTag();
 
 if (isBrowser) document.documentElement.classList.add("ua_browser_desktop");
 else if (isMobile) document.documentElement.classList.add("ua_browser_mobile");
