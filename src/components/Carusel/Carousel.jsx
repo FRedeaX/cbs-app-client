@@ -1,5 +1,5 @@
 import classNamesBind from "classnames/bind";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import { isBrowser } from 'react-device-detect';
 import Button from "../UI/Button-arrow/Button";
 import classes from "./Carousel.module.css";
@@ -13,14 +13,14 @@ const Carousel = ({ children, length }) => {
   const [isRight, setRight] = useState(false);
   const [isCenter, setCenter] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!scrollRef.current) return;
     const scrolled = scrollRef.current;
     const wrapperWidth = scrolled.offsetWidth;
     const itemsWidth = scrolled.childNodes[0] && scrolled.childNodes[0].offsetWidth;
 
-    if (wrapperWidth > itemsWidth) setCenter(true);
-    if (wrapperWidth < itemsWidth) setRight(true);
+    if (wrapperWidth > itemsWidth && length <= 3) setCenter(true);
+    if (wrapperWidth < itemsWidth || length > 3) setRight(true);
   }, [length, setLeft, setRight]);
 
   const hendleScroll = (direction) => {
