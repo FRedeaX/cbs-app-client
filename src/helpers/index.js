@@ -1,20 +1,20 @@
-export const asyncLoadScript = (src, obj) => {
-  return new Promise((resolve, reject) => {
-    if (obj) {
-      return resolve();
-    }
-    let script = document.createElement("script");
-    script.async = true;
-    script.src = src;
-    script.addEventListener("load", function () {
-      resolve();
-    });
-    script.addEventListener("error", function (e) {
-      reject(e);
-    });
-    document.body.appendChild(script);
-  });
-};
+// export const asyncLoadScript = (src, obj) => {
+//   return new Promise((resolve, reject) => {
+//     if (obj) {
+//       return resolve();
+//     }
+//     let script = document.createElement("script");
+//     script.async = true;
+//     script.src = src;
+//     script.addEventListener("load", function () {
+//       resolve();
+//     });
+//     script.addEventListener("error", function (e) {
+//       reject(e);
+//     });
+//     document.body.appendChild(script);
+//   });
+// };
 
 // export const getTag = () => {
 //   (function (m, e, t, r, i, k, a) {

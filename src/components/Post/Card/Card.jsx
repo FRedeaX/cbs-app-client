@@ -1,5 +1,5 @@
 import classNamesBind from "classnames/bind";
-import React from "react";
+import React, { memo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Category from "../Category/Category";
 import { classJoin, createMarkup } from "./../../../constant/function";
@@ -49,7 +49,7 @@ const Card = ({ data, horizontal, cls }) => {
                 state: {
                   background: location,
                   scrollToTop: false,
-                  postData: data,
+                  // postData: data,
                 },
               }}
               className={classes.link}
@@ -69,4 +69,4 @@ const Card = ({ data, horizontal, cls }) => {
   );
 };
 
-export default Card;
+export default memo(Card);
