@@ -1,5 +1,5 @@
 import { gql, useApolloClient, useQuery } from "@apollo/client";
-import { memo, useEffect, useRef } from "react";
+import { memo, React, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import BookPage from "../../../components/book/BookPage/BookPage";
 import { mainShortDataByBook, otherDataByBook } from "../root";

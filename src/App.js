@@ -11,7 +11,6 @@ import Footer from "./components/Footer/Footer";
 import Library from "./components/Page/Library/Library";
 import RedirectToHome from "./components/RedirectToHome";
 import ZoomImage from "./components/Zoom-image/Zoom-image";
-import BookPageRoot from "./containers/book/BookPageRoot/BookPageRoot";
 import Category from "./containers/Category/Category";
 import Header from "./containers/Header/Header";
 import HomePage from "./containers/HomePage/HomePage";
@@ -73,7 +72,7 @@ function ModalSwitch() {
           <Route path="/post/category" exact component={RedirectToHome} />
           <Route path="/post/category/:slug" component={Category} />
           <Route path="/post/:slug" component={ModalRoot} />
-          <Route path="/book/:slug" component={BookPageRoot} />
+          {/* <Route path="/book/:slug" component={BookPageRoot} /> */}
 
           <Route path="/biblioteki" exact component={Library} />
           <Route path="/:slug" component={Page} />

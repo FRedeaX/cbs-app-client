@@ -3,10 +3,11 @@ import React, { memo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Category from "../Category/Category";
 import { classJoin, createMarkup } from "./../../../constant/function";
+import BookImage from "./../../book/BookImage/BookImage";
 import classes from "./Card.module.css";
 
 
-const Card = ({ data, horizontal, cls }) => {
+const Card = ({ data:{ isSticky, featuredImage, uri, title, excerpt, categories }, horizontal, cls }) => {
   let cx = classNamesBind.bind(classes);
   // const style = [classes.item, cls];
   let location = useLocation();
@@ -15,11 +16,12 @@ const Card = ({ data, horizontal, cls }) => {
       className={cx({
           item: true,
           "item--horizontal": horizontal,
-          sticky: data.isSticky
+          sticky: isSticky
         }, cls)
       }
     >
-      {data.featuredImage && (
+      {/* {console.log(title)} */}
+      {featuredImage && (
         <div
           className={
             horizontal
@@ -27,15 +29,13 @@ const Card = ({ data, horizontal, cls }) => {
               : classes.image
           }
         >
-          <img
-            // src={data.featuredImage.sourceUrl}
-            src={data.featuredImage.node.sourceUrl}
-            className={
+          <BookImage
+            src={featuredImage.node.sourceUrl}
+            cls={
               horizontal
                 ? classJoin([classes.img, classes["img--horizontal"]])
                 : classes.img
             }
-            alt=""
           />
         </div>
       )}
@@ -45,7 +45,7 @@ const Card = ({ data, horizontal, cls }) => {
           <h3 className={classes.title}>
             <Link
               to={{
-                pathname: data.uri,
+                pathname: uri,
                 state: {
                   background: location,
                   scrollToTop: false,
@@ -53,20 +53,33 @@ const Card = ({ data, horizontal, cls }) => {
                 },
               }}
               className={classes.link}
-              dangerouslySetInnerHTML={createMarkup(data.title)}
+              dangerouslySetInnerHTML={createMarkup(title)}
             />
           </h3>
           <div
             className={classes.subtitle}
-            dangerouslySetInnerHTML={createMarkup(data.excerpt)}
+            dangerouslySetInnerHTML={createMarkup(excerpt)}
           />
         </div>
         <div className={classes.footer}>
-          <Category data={data.categories} />
+          <Category data={categories} />
         </div>
       </div>
     </article>
   );
 };
 
-export default memo(Card);
+function areEqual(prevProps, nextProps) {
+  console.log('prevProps', prevProps.data.title);
+  console.log('nextProps', nextProps.data.title);
+  if (prevProps.data.id === nextProps.data.id) {
+    return true;
+  }
+  /*
+  возвращает true, если nextProps рендерит
+  тот же результат что и prevProps,
+  иначе возвращает false
+  */
+}
+
+export default memo(Card, areEqual);

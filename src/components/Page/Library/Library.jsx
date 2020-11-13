@@ -22,25 +22,6 @@ const Library = () => {
   // );
 
   useEffect(() => {
-    // function loadScript(src) {
-    //   return new Promise((resolve, reject) => {
-    //     if (window.ymaps) {
-    //       return resolve();
-    //     }
-    //     let script = document.createElement("script");
-    //     script.async = true;
-    //     script.src = src;
-    //     script.addEventListener("load", function () {
-    //       document.body.style.minHeight = "";
-    //       resolve();
-    //     });
-    //     script.addEventListener("error", function (e) {
-    //       reject(e);
-    //     });
-    //     document.body.appendChild(script);
-    //   });
-    // }
-
     function init() {
       let zoom = 14;
       let center = [45.6246, 63.308];

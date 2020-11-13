@@ -3,6 +3,7 @@ import GroupCardsContainer from "../../containers/Post/GroupCards/GroupCards";
 import SectionHeader from "../SectionHeader/SectionHeader";
 import Card from "./Card/Card";
 import classes from "./Post.module.css";
+import PostNotGroupCards from "./PostNotGroupCards/PostNotGroupCards";
 
 const Post = ({ data, title, groupCards = true }) => {
   let index = 0;
@@ -91,8 +92,6 @@ const Post = ({ data, title, groupCards = true }) => {
     });
   };
 
-  const RenderPostNotGroupCards = () => data.map(post=><Card key={post.id} data={post} horizontal={true} />)
-
   if (isTwoColumns === null) {
     windowSize()
   }
@@ -107,7 +106,7 @@ const Post = ({ data, title, groupCards = true }) => {
             {title ? title : "Мероприятия"}
           </SectionHeader>
           <div className={classes.container}>
-            {groupCards ? <RenderPostAndGroupCards /> : <RenderPostNotGroupCards/>}
+        { groupCards ? <RenderPostAndGroupCards /> : <PostNotGroupCards data={ data }/>}
           </div>
         {/* </Layout> */}
       {/* </section> */}
@@ -116,7 +115,10 @@ const Post = ({ data, title, groupCards = true }) => {
 };
 
 function areEqual(prevProps, nextProps) {
-  if (prevProps.data.length === nextProps.data.length) return true;
+  if (prevProps.data.length === nextProps.data.length) {
+    
+    return true
+  };
   /*
   возвращает true, если nextProps рендерит
   тот же результат что и prevProps,
