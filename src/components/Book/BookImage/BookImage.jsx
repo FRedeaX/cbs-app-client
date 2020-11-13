@@ -1,13 +1,20 @@
 import classNames from "classnames/bind";
-import React, { memo } from "react";
+import React, { memo, useCallback, useState } from "react";
 import classes from "./Book-image.module.css";
 
 
 const BookImage = ({ cls, width, height, src, alt }) => {
-
   const cx = classNames.bind(classes);
+  const [isLoaded, setLoaded] = useState(false);
+
+  const hendleLoad = useCallback(() => {
+    setLoaded(true);
+  },[setLoaded])
+  
   return <img
-    className={cx({img:true}, cls)}
+    onLoad={ hendleLoad }
+    loading="lazy"
+    className={cx({img:true, loaded: isLoaded}, cls)}
     width={ width && width }
     height={ height && height }
     src={ src && src }

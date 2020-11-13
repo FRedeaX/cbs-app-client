@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import Carousel from "../../Carusel/Carousel";
 import Card from "../Card/Card";
 import classes from "./Group-cards.module.css";
@@ -21,4 +21,4 @@ const GroupCards = ({ data, title, description, length }) => {
   );
 };
 
-export default GroupCards;
+export default memo(GroupCards);

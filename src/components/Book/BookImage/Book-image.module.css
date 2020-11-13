@@ -3,4 +3,10 @@
   height: 100%;
   /* object-fit: cover; */
   /* transition: filter 0.2s; */
+  opacity: 0;
+  transition: opacity 0.2s ease-in;
+}
+
+.loaded {
+  opacity: 1;
 }

@@ -1,8 +1,8 @@
 import React, { memo } from "react";
-import Carousel from "../Carusel/Carousel";
-import BookItem from "./BookItem/BookItem";
+import Carousel from "../../Carusel/Carousel";
+import BookItem from "../BookItem/BookItem";
 
-const Book = ({ data }) => {
+const BookPreview = ({ data }) => {
   console.log(data);
 
   return (
@@ -12,4 +12,4 @@ const Book = ({ data }) => {
   )
 };
 
-export default memo(Book);
+export default memo(BookPreview);
