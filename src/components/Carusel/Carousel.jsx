@@ -1,5 +1,5 @@
 import classNamesBind from "classnames/bind";
-import React, { useLayoutEffect, useRef, useState } from "react";
+import React, { memo, useLayoutEffect, useRef, useState } from "react";
 import { isBrowser } from 'react-device-detect';
 import Button from "../UI/Button-arrow/Button";
 import classes from "./Carousel.module.css";
@@ -17,10 +17,13 @@ const Carousel = ({ children, length }) => {
     if (!scrollRef.current) return;
     const scrolled = scrollRef.current;
     const wrapperWidth = scrolled.offsetWidth;
-    const itemsWidth = scrolled.childNodes[0] && scrolled.childNodes[0].offsetWidth;
+    // const itemsWidth = scrolled.childNodes[0] && scrolled.childNodes[0].offsetWidth;
 
-    if (wrapperWidth > itemsWidth && length <= 3) setCenter(true);
-    if (wrapperWidth < itemsWidth || length > 3) setRight(true);
+    //TODO: до выпуская раздела книг заменить 308 на вычисляемое значение 
+    // решить проблему с вычислением значения при дозагрузке постов
+    // console.log(wrapperWidth > (308 * length), scrolled.childNodes[0].offsetWidth);
+    if (wrapperWidth > (308 * length) ) setCenter(true);// && length <= 3 похоже что она больше не нужна
+    if (wrapperWidth < (308 * length) || length > 3) setRight(true);
   }, [length, setLeft, setRight]);
 
   const hendleScroll = (direction) => {
@@ -114,4 +117,4 @@ const Carousel = ({ children, length }) => {
   );
 };
 
-export default Carousel;
+export default memo(Carousel);

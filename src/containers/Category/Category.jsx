@@ -1,7 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import React, { Fragment, useCallback, useEffect, useRef } from "react";
 import NotFound from "../../components/NotFound/NotFound";
-import Post from "../../components/Post/Post";
+import Post from "../../components/post/Post/Post";
 import SEO from "../../components/Seo/Seo";
 import Layout from "../../components/UI/Layout/Layout";
 import Loader from "../../components/UI/Loader/Loader";

@@ -22,17 +22,17 @@ const BookImage = ({ cls, width, height, src, alt }) => {
   />
 }
 
-function areEqual(prevProps, nextProps) {
-  console.log('prevProps', prevProps.src);
-  console.log('nextProps', nextProps.src);
-  if (prevProps.data.id === nextProps.data.id) {
-    return true;
-  }
-  /*
-  возвращает true, если nextProps рендерит
-  тот же результат что и prevProps,
-  иначе возвращает false
-  */
-}
+// function areEqual(prevProps, nextProps) {
+//   console.log('prevProps', prevProps.src);
+//   console.log('nextProps', nextProps.src);
+//   if (prevProps.data.id === nextProps.data.id) {
+//     return true;
+//   }
+//   /*
+//   возвращает true, если nextProps рендерит
+//   тот же результат что и prevProps,
+//   иначе возвращает false
+//   */
+// }
 
-export default memo(BookImage, areEqual);
+export default memo(BookImage);

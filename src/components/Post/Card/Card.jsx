@@ -1,8 +1,8 @@
 import classNamesBind from "classnames/bind";
 import React, { memo } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { classJoin, createMarkup } from "../../../constant/function";
 import Category from "../Category/Category";
-import { classJoin, createMarkup } from "./../../../constant/function";
 import BookImage from "./../../book/BookImage/BookImage";
 import classes from "./Card.module.css";
 
@@ -20,7 +20,6 @@ const Card = ({ data:{ isSticky, featuredImage, uri, title, excerpt, categories 
         }, cls)
       }
     >
-      {/* {console.log(title)} */}
       {featuredImage && (
         <div
           className={
@@ -62,7 +61,7 @@ const Card = ({ data:{ isSticky, featuredImage, uri, title, excerpt, categories 
           />
         </div>
         <div className={classes.footer}>
-          <Category data={categories} />
+          <Category data={ categories } />
         </div>
       </div>
     </article>
@@ -70,8 +69,8 @@ const Card = ({ data:{ isSticky, featuredImage, uri, title, excerpt, categories 
 };
 
 function areEqual(prevProps, nextProps) {
-  console.log('prevProps', prevProps.data.title);
-  console.log('nextProps', nextProps.data.title);
+  // console.log('prevProps', prevProps.data.title);
+  // console.log('nextProps', nextProps.data.title);
   if (prevProps.data.id === nextProps.data.id) {
     return true;
   }

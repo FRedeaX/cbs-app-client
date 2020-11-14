@@ -10,11 +10,11 @@ import Button from "../../components/UI/Button/Button";
 import { classJoin, createMarkup } from "../../constant/function";
 import { toggleOverlay } from "../../store/action/UI";
 import Content from "../Content/Content";
-import Category from "../Post/Category/Category";
 import SEO from "../Seo/Seo";
 import Share from "../Share/Share";
 import Overlay from "../UI/Overlay/Overlay";
 import NotFound from "./../../components/NotFound/NotFound";
+import Category from "./../post/Category/Category";
 import classes from "./Modal.module.css";
 // let scroll, modal, titleOffsetHeight;
 

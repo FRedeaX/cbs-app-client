@@ -62,7 +62,7 @@
     <script async src="https://unpkg.com/cross-fetch@3.0.6/dist/cross-fetch.js"></script>
     <script async src="https://unpkg.com/es7-object-polyfill@1.0.1/build/es7-object-polyfill.browser.js"></script>
 
-    <!-- <script type="text/javascript" >
+    <script type="text/javascript" >
       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
       m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
@@ -73,7 +73,7 @@
         accurateTrackBounce:true,
         webvisor:true
       });
-    </script> -->
+    </script>
 
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script async src="https://cbsbaikonur.ru/wp-content/plugins/ml-slider/assets/sliders/flexslider/jquery.flexslider.min.js"></script>

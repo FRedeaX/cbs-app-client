@@ -2,7 +2,7 @@ import { gql, useQuery } from "@apollo/client";
 import React, { memo, useCallback, useEffect, useRef, useState } from "react";
 import Button from "../../components/UI/Button-v2/Button";
 import Loader from "../../components/UI/Loader/Loader";
-import Post from "./../../components/Post/Post";
+import Post from "./../../components/post/Post/Post";
 import classes from "./Post.module.css";
 
 const FETCH_ARTICLES = gql`
@@ -56,7 +56,7 @@ const FETCH_ARTICLES = gql`
 const PostContainer = () => {
   const { data, loading, error, fetchMore } = useQuery(FETCH_ARTICLES, {
     variables: {
-      first: 14,
+      first: 15,
     },
   });
 

@@ -14,7 +14,7 @@ const GroupCards = ({ data, title, description, length }) => {
       </div>
       <Carousel length={ length }>
         { data.map((postByTag) => (
-          <Card key={ postByTag.id } data={ postByTag } cls={ classes.article }/>
+          <Card key={ postByTag.id } data={ postByTag } cls={ classes.article } />
         )) }
       </Carousel>
     </div>
