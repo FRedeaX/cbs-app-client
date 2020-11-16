@@ -9,7 +9,7 @@ const BookImage = ({ cls, width, height, src, alt }) => {
 
   const hendleLoad = useCallback(() => {
     setLoaded(true);
-  },[setLoaded])
+  }, [setLoaded])
   
   return <img
     onLoad={ hendleLoad }
@@ -23,11 +23,11 @@ const BookImage = ({ cls, width, height, src, alt }) => {
 }
 
 // function areEqual(prevProps, nextProps) {
-//   console.log('prevProps', prevProps.src);
-//   console.log('nextProps', nextProps.src);
-//   if (prevProps.data.id === nextProps.data.id) {
-//     return true;
-//   }
+//   console.log('prevProps', prevProps);
+//   console.log('nextProps', nextProps);
+//   // if (prevProps.data.id === nextProps.data.id) {
+//   //   return true;
+//   // }
 //   /*
 //   возвращает true, если nextProps рендерит
 //   тот же результат что и prevProps,

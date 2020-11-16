@@ -90,7 +90,7 @@
   fill: #cc0000;
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 995px) {
   .header--scrolled {
     transform: translateY(-20px);
   }
@@ -104,7 +104,7 @@
   }
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 995px) {
   .grid {
     /* grid-row-gap: 7px;
     grid-column-gap: 13px; */

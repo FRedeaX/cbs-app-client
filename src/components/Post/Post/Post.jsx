@@ -26,6 +26,7 @@ const Post = ({ data, title, groupCards = true }) => {
 
   return (
     <>
+      {/* {console.log('render Post')} */}
       <SectionHeader>
         {title ? title : "Мероприятия"}
       </SectionHeader>

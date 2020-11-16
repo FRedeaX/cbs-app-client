@@ -60,7 +60,14 @@ const store = createStore(
 );
 
 smoothscroll.polyfill();
-// if (process.env.NODE_ENV === "production") getTag();
+// if (process.env.NODE_ENV === "production")
+//   getTag(
+//     window,
+//     document,
+//     "script",
+//     "https://mc.yandex.ru/metrika/tag.js",
+//     "ym"
+//   );
 
 if (isBrowser) document.documentElement.classList.add("ua_browser_desktop");
 else if (isMobile) document.documentElement.classList.add("ua_browser_mobile");
