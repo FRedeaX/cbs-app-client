@@ -2,11 +2,15 @@
   /* width: 95%; */
   max-width: 1502px;
   margin: 0 auto;
-  /* padding: 0 15px; */
+  padding: 0 15px;
 }
 
 .page {
   max-width: 960px;
+}
+
+.page--p-none {
+  padding: 0;
 }
 
 /* @media screen and (max-width: 992px) {

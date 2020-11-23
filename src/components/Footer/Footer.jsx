@@ -5,7 +5,7 @@ import classes from './Footer.module.css';
 function Footer() {
   return(
     <div className={ classes.body }>
-      <Layout>
+      <Layout page={true}>
         {process.env.NODE_ENV === "production" && (
           <a
           href="https://metrika.yandex.ru/stat/?id=33186213&amp;from=informer"

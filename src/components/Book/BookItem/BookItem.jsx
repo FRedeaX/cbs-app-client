@@ -23,6 +23,7 @@ const BookItem = ({ node: { title, featuredImage, bookAuthors, id, uri } }) => {
       height={ featuredImage.node.mediaDetails.height }
       src={ featuredImage.node.sourceUrl }
       alt={ `Книга «${title}» – ${bookAuthors.nodes[0] && bookAuthors.nodes[0].name}` }
+      cover={ true }
     />
     <div className={classNames(classes.info, "book-item__info--hover")}>
       {bookAuthors.nodes[0] && <Link className={classes.authors} to={bookAuthors.nodes[0].uri}>{bookAuthors.nodes[0].name}</Link>}

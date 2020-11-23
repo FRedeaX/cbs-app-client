@@ -1,5 +1,5 @@
-import { gql, useApolloClient, useQuery } from "@apollo/client";
-import { memo, React, useEffect, useRef } from "react";
+import { gql, useApolloClient, useLazyQuery } from "@apollo/client";
+import React, { memo, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import BookPage from "../../../components/book/BookPage/BookPage";
 import { mainShortDataByBook, otherDataByBook } from "../root";
@@ -27,38 +27,47 @@ const FETCH_MISSING_BOOK = gql`
 const BookPageRoot = () => {
   const { pathname, state } = useLocation();
   const client = useApolloClient();
-  const book = useRef(null);
+  const [book, setBook] = useState(null);
+  const [fetchBook, { data, loading, error }] = useLazyQuery(
+    book ? FETCH_MISSING_BOOK : FETCH_BOOK
+  );
 
   useEffect(() => {
-    if (state && !book.current) {
-      console.log("1", book.current);
-      book.current = client.readFragment({
+    if (state && !book) {
+      const b = client.readFragment({
         id: `Book:${state.b_id}`,
         fragment: { ...mainShortDataByBook.fragments },
       });
+      setBook(b);
     }
-  }, [client, state]);
 
-  const { data, error } = useQuery(
-    book.current ? FETCH_MISSING_BOOK : FETCH_BOOK,
-    {
+    fetchBook({
       variables: {
         uri: `post${pathname}`,
       },
-    }
-  );
+    });
+  }, [state, book, client, fetchBook, pathname]);
 
-  if (!book.current && !data) return null;
+  useEffect(() => {
+    if (!loading) document.body.style.minHeight = "";
+  }, [loading]);
+
+  if (!book && !data) return null;
   if (error) console.error(error);
+  const dataBook = data ? { ...book, ...data.book } : { ...book };
 
-  console.log("book", book.current);
-  console.log("data", data);
-  console.log("b_id", state);
-  return <BookPage />;
+  // console.log("book", book);
+  // console.log("data", data);
+  return <BookPage data={dataBook} />;
+  // return data ? (
+  //   <BookPage data={{ ...book, ...data.book }} />
+  // ) : (
+  //   <BookPage data={{ ...book }} />
+  // );
 };
 
 // function areEqual(prevProps, nextProps) {
-//   if (prevProps.book.current.id === nextProps.book.current.id) {
+//   if (prevProps.book.id === nextProps.book.id) {
 //     return true;
 //   }
 //   /*

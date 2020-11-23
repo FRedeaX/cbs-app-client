@@ -13,6 +13,7 @@ export const mainShortDataByBook = {
       featuredImage {
         node {
           sourceUrl(size: THUMBNAIL)
+          srcSet(size: MEDIUM)
           mediaDetails {
             height
             width

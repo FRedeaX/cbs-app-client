@@ -47,7 +47,7 @@ const Page = () => {
   return (
     <>
       <SEO title={data.page.title} description={data.page.excerpt} />
-      <Layout page={true}>
+      <Layout>
         {data.page.template.templateName === "Default" && (
           <PageDefault page={data.page} />
         )}

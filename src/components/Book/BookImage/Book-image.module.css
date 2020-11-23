@@ -4,7 +4,11 @@
   /* object-fit: cover; */
   /* transition: filter 0.2s; */
   opacity: 0;
-  transition: opacity 0.2s ease-in;
+  transition: opacity 0.2s ease-out;
+}
+
+.img--cover {
+  object-fit: cover;
 }
 
 .loaded {

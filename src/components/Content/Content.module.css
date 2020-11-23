@@ -4,7 +4,7 @@
 
 .body a {
   padding: 1px 4px;
-  background-color: hsla(199, 100%, 33%, 0.08);
+  /* background-color: hsla(199, 100%, 33%, 0.08); */
   border-radius: 4px;
   color: #0073aa;
   transition: background-color 0.150s linear;
@@ -20,6 +20,10 @@
 
 .body a:visited {
   color: rgb(85, 26, 139);
+  /* background-color: rgba(85, 26, 139, 0.08); */
+}
+
+.body a:visited:hover {
   background-color: rgba(85, 26, 139, 0.08);
 }
 
@@ -51,8 +55,8 @@
 .body ol,
 .body td {
   font-size: calc(16px + 3 * (100vw / 1600));
-  letter-spacing: 0.019em;
-  line-height: 1.5;
+  /* letter-spacing: 0.019em; */
+  line-height: 1.34;
 }
 
 @media screen and (max-width: 767px) {
@@ -95,7 +99,6 @@ h1 {
   font-size: calc(26px + 5 * (100vw / 960));
   padding-bottom: 0.6em;
   margin: 1em 0 1.2em;
-  border-bottom: 1px solid var(--black-14);
 }
 
 h2 {

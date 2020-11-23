@@ -3,8 +3,6 @@ import Carousel from "../../Carusel/Carousel";
 import BookItem from "../BookItem/BookItem";
 
 const BookPreview = ({ data }) => {
-  console.log(data);
-
   return (
     <Carousel>
       {data.map(book => <BookItem key={book.id} node={book}/>)}

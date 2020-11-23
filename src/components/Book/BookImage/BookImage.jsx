@@ -1,22 +1,33 @@
 import classNames from "classnames/bind";
-import React, { memo, useCallback, useState } from "react";
+import React, { memo, useCallback, useRef, useState } from "react";
 import classes from "./Book-image.module.css";
 
 
-const BookImage = ({ cls, width, height, src, alt }) => {
-  const cx = classNames.bind(classes);
-  const [isLoaded, setLoaded] = useState(false);
+const BookImage = ({ cls, width, height, src, srcSet, alt, cover }) => {
+  const cx = classNames.bind(classes);  
+  const img = useRef(new Image());
+  img.current.loading = "lazy";
+  if(srcSet) img.current.srcSet = srcSet;
+  if(!srcSet) img.current.src = src;
+  const [isLoaded, setLoaded] = useState(img.current.complete);
 
   const hendleLoad = useCallback(() => {
     setLoaded(true);
   }, [setLoaded])
+
+  // useLayoutEffect(() => {
+  //   if (srcSet) {
+      
+  //   }
+  // })
   
   return <img
     onLoad={ hendleLoad }
     loading="lazy"
-    className={cx({img:true, loaded: isLoaded}, cls)}
+    className={cx({img:true, loaded: isLoaded, "img--cover": cover}, cls)}
     width={ width && width }
     height={ height && height }
+    srcSet={ srcSet && srcSet }
     src={ src && src }
     alt={ alt && alt }
   />

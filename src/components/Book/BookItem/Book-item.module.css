@@ -43,6 +43,9 @@
 
 .authors {
   font-size: 13px;
+  font-weight: 300;
+
+  
   color: var(--white-80);
   text-decoration: none;
 }

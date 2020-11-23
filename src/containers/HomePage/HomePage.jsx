@@ -21,13 +21,13 @@ const HomePage = () => {
 
       {/* {loading && <Loader isFullscreen={true} />} */}
       {/* <section className={ classes.book }>
-        <Layout page={ true }>
+        <Layout padingDisabled={true}>
           <SectionHeader HtmlTeg="h2">Обзоры книг</SectionHeader>
           <BookPreviewRoot />
         </Layout>
       </section> */}
         
-      <Layout page={ true }>
+      <Layout padingDisabled={true}>
         <PostContainer/>
       </Layout>
     </>

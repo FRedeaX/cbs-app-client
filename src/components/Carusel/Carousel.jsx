@@ -17,14 +17,16 @@ const Carousel = ({ children, length }) => {
     if (!scrollRef.current) return;
     const scrolled = scrollRef.current;
     const wrapperWidth = scrolled.offsetWidth;
+    const articleWidth = scrolled.children[0].children[0].offsetWidth;
     // const itemsWidth = scrolled.childNodes[0] && scrolled.childNodes[0].offsetWidth;
-
+    const l = length ? length : children.length;
+    
     //TODO: до выпуская раздела книг заменить 308 на вычисляемое значение 
     // решить проблему с вычислением значения при дозагрузке постов
-    // console.log(wrapperWidth > (308 * length), scrolled.childNodes[0].offsetWidth);
-    if (wrapperWidth > (308 * length) ) setCenter(true);// && length <= 3 похоже что она больше не нужна
-    if (wrapperWidth < (308 * length) || length > 3) setRight(true);
-  }, [length, setLeft, setRight]);
+    // console.log(wrapperWidth > (308 * l), scrolled.childNodes[0].offsetWidth);
+    if (wrapperWidth > ((articleWidth + 20) * l) ) setCenter(true);// && l <= 3 похоже что она больше не нужна
+    if (wrapperWidth < ((articleWidth + 20) * l) || l > 3) setRight(true);
+  }, [children.length, length, setLeft, setRight]);
 
   const hendleScroll = (direction) => {
     if (!scrollRef.current) return;

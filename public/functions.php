@@ -481,9 +481,9 @@ function register_book_post_type() {
 /**
  * Анонсы
  */
-add_action( 'init', 'register_anons_post_type' );
-function register_anons_post_type() {
-	register_taxonomy('taxonomyAnons', array('anons'), array(
+add_action( 'init', 'register_poster_post_type' );
+function register_poster_post_type() {
+	register_taxonomy('posterDepartment', array('poster'), array(
 		'label'                 => 'Филиалы', // определяется параметром $labels->name
 		'labels'                => array(
 			'name'              => 'Филиалы',
@@ -500,16 +500,19 @@ function register_anons_post_type() {
 		),
 		'description'           => 'Рубрики для раздела вопросов', // описание таксономии
 		'public'                => true,
-		'show_in_nav_menus'     => false, // равен аргументу public
-		'show_ui'               => true, // равен аргументу public		
+		// 'show_in_nav_menus'     => false, // равен аргументу public
+		// 'show_ui'               => true, // равен аргументу public		
 		'show_in_rest' 					=> true, // Таксономи в редакторе Гутенберг
-		'show_tagcloud'         => false, // равен аргументу show_ui
+		// 'show_tagcloud'         => false, // равен аргументу show_ui
 		'hierarchical'          => true,
-		'rewrite'               => array('slug'=>'anons', 'hierarchical'=>false, 'with_front'=>false, 'feed'=>false ),
+		'rewrite'               => array('slug'=>'poster/department', 'hierarchical'=>false, 'with_front'=>false, 'feed'=>false ),
 		'show_admin_column'     => true, // Позволить или нет авто-создание колонки таксономии в таблице ассоциированного типа записи. (с версии 3.5)
+		'show_in_graphql' => true,
+    'graphql_single_name' => 'posterDepartment',
+    'graphql_plural_name' => 'posterDepartments',
 	) );
 
-	register_post_type('anons', array(
+	register_post_type('poster', array(
 		'label'               => 'Анонсы',
 		'labels'              => array(
 			'name'          => 'Анонсы',
@@ -533,16 +536,16 @@ function register_anons_post_type() {
 		'capability_type'     => 'post',
 		'map_meta_cap'        => true,
 		'hierarchical'        => false,
-		'rewrite'             => array( 'slug'=>'anons/%taxonomyAnons%', 'with_front'=>false, 'pages'=>false, 'feeds'=>false, 'feed'=>false ),
+		'rewrite'             => array( 'slug'=>'poster', 'with_front'=>false, 'pages'=>false, 'feeds'=>false, 'feed'=>false ),
 		'has_archive'         => false,
 		'query_var'           => true,
 		'menu_position'       => 5,
 		'supports'            => array( 'title', 'editor', 'excerpt' ),
-		'taxonomies'          => array( 'taxonomyAnons' ),
+		'taxonomies'          => array( 'posterDepartment' ),
 		
 		'show_in_graphql' 			=> true,
-		'graphql_single_name' 	=> 'anons',
-		'graphql_plural_name' 	=> 'anonss',
+		'graphql_single_name' 	=> 'poster',
+		'graphql_plural_name' 	=> 'posters',
 	) );
 }
 
