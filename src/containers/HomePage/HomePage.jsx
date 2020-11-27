@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import SEO from "../../components/Seo/Seo";
 import Layout from "../../components/UI/Layout/Layout";
 import ModalRoot from "../ModalRoot/ModalRoot";
+import PosterContainer from './../../components/poster/PosterContainer/PosterContainer';
 import PostContainer from "./../Post/Post";
 
 const HomePage = () => {
@@ -18,18 +19,29 @@ const HomePage = () => {
   return (
     <>
       {window.location.pathname === "/" && <SEO />}
-
-      {/* {loading && <Loader isFullscreen={true} />} */}
-      {/* <section className={ classes.book }>
-        <Layout padingDisabled={true}>
-          <SectionHeader HtmlTeg="h2">Обзоры книг</SectionHeader>
-          <BookPreviewRoot />
-        </Layout>
-      </section> */}
+      
+      <div>
+        {/* {loading && <Loader isFullscreen={true} />} */}
+        {/* <section className={ classes.book }>
+          <Layout padingDisabled={true}>
+            <SectionHeader HtmlTeg="h2">Обзоры книг</SectionHeader>
+            <BookPreviewRoot />
+          </Layout>
+        </section> */}
+          
         
-      <Layout padingDisabled={true}>
-        <PostContainer/>
-      </Layout>
+
+        <Layout page={ false } padingDisabled={ true }>
+          <div style={ { display: "flex", flexWrap: "wrap", width: "max-content", margin: "auto", columnGap: "40px", paddingLeft: "40px"}}>
+            <div style={{width: "280px", order: 1}}>
+              <PosterContainer />
+            </div>
+            <div style={{maxWidth: "960px"}}>
+              <PostContainer/>
+            </div>
+          </div>
+        </Layout>
+      </div>
     </>
   );
 };

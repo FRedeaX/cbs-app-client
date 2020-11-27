@@ -1,6 +1,6 @@
 :root {
   /* color */
-  --white: #f7f7f7;
+  --white: hsl(0, 0%, 97%); /*hsl(0, 0%, 96%)*/
   --white-80: hsla(0, 0%, 100%, 0.8);
   --black: hsl(0, 0%, 12%);
   --black-80: hsla(0, 0%, 12%, 0.8);
@@ -8,7 +8,8 @@
   --black-14: hsla(0, 0%, 12%, 0.14);
   --gray: hsl(222, 13%, 60%);
   --dark-gray: hsl(0, 0%, 24%);
-  --d-dark-gray: hsl(222, 13%, 28%, 1); /* не используется */
+  --d-dark-gray: hsl(222, 13%, 28%, 1);
+  /* не используется */
   --red: hsl(0, 98%, 60%);
   --red-80: hsla(0, 98%, 60%, 0.8);
 
@@ -16,7 +17,7 @@
 
 
   /*#293448*/
-  --secondaryWhite: hsl(0, 0%, 96%);
+  /* --secondaryWhite: hsl(0, 0%, 96%); */
   --accentColor: hsla(0, 98%, 60%, 0.685);
   /* --menuLink: hsla(0, 0%, 8%, 0.85); */
   --menuLink--medium: hsla(0, 0%, 8%, 0.54);
@@ -145,6 +146,9 @@ table td {
   height: 100%;
 }
 
+/* .wp-block-file a.wp-block-file__button:visited:hover {
+  background-color: rgba(50, 55, 60, 0.85) !important;
+} */
 
 /*
  * wp-class styles

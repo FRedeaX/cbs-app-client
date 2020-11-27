@@ -176,21 +176,21 @@
   float: left;
 } */
 
-.content p strong {
+/* .content p strong {
   font-weight: 600;
-}
+} */
 
-.content h2,
+/* .content h2,
 .content h3,
 .content h4,
 .content h5,
 .content h6 {
   color: var(--black);
-}
+} */
 
-.content ul li {
+/* .content ul li {
   margin-bottom: 8px;
-}
+} */
 /* .content img {
   transition: all 0.35s;
 } */
