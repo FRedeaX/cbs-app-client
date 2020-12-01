@@ -1,12 +1,13 @@
 .title {
   /* font-family: var(--fontMA); */
-  font-size: 2.6rem;
+  font-size: 20px;
   /* font-weight: 500; */
-  font-weight: 300;
-  color: rgba(50, 50, 50, 0.85);
+  font-weight: 400;
+  /* color: rgba(50, 50, 50, 0.85); */
   /* color: rgba(50, 50, 50, 0.78); */
-  text-align: center;
+  /* text-align: center; */
   margin: 0;
+  padding-left: 10px;
   /* font-family: var(--fontMA);
       font-weight: 800;
       letter-spacing: 4px;

@@ -1,0 +1,78 @@
+.wrapper {
+  width: 280px;
+  font-size: 16px;
+  line-height: 20px;
+  background-color: #fff;
+  /* box-shadow: rgba(30, 30, 30, 0.1) 0 4px 12px; */
+  box-shadow: rgba(30, 30, 30, 0.1) 0 2px 12px -2px;
+
+  padding: 12px;
+  margin-bottom: 10px;
+}
+
+.wrapper:last-child {
+  margin-bottom: 0;
+}
+
+.header {
+  padding: 8px 24px 10px;
+  border-bottom: 1px solid var(--black-10);
+}
+
+.date {
+  /* font-family: var(--font-R-S); */
+  font-size: 2em;
+  font-weight: 100;
+  margin-right: 4px;
+  /* color: var(--dark-gray); */
+}
+
+.month {
+  font-weight: 300;
+}
+
+.body {
+  padding: 8px 0 12px;
+}
+
+.title {
+  font-size: 0.94em;
+  margin-top: 0;
+  margin-bottom: 6px;
+}
+
+.content {
+  font-size: 0.9em;
+  margin-bottom: 2px;
+}
+
+.content p {
+  margin: 0;
+}
+
+.description {
+  font-size: 0.9em;
+  font-weight: 300;
+  text-transform: capitalize;
+  color: #4c4c4c;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8125em;
+  color: var(--secondary-color);
+}
+
+.info {
+  padding-left: 8px;
+}
+
+.info::before {
+  content: url('/wp-content/themes/cbs-app/icons/phone.svg');
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 4px;
+  opacity: 0.5;
+}

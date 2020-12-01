@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client';
 import React from 'react';
+import { createMarkup } from '../../../constant/function';
 import classes from './Poster-item.module.css';
 
 export const posterItem = {
@@ -23,23 +24,56 @@ export const posterItem = {
 }
 
 const PosterItem = ({data: { posterDate, title, content, excerpt, posterDepartments }}) => {
-  
+  const date = posterDate.date.split('/');
+
   return (
     <div className={classes.wrapper}>
       <div className={classes.header}>
-        {posterDate.date}
+        <span className={classes.date}>{ date[0] }</span>
+        <span className={classes.month}>{ getStringMonth(date[1]) }</span>
       </div>
       <div className={classes.body}>
-        { title }
-        { content }
-        { excerpt }
+        <h3 className={classes.title}>{ title }</h3>
+        <div className={classes.content} dangerouslySetInnerHTML={createMarkup(content)} />
+        <div className={classes.description}>{ excerpt }</div>
       </div>
       <div className={classes.footer}>
-        { posterDepartments.nodes[0].name }
-        { posterDepartments.nodes[0].description }
+        <span>{ posterDepartments.nodes[0].name }</span>
+        <span className={classes.info} title={'Cправки по телефону'}>{ posterDepartments.nodes[0].description }</span>
       </div>
     </div>
   )
 }
 
 export default PosterItem;
+
+const getStringMonth = (month) => {
+  switch (month) {
+    case '01':
+      return 'Январь';
+    case '02':
+      return 'Феваль';
+    case '03':
+      return 'Март';
+    case '04':
+      return 'Апрель';
+    case '05':
+      return 'Май';
+    case '06':
+      return 'Июнь';
+    case '07':
+      return 'Июль';
+    case '08':
+      return 'Август';
+    case '09':
+      return 'Сентябрь';
+    case '10':
+      return 'Октябрь';
+    case '11':
+      return 'Ноябрь';
+    case '12':
+      return 'Декабрь';
+    default:
+      break;
+  }
+}

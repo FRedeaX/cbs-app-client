@@ -1,9 +1,9 @@
 import React, { memo } from "react";
 import { useLocation } from "react-router-dom";
+import PosterRoot from '../../components/poster/PosterRoot/PosterRoot';
 import SEO from "../../components/Seo/Seo";
 import Layout from "../../components/UI/Layout/Layout";
 import ModalRoot from "../ModalRoot/ModalRoot";
-import PosterContainer from './../../components/poster/PosterContainer/PosterContainer';
 import PostContainer from "./../Post/Post";
 
 const HomePage = () => {
@@ -32,9 +32,9 @@ const HomePage = () => {
         
 
         <Layout page={ false } padingDisabled={ true }>
-          <div style={ { display: "flex", flexWrap: "wrap", width: "max-content", margin: "auto", columnGap: "40px", paddingLeft: "40px"}}>
+          <div style={{ display: "flex", flexWrap: "wrap", width: "max-content", margin: "auto", columnGap: "30px"}}>
             <div style={{width: "280px", order: 1}}>
-              <PosterContainer />
+              <PosterRoot />
             </div>
             <div style={{maxWidth: "960px"}}>
               <PostContainer/>
