@@ -8,7 +8,8 @@
   --black-14: hsla(0, 0%, 12%, 0.14);
   --gray: hsl(222, 13%, 60%);
   --dark-gray: hsl(0, 0%, 24%);
-  --d-dark-gray: hsl(222, 13%, 28%, 1); /* не используется */
+  --d-dark-gray: hsl(222, 13%, 28%, 1);
+  /* не используется */
   --red: hsl(0, 98%, 60%);
   --red-80: hsla(0, 98%, 60%, 0.8);
 
@@ -52,7 +53,8 @@ figure figcaption {
   text-align: center;
   font-size: 14px;
   line-height: 1.2;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px;  //добавляет лишний отступ у подписи картинок */
+  border-radius: 0 0 6px 6px;
 }
 
 /* .wp-block-gallery {
