@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client';
+import classNames from 'classnames';
 import React from 'react';
 import { createMarkup } from '../../../constant/function';
 import classes from './Poster-item.module.css';
@@ -23,14 +24,15 @@ export const posterItem = {
   `
 }
 
-const PosterItem = ({data: { posterDate, title, content, excerpt, posterDepartments }}) => {
+const PosterItem = ({data: { posterDate, title, content, excerpt, posterDepartments }, cls}) => {
   const date = posterDate.date.split('/');
 
   return (
-    <div className={classes.wrapper}>
+    <div className={classNames(classes.wrapper, cls)}>
       <div className={classes.header}>
         <span className={classes.date}>{ date[0] }</span>
         <span className={classes.month}>{ getStringMonth(date[1]) }</span>
+        <span className={classes.type} title={"Мероприятия будут проведены в онлайн-режиме на сайте ГКУ ЦБС"}>онлайн</span>
       </div>
       <div className={classes.body}>
         <h3 className={classes.title}>{ title }</h3>
@@ -39,7 +41,7 @@ const PosterItem = ({data: { posterDate, title, content, excerpt, posterDepartme
       </div>
       <div className={classes.footer}>
         <span>{ posterDepartments.nodes[0].name }</span>
-        <span className={classes.info} title={'Cправки по телефону'}>{ posterDepartments.nodes[0].description }</span>
+        <span className={classes.info} title={"Cправки по телефону"}>{ posterDepartments.nodes[0].description }</span>
       </div>
     </div>
   )

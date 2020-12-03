@@ -1,6 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
 import React, { memo } from "react";
-import PosterContainer from "../PosterContainer/PosterContainer";
 import PosterItem, { posterItem } from "../PosterItem/PosterItem";
 
 const FETCH_POSTER = gql`
@@ -14,31 +13,32 @@ const FETCH_POSTER = gql`
   ${posterItem.fragments}
 `;
 
-const PosterRoot = () => {
+const PosterRoot = ({ limitRender = false, clsItem }) => {
   const { data, loading, error } = useQuery(FETCH_POSTER);
 
   if (error) console.log(error);
   if (loading) return null;
 
-  const RenderPoster = (array) => {
-    console.log(array);
-    let r;
-    for (let index = 0; index < array.length; index++) {
-      const poster = array[index];
-      r += <PosterItem key={poster.id} data={poster} />;
-    }
-    console.log(r);
-    return r;
-  };
+  // const RenderPoster = () => {
+  //   data.posters.nodes.reduce((acc, poster, index, array) => {
+  //     console.log(acc);
+  //     return (
+  //       acc,
+  //       (
+  //         <div>
+  //           <PosterItem key={poster.id} data={poster} />
+  //           <PosterItem key={poster.id} data={array[index + 1]} />
+  //         </div>
+  //       )
+  //     );
+  //   });
+  // };
 
-  return (
-    <PosterContainer>
-      {/* {data.posters.nodes.map((poster) => (
-        <PosterItem key={poster.id} data={poster} />
-      ))} */}
-      <RenderPoster array={data.posters.nodes} />
-    </PosterContainer>
-  );
+  console.log("render PosterRoot");
+  return data.posters.nodes.map((poster, index) => {
+    if (limitRender && index + 1 > limitRender) return null;
+    return <PosterItem key={poster.id} data={poster} cls={clsItem} />;
+  });
 };
 
 export default memo(PosterRoot);
