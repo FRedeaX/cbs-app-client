@@ -34,7 +34,7 @@ const PosterRoot = ({ limitRender = false, clsItem }) => {
   //   });
   // };
 
-  console.log("render PosterRoot");
+  // console.log("render PosterRoot");
   return data.posters.nodes.map((poster, index) => {
     if (limitRender && index + 1 > limitRender) return null;
     return <PosterItem key={poster.id} data={poster} cls={clsItem} />;
