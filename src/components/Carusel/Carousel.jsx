@@ -4,7 +4,7 @@ import { isBrowser } from 'react-device-detect';
 import Button from "../UI/Button-arrow/Button";
 import classes from "./Carousel.module.css";
 
-const Carousel = ({ children, length }) => {
+const Carousel = ({ children, length, articleWidth, articleMargin, isShadow = true }) => {
 
   const scrollRef = useRef();
   let alreadyScrolled = 0;
@@ -17,7 +17,7 @@ const Carousel = ({ children, length }) => {
     if (!scrollRef.current) return;
     const scrolled = scrollRef.current;
     const wrapperWidth = scrolled.offsetWidth;
-    const articleWidth = scrolled.children[0].children[0].offsetWidth;
+    // const articleWidth = scrolled.children[0].children[0].offsetWidth;
     // const itemsWidth = scrolled.childNodes[0] && scrolled.childNodes[0].offsetWidth;
     const l = length ? length : children.length;
     
@@ -26,18 +26,20 @@ const Carousel = ({ children, length }) => {
     // console.log(wrapperWidth > (308 * l), scrolled.childNodes[0].offsetWidth);
     if (wrapperWidth > ((articleWidth + 20) * l) ) setCenter(true);// && l <= 3 похоже что она больше не нужна
     if (wrapperWidth < ((articleWidth + 20) * l) || l > 3) setRight(true);
-  }, [children.length, length, setLeft, setRight]);
+  }, [children.length, length, articleWidth, setLeft, setRight]);
 
   const hendleScroll = (direction) => {
     if (!scrollRef.current) return;
     const scrolled = scrollRef.current;
-    const article = scrolled.childNodes[0].childNodes[0];
+    // const article = scrolled.childNodes[0].childNodes[0];
 
     const scrolledOffsetW = scrolled.offsetWidth;
-    const articleOffsetW = article.offsetWidth;
-    const articleMargin = 20;
+    const articleOffsetW = articleWidth;
+    // const articleMargin = 20;
     const articleCountOfScreen = Math.floor(scrolledOffsetW / articleOffsetW);
-    const scrollTo = (articleOffsetW + articleMargin) * articleCountOfScreen;
+    console.log(articleCountOfScreen);
+    const scrollTo = (articleOffsetW + articleMargin * 2) * articleCountOfScreen;
+    console.log(scrollTo);
 
     if (direction === "left") alreadyScrolled -= scrollTo;
     else if (direction === "right") alreadyScrolled += scrollTo;
@@ -86,13 +88,13 @@ const Carousel = ({ children, length }) => {
           <div
             className={cx({
               "shadow-left": true,
-              "shadow-left--active": isLeft
+              "shadow-left--active": isLeft && isShadow
             })}
           />
           <div
             className={cx({
               "shadow-right": true,
-              "shadow-right--active": isRight
+              "shadow-right--active": isRight && isShadow
             })}
           />
           { isBrowser && (

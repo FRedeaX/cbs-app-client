@@ -11,3 +11,98 @@
 .book {
   min-height: 368px;
 }
+
+.wrapper {
+  display: flex;
+  /* flex-wrap: wrap; */
+  /* width: max-content; */
+  max-width: 1310px;
+  width: 100%;
+  margin: auto;
+  gap: 10px;
+}
+
+/*
+ * width <= 1330 & width > 960
+ */
+@media screen and (max-width: 1330px) and (min-width: 961px) {
+  .poster {
+    padding-right: 10px;
+  }
+}
+
+/*
+ * width <= 1330
+ */
+@media screen and (max-width: 1330px) {
+  .wrapper {
+    max-width: 960px;
+    flex-direction: column;
+  }
+
+  .poster {
+    max-width: 960px;
+    /* width: 97.917%; */
+    margin-bottom: -30px;
+  }
+
+  .list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .item:first-child {
+    margin-left: 10px;
+  }
+
+  .item:last-child {
+    margin-right: 10px;
+  }
+}
+
+/*
+ * width <= 1330 & width >= 480
+ */
+@media screen and (max-width: 1330px) and (min-width: 480px) {
+  .item {
+    width: 440px;
+  }
+}
+
+/* @media screen and (max-width: 1330px) and (min-width: 960px) {
+  .poster {
+    max-width: 960px;
+  }
+} */
+
+/*
+ * width <= 1020
+ */
+/* @media screen and (max-width: 1020px) {
+  .wrapper {
+    width: 97.917%;
+  }
+} */
+
+/*
+ * width >= 1330
+ */
+@media screen and (min-width: 1330px) {
+  .poster {
+    width: 330px;
+    order: 1;
+    margin-right: 10px;
+  }
+
+  .item {
+    margin: 10px 0 20px;
+  }
+
+  .item:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.post {
+  max-width: 960px;
+}

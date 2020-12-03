@@ -52,9 +52,9 @@
 .shadow-left {
   display: none;
   position: absolute;
-  top: 6px;
+  top: 8px;
   left: -20px;
-  bottom: 22px;
+  bottom: 12px;
   width: 20px;
   box-shadow: rgb(0, 0, 0, 0.2) 10px 0px 12px -6px;
 }

@@ -2,8 +2,8 @@ import classNamesBind from "classnames/bind";
 import React, { memo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { classJoin, createMarkup } from "../../../constant/function";
-import BookImage from "../../book/BookImage/BookImage";
 import Category from "../Category/Category";
+import BookImage from "./../../Book/BookImage/BookImage";
 import classes from "./Card.module.css";
 
 

@@ -45,7 +45,7 @@
   font-size: 13px;
   font-weight: 300;
 
-  
+
   color: var(--white-80);
   text-decoration: none;
 }
@@ -58,7 +58,7 @@
   font-size: 15px;
   font-weight: 400;
   line-height: 1;
-  color: var(--secondaryWhite);
+  color: var(--white);
   margin-top: 4px;
   margin-bottom: 0;
   pointer-events: none;
