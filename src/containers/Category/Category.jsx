@@ -1,8 +1,9 @@
 import { gql, useQuery } from "@apollo/client";
 import React, { Fragment, useCallback, useEffect, useRef } from "react";
 import NotFound from "../../components/NotFound/NotFound";
-import Post from "../../components/Post/Post";
+import Post from "../../components/post/Post/Post";
 import SEO from "../../components/Seo/Seo";
+import Layout from "../../components/UI/Layout/Layout";
 import Loader from "../../components/UI/Loader/Loader";
 
 const GET_ARTICLES_BY_CATEGORY = gql`
@@ -26,6 +27,7 @@ const GET_ARTICLES_BY_CATEGORY = gql`
               }
             }
             id
+            isSticky
             tags {
               nodes {
                 id
@@ -87,7 +89,8 @@ const Category = (props) => {
     isLoaded.current = true;
   }, [data]);
 
-  const handleOnScrollCategory = useCallback(() => {
+  const handleOnScrollCategory = useCallback((event) => {
+    event.stopPropagation();
     if (!data) return;
     const scrolledToBottom =
       Math.ceil(window.scrollY + window.innerHeight * 3) >=
@@ -124,7 +127,7 @@ const Category = (props) => {
             : "default"
         }
       />
-      <main>
+      <Layout page={true}>
         {/* <Layout> */}
         <Post
           data={data.categories.nodes[0].posts.nodes}
@@ -137,7 +140,7 @@ const Category = (props) => {
         />
         {/* <button onClick={hendleFetchMore}>Load</button> */}
         {/* </Layout> */}
-      </main>
+      </Layout>
     </Fragment>
   );
 };

@@ -10,11 +10,11 @@ import Button from "../../components/UI/Button/Button";
 import { classJoin, createMarkup } from "../../constant/function";
 import { toggleOverlay } from "../../store/action/UI";
 import Content from "../Content/Content";
-import Category from "../Post/Category/Category";
 import SEO from "../Seo/Seo";
 import Share from "../Share/Share";
 import Overlay from "../UI/Overlay/Overlay";
 import NotFound from "./../../components/NotFound/NotFound";
+import Category from "./../post/Category/Category";
 import classes from "./Modal.module.css";
 // let scroll, modal, titleOffsetHeight;
 
@@ -58,6 +58,7 @@ const Modal = ({
   }, [toggle]);
 
   const hendleScroll = (event) => {
+    event.stopPropagation();
     if (!titleOffsetHeight.current) return;
 
     const scroll = event.target.scrollTop;
@@ -82,7 +83,7 @@ const Modal = ({
         data-close
       >
         <div className={classes.container}>
-          <header className={classes.header}>
+          <div className={classes.header}>
             <div
               className={
                 isScroll
@@ -113,9 +114,9 @@ const Modal = ({
               type="button"
               onClick={onCloseHendler}
             />
-          </header>
+          </div>
           {title && (
-            <h2
+            <h1
               className={
                 isScroll
                   ? classJoin([
@@ -141,7 +142,7 @@ const Modal = ({
                 className={classes.content}
                 dangerouslySetInnerHTML={createMarkup(content)}
               /> */}
-              <Content text={content} cls={classes.content} />
+              <Content cls={ classes.content }>{content}</Content>
             </div>
           )}
           {notFound && (

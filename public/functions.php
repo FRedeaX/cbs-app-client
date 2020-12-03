@@ -298,38 +298,34 @@ function switchjQueryCDN() {
 // }
 
 
+// add_action( 'init', function() {
+//    register_post_type( 'docs', [
+//       'show_ui' => true,
+//       'labels'  => [
+//       	'menu_name' => __( 'Docs', 'your-textdomain' ),//@see https://developer.wordpress.org/themes/functionality/internationalization/
+//       ],
+//       'show_in_graphql' => true,
+//       'hierarchical' => true,
+//       'graphql_single_name' => 'document',
+//       'graphql_plural_name' => 'documents',
+//    ] );
+// } );
 
+// add_action('init', function() {
+//   register_taxonomy( 'doc_tag', 'docs', [
+//     'labels'  => [
+// 			'menu_name' => __( 'Document Tags', 'your-textdomain' ),
+// 		],
+//     'show_in_graphql' => true,
+//     'graphql_single_name' => 'documentTag',
+//     'graphql_plural_name' => 'documentTags',
+//   ]);
+// });
 /**
  * Книги
  */
 add_action( 'init', 'register_book_post_type' );
 function register_book_post_type() {
-	register_taxonomy('taxonomyBook', array('book'), array(
-		'label'                 => 'Жанры', // определяется параметром $labels->name
-		'labels'                => array(
-			'name'              => 'Жанры',
-			'singular_name'     => 'Жанр',
-			'search_items'      => 'Искать жанр',
-			'all_items'         => 'Все жанры',
-			'parent_item'       => 'Родит. жанр',
-			'parent_item_colon' => 'Родит. жанр:',
-			'edit_item'         => 'Редактировать данные жанра',
-			'update_item'       => 'Обновить',
-			'add_new_item'      => 'Добавить новый жанр',
-			'new_item_name'     => 'Добавить жанр',
-			'menu_name'         => 'Жанры',
-		),
-		'description'           => 'Рубрики для раздела вопросов', // описание таксономии
-		'public'                => true,
-		'show_in_nav_menus'     => false, // равен аргументу public
-		'show_ui'               => true, // равен аргументу public		
-		'show_in_rest' 					=> true, // Таксономи в редакторе Гутенберг
-		'show_tagcloud'         => false, // равен аргументу show_ui
-		'hierarchical'          => true,
-		'rewrite'               => array('slug'=>'taxonomyBook', 'hierarchical'=>false, 'with_front'=>true, 'feed'=>false ),
-		'show_admin_column'     => true, // Позволить или нет авто-создание колонки таксономии в таблице ассоциированного типа записи. (с версии 3.5)
-	) );
-
 	register_post_type('book', array(
 		'label'               => 'Книги',
 		'labels'              => array(
@@ -346,32 +342,148 @@ function register_book_post_type() {
 		'description'         => '',
 		'public'              => true,
 		'publicly_queryable'  => true,
+		'exclude_from_search' => false, // исключать ли этот тип записей из поиска по сайту
+		'show_in_nav_menus'		=> true,
 		'show_ui'             => true,
-		'show_in_rest'        => true, // редактор Гутенберг
-		'rest_base'           => '',
 		'show_in_menu'        => true,
-		'exclude_from_search' => true, // исключать ли этот тип записей из поиска по сайту
-		'capability_type'     => 'post',
-		'map_meta_cap'        => true,
-		'hierarchical'        => false,
-		'rewrite'             => array( 'with_front'=> false ),//array( 'slug'=>'book', 'with_front'=>false, 'pages'=>false, 'feeds'=>false, 'feed'=>false ),
-		'has_archive'         => false,
-		'query_var'           => true,
+		'show_in_rest'        => true, // редактор Гутенберг
+		'rest_base'           => 'book',
 		'menu_position'       => 4,
+		'capability_type'     => 'post',//array('book', 'books'),
+		'map_meta_cap'        => true,
+		'hierarchical'        => true,//тома?
+		'supports'            => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions' ),
+		'taxonomies'          => array( 'bookAuthor', 'bookGenre', 'bookYear','bookPublisher' ),
+		'has_archive'         => false,
+		'rewrite'             => array( 'slug'=>'book', 'with_front'=> false ),//array( 'slug'=>'book', 'with_front'=>false, 'pages'=>false, 'feeds'=>false, 'feed'=>false ),
+
 		'show_in_graphql' 			=> true,
 		'graphql_single_name' 	=> 'book',
 		'graphql_plural_name' 	=> 'books',
-		'supports'            => array( 'title', 'editor', 'thumbnail', 'excerpt' ),
-		'taxonomies'          => array( 'taxonomyBook' ),
+	) );
+
+
+	register_taxonomy('bookAuthor', array('book'), array(
+		'labels'                => array(
+			'name'              => 'Авторы',
+			'singular_name'     => 'Автор',
+			'search_items'      => 'Поиск по автору',
+			'popular_items'			=> 'Популярные авторы',
+			'all_items'         => 'Все авторы',
+			'parent_item'       => null,
+			'parent_item_colon' => null,
+			'edit_item'         => 'Редактировать данные автора',
+			'update_item'       => 'Обновить',
+			'add_new_item'      => 'Добавить нового автора',
+			'view_item'					=> 'Перейти',
+			'new_item_name'     => 'Добавить автора',
+			'choose_from_most_used' => 'Часто используемые',
+		),
+		'description'           => 'Авторы книг', // описание таксономии
+		'public'                => true,
+		'show_in_rest' 					=> true, // Таксономи в редакторе Гутенберг
+		// 'rest_base'							=> 'bookGenres', //не обязательно для graphql?
+		// 'rest_controller_class'	=> 'bookGenres', //не обязательно для graphql?
+		'rewrite'               => array('slug'=>'book/author', 'with_front'=>false, 'feed'=>false ),
+		'sort'									=> true,
+		'show_admin_column'     => true, // Позволить или нет авто-создание колонки таксономии в таблице ассоциированного типа записи. (с версии 3.5)
+		'show_in_graphql' => true,
+    'graphql_single_name' => 'bookAuthor',
+    'graphql_plural_name' => 'bookAuthors',
+	) );
+
+	register_taxonomy('bookGenre', array('book'), array(
+		'labels'                => array(
+			'name'              => 'Жанры',
+			'singular_name'     => 'Жанр',
+			'search_items'      => 'Искать жанр',
+			'popular_items'			=> 'Популярные жанры',
+			'all_items'         => 'Все жанры',
+			'parent_item'       => 'Родит. жанр',
+			'parent_item_colon' => 'Родит. жанр:',
+			'edit_item'         => 'Редактировать данные жанра',
+			'update_item'       => 'Обновить',
+			'add_new_item'      => 'Добавить новый жанр',
+			'view_item'					=> 'Перейти',
+			'new_item_name'     => 'Добавить жанр',
+			'choose_from_most_used' => 'Часто используемые',
+		),
+		'description'           => 'Жанры книг', // описание таксономии
+		'public'                => true,
+		'show_in_rest' 					=> true, // Таксономи в редакторе Гутенберг
+		'rest_base'							=> 'bookGenres', //не обязательно для graphql?
+		'rest_controller_class'	=> 'bookGenre', //не обязательно для graphql?
+		'hierarchical'          => true,
+		'rewrite'               => array('slug'=>'book/genre', 'hierarchical'=>true, 'with_front'=>false, 'feed'=>false ),
+		// 'sort'									=> true,
+		'show_admin_column'     => true, // Позволить или нет авто-создание колонки таксономии в таблице ассоциированного типа записи. (с версии 3.5)
+		'show_in_graphql' => true,
+    'graphql_single_name' => 'bookGenre',
+    'graphql_plural_name' => 'bookGenres',
+	) );
+
+	register_taxonomy('bookYear', array('book'), array(
+		'labels'                => array(
+			'name'              => 'Год издания',
+			'singular_name'     => 'Год издания',
+			'search_items'      => 'Поиск по году издания',
+			'all_items'         => 'Все годы издания',
+			'parent_item'       => null,
+			'parent_item_colon' => null,
+			'edit_item'         => 'Редактировать год издания',
+			'update_item'       => 'Обновить',
+			'add_new_item'      => 'Добавить новый год издания',
+			'view_item'					=> 'Перейти',
+			'new_item_name'     => 'Добавить новый год издания',
+			'choose_from_most_used' => 'Часто используемые',
+		),
+		'description'           => 'Год издания книги', // описание таксономии
+		'public'                => true,
+		'show_in_rest' 					=> true, // Таксономи в редакторе Гутенберг
+		// 'rest_base'							=> 'bookGenres', //не обязательно для graphql?
+		// 'rest_controller_class'	=> 'bookGenres', //не обязательно для graphql?
+		'rewrite'               => array('slug'=>'book/year', 'with_front'=>false, 'feed'=>false ),
+		// 'sort'									=> true,
+		'show_admin_column'     => true, // Позволить или нет авто-создание колонки таксономии в таблице ассоциированного типа записи. (с версии 3.5)
+		'show_in_graphql' => true,
+    'graphql_single_name' => 'bookYear',
+    'graphql_plural_name' => 'bookYears',
+	) );
+
+	register_taxonomy('bookPublisher', array('book'), array(
+		'labels'                => array(
+			'name'              => 'Издательство',
+			'singular_name'     => 'Издательство',
+			'search_items'      => 'Поиск по издателям',
+			'all_items'         => 'Все издатели',
+			'parent_item'       => null,
+			'parent_item_colon' => null,
+			'edit_item'         => 'Редактировать издателя',
+			'update_item'       => 'Обновить',
+			'add_new_item'      => 'Добавить нового издателя',
+			'view_item'					=> 'Перейти',
+			'new_item_name'     => 'Добавить нового издателя',
+			'choose_from_most_used' => 'Часто используемые',
+		),
+		'public'                => true,
+		'show_in_rest' 					=> true, // Таксономи в редакторе Гутенберг
+		// 'rest_base'							=> 'bookGenres', //не обязательно для graphql?
+		// 'rest_controller_class'	=> 'bookGenres', //не обязательно для graphql?
+		'rewrite'               => array('slug'=>'book/publisher', 'with_front'=>false, 'feed'=>false ),
+		// 'sort'									=> true,
+		'show_admin_column'     => true, // Позволить или нет авто-создание колонки таксономии в таблице ассоциированного типа записи. (с версии 3.5)
+		'show_in_graphql' => true,
+    'graphql_single_name' => 'bookPublisher',
+    'graphql_plural_name' => 'bookPublishers',
 	) );
 }
 
 /**
  * Анонсы
  */
-add_action( 'init', 'register_anons_post_type' );
-function register_anons_post_type() {
-	register_taxonomy('taxonomyAnons', array('anons'), array(
+add_action( 'init', 'register_poster_post_type' );
+function register_poster_post_type() {
+	register_taxonomy('posterDepartment', array('poster'), array(
 		'label'                 => 'Филиалы', // определяется параметром $labels->name
 		'labels'                => array(
 			'name'              => 'Филиалы',
@@ -388,16 +500,19 @@ function register_anons_post_type() {
 		),
 		'description'           => 'Рубрики для раздела вопросов', // описание таксономии
 		'public'                => true,
-		'show_in_nav_menus'     => false, // равен аргументу public
-		'show_ui'               => true, // равен аргументу public		
+		// 'show_in_nav_menus'     => false, // равен аргументу public
+		// 'show_ui'               => true, // равен аргументу public		
 		'show_in_rest' 					=> true, // Таксономи в редакторе Гутенберг
-		'show_tagcloud'         => false, // равен аргументу show_ui
+		// 'show_tagcloud'         => false, // равен аргументу show_ui
 		'hierarchical'          => true,
-		'rewrite'               => array('slug'=>'anons', 'hierarchical'=>false, 'with_front'=>false, 'feed'=>false ),
+		'rewrite'               => array('slug'=>'poster/department', 'hierarchical'=>false, 'with_front'=>false, 'feed'=>false ),
 		'show_admin_column'     => true, // Позволить или нет авто-создание колонки таксономии в таблице ассоциированного типа записи. (с версии 3.5)
+		'show_in_graphql' => true,
+    'graphql_single_name' => 'posterDepartment',
+    'graphql_plural_name' => 'posterDepartments',
 	) );
 
-	register_post_type('anons', array(
+	register_post_type('poster', array(
 		'label'               => 'Анонсы',
 		'labels'              => array(
 			'name'          => 'Анонсы',
@@ -421,12 +536,16 @@ function register_anons_post_type() {
 		'capability_type'     => 'post',
 		'map_meta_cap'        => true,
 		'hierarchical'        => false,
-		'rewrite'             => array( 'slug'=>'anons/%taxonomyAnons%', 'with_front'=>false, 'pages'=>false, 'feeds'=>false, 'feed'=>false ),
+		'rewrite'             => array( 'slug'=>'poster', 'with_front'=>false, 'pages'=>false, 'feeds'=>false, 'feed'=>false ),
 		'has_archive'         => false,
 		'query_var'           => true,
 		'menu_position'       => 5,
 		'supports'            => array( 'title', 'editor', 'excerpt' ),
-		'taxonomies'          => array( 'taxonomyAnons' ),
+		'taxonomies'          => array( 'posterDepartment' ),
+		
+		'show_in_graphql' 			=> true,
+		'graphql_single_name' 	=> 'poster',
+		'graphql_plural_name' 	=> 'posters',
 	) );
 }
 

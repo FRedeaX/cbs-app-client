@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import classes from './Contact-info.module.css';
 import { Email } from "./Email/Email";
 import { Schedule } from "./Schedule/Schedule";
 import { Telefon } from "./Telefon/Telefon";
@@ -11,13 +12,13 @@ const ContactInfo = (props) => {
       {schedule && <Schedule schedule={schedule} />}
       {email && telefon ? (
         <div>
-          {email && <Email email={email} />}
-          {telefon && <Telefon telefon={telefon} />}
+          {email && <Email email={email} cls={classes.link} />}
+          {telefon && <Telefon telefon={telefon} cls={classes.link} />}
         </div>
       ) : email ? (
-        <Email email={email} />
+        <Email email={email} cls={classes.link} />
       ) : telefon ? (
-        <Telefon telefon={telefon} />
+        <Telefon telefon={telefon} cls={classes.link} />
       ) : null}
     </Fragment>
   );

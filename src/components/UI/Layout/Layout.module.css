@@ -6,14 +6,18 @@
 }
 
 .page {
-  padding-top: 100px;
+  max-width: 960px;
 }
 
-@media screen and (max-width: 992px) {
+.page--p-none {
+  padding: 0;
+}
+
+/* @media screen and (max-width: 992px) {
   .page {
     padding-top: 80px;
   }
-}
+} */
 
 /* @media screen and (max-width: 720px) {
   .layout {

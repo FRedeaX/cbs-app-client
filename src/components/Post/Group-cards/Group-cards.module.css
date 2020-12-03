@@ -1,4 +1,5 @@
 .container {
+  /* width: 100%; */
   width: 97.917%;
   /* width: 97.943%; */
 
@@ -6,6 +7,10 @@
   /* padding-bottom: 20px; */
 
   box-sizing: border-box;
+  margin: 10px auto 0;
+}
+
+.container:first-child {
   margin: 0 auto 10px auto;
 }
 
@@ -17,6 +22,16 @@
     /* width: calc(100% - 20px); */
     /* width: calc(100% + 30px);
     margin: 0 -15px; */
+  }
+}
+
+@media screen and (min-width: 961px) {
+  .container article:first-child {
+    margin-left: 0;
+  }
+
+  .container article:last-child {
+    margin-right: 0;
   }
 }
 
@@ -35,7 +50,7 @@
   color: #606060;
 }
 
-.scroll-body {
+/* .scroll-body {
   position: relative;
   flex: 1 0 auto;
 }
@@ -44,15 +59,15 @@
   .scroll-body {
     overflow: hidden;
   }
-}
+} */
 
-.wrapper-cards {
+/* .wrapper-cards {
   padding: 5.8rem 0 5.6rem;
   overflow: hidden;
   z-index: 1;
-}
+} */
 
-.scrolled {
+/* .scrolled {
   display: flex;
   overflow-x: auto;
   overflow-y: hidden;
@@ -60,21 +75,15 @@
   padding: 40px 0;
 
   -webkit-overflow-scrolling: touch;
-
-  /* scroll-padding: 0;
-  scroll-snap-type: x mandatory;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  overscroll-behavior-x: contain; */
 }
 
 @media screen and (min-width: 940px) {
   .scrolled--center {
     justify-content: center;
   }
-}
+} */
 
-.scrolled article {
+.article {
   position: relative;
   width: 288px;
   /* height: 300px; */
@@ -87,16 +96,16 @@
 }
 
 @media screen and (min-width: 769px) {
-  .scrolled article {
+  .article {
     transition: transform 0.2s linear;
   }
 
-  .scrolled article:hover {
+  .article:hover {
     transform: translateY(-6px);
   }
 }
 
-.items {
+/* .items {
   display: flex;
 }
 
@@ -108,7 +117,7 @@
   .items article:last-child {
     margin-right: 0;
   }
-}
+} */
 
 /* .scrolled article:first-child {
   margin-left: 15px;
@@ -118,7 +127,7 @@
   margin-right: 15px;
 } */
 
-.shadow-left {
+/* .shadow-left {
   display: none;
   position: absolute;
   top: 6px;
@@ -157,7 +166,7 @@
   .button-right {
     right: 8px;
   }
-}
+} */
 
 /* .body {
   display: flex;

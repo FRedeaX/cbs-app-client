@@ -101,7 +101,7 @@ const Header = () => {
   const cx = classNamesBind.bind(classes);
   return (
     <header className={cx({header: true, "header--scrolled": isScroll})}>
-      <Layout>
+      <Layout page={false}>
         <div className={classes.grid}>
           <div className={classes.logo}>
             <Logo />

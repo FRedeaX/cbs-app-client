@@ -1,5 +1,5 @@
 import React from "react";
-import { createMarkup } from "./../../../constant/function";
+import Content from "../../Content/Content";
 import classes from "./Page.module.css";
 
 const Page = (props) => {
@@ -9,8 +9,8 @@ const Page = (props) => {
     <div className={classes.container}>
       <h1 className={classes.title}>{title}</h1>
       <div className={classes.content}>
-        {/* <Share cls={classes.share} /> */}
-        <div dangerouslySetInnerHTML={createMarkup(content)} />
+        {/* <Share cls={classes.share} /> */ }
+        <Content>{content}</Content>
       </div>
     </div>
   );

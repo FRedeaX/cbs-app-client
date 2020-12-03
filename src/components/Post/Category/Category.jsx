@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 import { Link } from "react-router-dom";
-import classes from "./../../Post/Category/Category.module.css";
+import classes from "./Category.module.css";
 
 const Category = ({ data, cls }) => {
   return data.nodes.map((term) => (
