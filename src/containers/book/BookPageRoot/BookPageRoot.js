@@ -1,8 +1,8 @@
 import { gql, useApolloClient, useLazyQuery } from "@apollo/client";
 import React, { memo, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import BookPage from "../../../components/book/BookPage/BookPage";
 import { mainShortDataByBook, otherDataByBook } from "../root";
+import BookPage from "./../../../components/Book/BookPage/BookPage";
 
 const FETCH_BOOK = gql`
   query FetchBook($uri: ID!) {
