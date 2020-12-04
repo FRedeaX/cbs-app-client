@@ -1,12 +1,7 @@
-import {
-  ApolloClient,
-  ApolloProvider,
-  createHttpLink,
-  InMemoryCache,
-} from "@apollo/client";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import { BatchHttpLink } from "@apollo/link-batch-http";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
-import { createPersistedQueryLink } from "apollo-link-persisted-queries";
 import React from "react";
 import { isBrowser, isMobile } from "react-device-detect";
 import ReactDOM from "react-dom";
@@ -27,13 +22,13 @@ import rootReducer from "./store/rootReducer";
 //   document.getElementById("root")
 // );
 
-const link = createPersistedQueryLink().concat(
-  // createHttpLink({ uri: "https://cbsbaikonur.ru/graphql" })
-  createHttpLink({
-    uri: "https://cbsbaikonur.ru/graphql",
-    useGETForQueries: true,
-  })
-);
+// const link = createPersistedQueryLink().concat(
+//   // createHttpLink({ uri: "https://cbsbaikonur.ru/graphql" })
+//   createHttpLink({
+//     uri: "https://cbsbaikonur.ru/graphql",
+//     useGETForQueries: true,
+//   })
+// );
 // const client = new ApolloClient({
 //   cache: new InMemoryCache(),
 //   link: new HttpLink({ uri: "https://cbsbaikonur.ru/graphql" }),
@@ -45,8 +40,11 @@ const link = createPersistedQueryLink().concat(
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  // link: new BatchHttpLink(link),
-  link,
+  link: new BatchHttpLink({
+    uri: "https://cbsbaikonur.ru/graphql",
+    // useGETForQueries: true,
+  }),
+  // link,
 });
 
 if (process.env.NODE_ENV === "production") {
