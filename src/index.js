@@ -7,6 +7,7 @@ import { isBrowser, isMobile } from "react-device-detect";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
+import { YMInitializer } from "react-yandex-metrika";
 import { applyMiddleware, compose, createStore } from "redux";
 import thunk from "redux-thunk";
 import smoothscroll from "smoothscroll-polyfill";
@@ -82,6 +83,17 @@ else if (isMobile) document.documentElement.classList.add("ua_browser_mobile");
 
 const app = (
   <React.StrictMode>
+    {process.env.NODE_ENV === "production" && (
+      <YMInitializer
+        accounts={[33186213]}
+        options={{
+          clickmap: true,
+          trackLinks: true,
+          accurateTrackBounce: true,
+          webvisor: true,
+        }}
+      />
+    )}
     <ApolloProvider client={client}>
       <Provider store={store}>
         <BrowserRouter>
