@@ -1,7 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import React, { memo } from "react";
 import Carousel from "../../Carusel/Carousel";
-import SectionHeader from "../../SectionHeader/SectionHeader";
 import PosterItem, { posterItem } from "../PosterItem/PosterItem";
 
 const FETCH_POSTER = gql`
@@ -26,10 +25,10 @@ const PosterRoot = ({ limitRender = false, isCarousel = false, clsItem }) => {
   const day = date.getDate();
   const hours = date.getHours();
 
-  const lastPosterDay =
-    posters[posters.length - 1].posterDate.date.split("/")[0] * 1;
-  console.log(lastPosterDay);
-  if (lastPosterDay < day || (lastPosterDay === day && hours > 18)) return null;
+  // const lastPosterDay =
+  //   posters[posters.length - 1].posterDate.date.split("/")[0] * 1;
+  // if (lastPosterDay < day || (lastPosterDay === day && hours > 18))
+  //   return isHeaderHendler(false);
 
   const RenderPoster = () =>
     posters.map((poster, index) => {
@@ -44,23 +43,18 @@ const PosterRoot = ({ limitRender = false, isCarousel = false, clsItem }) => {
     });
 
   // console.log("render PosterRoot");
-  return (
-    <>
-      <SectionHeader>Анонсы</SectionHeader>
-      {isCarousel ? (
-        <Carousel
-          length={posters.length}
-          articleWidth={window.innerWidth < 480 ? 280 : 440}
-          isShadow={true}
-          articleMargin={5}
-          // textLog="Anons"
-        >
-          <RenderPoster />
-        </Carousel>
-      ) : (
-        <RenderPoster />
-      )}
-    </>
+  return isCarousel ? (
+    <Carousel
+      length={posters.length}
+      articleWidth={window.innerWidth < 480 ? 280 : 440}
+      isShadow={true}
+      articleMargin={5}
+      // textLog="Anons"
+    >
+      <RenderPoster />
+    </Carousel>
+  ) : (
+    <RenderPoster />
   );
 };
 
