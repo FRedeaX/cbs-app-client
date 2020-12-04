@@ -1,8 +1,8 @@
 import { gql, useQuery } from "@apollo/client";
 import React, { Fragment, useEffect } from "react";
 import { connect } from "react-redux";
+import { createMarkup } from "../../../../helpers";
 import { getPageBySlug } from "../../../../store/action/page";
-import { createMarkup } from "./../../../../constant/function";
 
 const FETCH_PAGE = gql`
   query FetchPage($pathname: ID!) {

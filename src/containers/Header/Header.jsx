@@ -7,7 +7,7 @@ import { MAIN, Nav, SECONDARY } from "../../components/Navigation/Nav/Nav";
 import Social from "../../components/Social/Social";
 import Layout from "../../components/UI/Layout/Layout";
 import Overlay from "../../components/UI/Overlay/Overlay";
-import { classJoin } from "../../constant/function";
+import { classJoin } from "../../helpers";
 // import { fetchHeader } from "../../store/action/header";
 import classes from "./Header.module.css";
 

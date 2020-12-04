@@ -1,5 +1,5 @@
 import React from "react";
-import { classJoin } from "../../constant/function";
+import { classJoin } from "../../helpers";
 import Social from "./../Social/Social";
 import classes from "./Share.module.css";
 

@@ -13,6 +13,7 @@
   padding: 12px;
   margin: 5px;
   position: relative;
+  border-radius: 8px;
 }
 
 .header {

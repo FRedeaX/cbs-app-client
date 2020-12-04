@@ -1,7 +1,7 @@
 import classNamesBind from "classnames/bind";
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { createMarkup } from "../../../constant/function";
+import { createMarkup } from "../../../helpers";
 import classes from "./Nav.module.css";
 
 export const MAIN = "MAIN",

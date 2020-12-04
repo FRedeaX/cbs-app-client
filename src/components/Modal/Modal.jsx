@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import { useDispatch } from "react-redux";
 import Button from "../../components/UI/Button/Button";
-import { classJoin, createMarkup } from "../../constant/function";
+import { classJoin, createMarkup } from "../../helpers";
 import { toggleOverlay } from "../../store/action/UI";
 import Content from "../Content/Content";
 import SEO from "../Seo/Seo";

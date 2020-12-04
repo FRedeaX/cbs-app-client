@@ -21,6 +21,13 @@ import Page from "./containers/Page/Page";
 
 const App = () => {
   // const overlay = useSelector((state) => state.UI.overlay);
+
+  // useEffect(() => {
+  //   window.addEventListener("resize", () => {
+  //     windowWidthVar(window.innerWidth);
+  //   });
+  // }, []);
+
   return <ModalSwitch />;
 };
 
