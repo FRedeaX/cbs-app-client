@@ -1,11 +1,13 @@
 :root {
   /* color */
-  --white: #f7f7f7;
+  --white: hsl(0, 0%, 97%);
+  /*hsl(0, 0%, 96%)*/
   --white-80: hsla(0, 0%, 100%, 0.8);
   --black: hsl(0, 0%, 12%);
   --black-80: hsla(0, 0%, 12%, 0.8);
   --black-20: hsla(0, 0%, 0%, 0.2);
   --black-14: hsla(0, 0%, 12%, 0.14);
+  --black-10: hsla(0, 0%, 12%, 0.10);
   --gray: hsl(222, 13%, 60%);
   --dark-gray: hsl(0, 0%, 24%);
   --d-dark-gray: hsl(222, 13%, 28%, 1);
@@ -17,7 +19,7 @@
 
 
   /*#293448*/
-  --secondaryWhite: hsl(0, 0%, 96%);
+  /* --secondaryWhite: hsl(0, 0%, 96%); */
   --accentColor: hsla(0, 98%, 60%, 0.685);
   /* --menuLink: hsla(0, 0%, 8%, 0.85); */
   --menuLink--medium: hsla(0, 0%, 8%, 0.54);
@@ -36,6 +38,8 @@
   --borderLink: var(--red);
 
   --secondary-color: var(--gray);
+
+  --font-R-S: "Roboto-Slab", serif;
 }
 
 *,
@@ -147,6 +151,9 @@ table td {
   height: 100%;
 }
 
+/* .wp-block-file a.wp-block-file__button:visited:hover {
+  background-color: rgba(50, 55, 60, 0.85) !important;
+} */
 
 /*
  * wp-class styles

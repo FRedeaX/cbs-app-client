@@ -7,7 +7,7 @@
   box-shadow: rgba(30, 30, 30, 0.1) 0 4px 12px;
   border-radius: 8px;
   overflow: hidden;
-  background-color: var(--secondaryWhite);
+  background-color: #fff;
 
   width: calc(50% - 20px);
   /* height: 34.6rem; */

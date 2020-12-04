@@ -12,7 +12,7 @@ const GroupCards = ({ data, title, description, length }) => {
         <h3 className={classes.title}>{title}</h3>
         {description && <span className={classes.description}>{description}</span>}
       </div>
-      <Carousel length={ length }>
+      <Carousel length={ length } articleWidth={ 288 } articleMargin={ 10 }>
         { data.map((postByTag) => (
           <Card key={ postByTag.id } data={ postByTag } cls={ classes.article } />
         )) }

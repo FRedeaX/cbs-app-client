@@ -124,7 +124,7 @@ const PostContainer = () => {
     if (!loading) document.body.style.minHeight = "";
   }, [loading]);
 
-  if (loading) return <Loader isFullscreen={true} />;
+  if (loading) return <Loader isFullscreen={true} isBackground1={true} />;
   if (error) return console.error(error);
 
   const hendleMoreLoad = () => {
@@ -133,8 +133,8 @@ const PostContainer = () => {
   };
 
   return (
-    <section>
-      {/* {console.log("render PC")} */}
+    <>
+      {/* {console.log("render PostRoot")} */}
       {/* <Layout page={true}> */}
       <Post data={data.posts.nodes} />
       {
@@ -148,7 +148,7 @@ const PostContainer = () => {
         </Button>
       }
       {/* </Layout> */}
-    </section>
+    </>
   );
 };
 

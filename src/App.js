@@ -9,6 +9,7 @@ import {
 import classes from "./App.module.css";
 import Footer from "./components/Footer/Footer";
 import Library from "./components/Page/Library/Library";
+import PosterPage from "./components/poster/PosterPage/PosterPage";
 import RedirectToHome from "./components/RedirectToHome";
 import ZoomImage from "./components/Zoom-image/Zoom-image";
 import BookPageRoot from "./containers/book/BookPageRoot/BookPageRoot";
@@ -69,11 +70,14 @@ function ModalSwitch() {
         <Switch location={background || location}>
           <Route path="/" exact component={HomePage} />
           <Route path="/post" exact component={RedirectToHome} />
-          <Route path="/book" exact component={RedirectToHome} />
           <Route path="/post/category" exact component={RedirectToHome} />
           <Route path="/post/category/:slug" component={Category} />
           <Route path="/post/:slug" component={ModalRoot} />
+
+          <Route path="/book" exact component={RedirectToHome} />
           <Route path="/book/:slug" component={BookPageRoot} />
+
+          <Route path="/poster" component={PosterPage} />
 
           <Route path="/biblioteki" exact component={Library} />
           <Route path="/:slug" component={Page} />
