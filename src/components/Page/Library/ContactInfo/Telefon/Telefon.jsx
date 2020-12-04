@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React, { useState } from "react";
-import { classJoin } from "../../../../../constant/function";
+import { classJoin } from "../../../../../helpers";
 import classesInfo from "../Contact-info.module.css";
 import classes from "./Telefon.module.css";
 

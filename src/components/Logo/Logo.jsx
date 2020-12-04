@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { classJoin } from "../../constant/function";
+import { classJoin } from "../../helpers";
 import classes from "./Logo.module.css";
 
 const Logo = () => (

@@ -1,5 +1,5 @@
 import React from "react";
-import { classJoin } from "../../../../../constant/function";
+import { classJoin } from "../../../../../helpers";
 import classesInfo from "../Contact-info.module.css";
 import classes from "./Schedule.module.css";
 

@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import React from "react";
-import { createMarkup } from "../../constant/function";
+import { createMarkup } from "../../helpers";
 // import { fetchHeader } from "../../store/action/header";
 import "./Content.css";
 

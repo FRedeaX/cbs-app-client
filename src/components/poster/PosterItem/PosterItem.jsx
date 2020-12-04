@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 import classNames from 'classnames';
 import React from 'react';
-import { createMarkup } from '../../../constant/function';
+import { createMarkup } from '../../../helpers';
 import classes from './Poster-item.module.css';
 
 export const posterItem = {

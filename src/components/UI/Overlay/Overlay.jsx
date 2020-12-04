@@ -1,6 +1,6 @@
 import React, { Fragment, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { classJoin, scrollbarWidth } from "../../../constant/function";
+import { classJoin, scrollbarWidth } from "../../../helpers";
 import { toggleOverlay } from "../../../store/action/UI";
 import classes from "./Overlay.module.css";
 

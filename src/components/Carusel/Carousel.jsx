@@ -4,7 +4,7 @@ import { isBrowser } from 'react-device-detect';
 import Button from "../UI/Button-arrow/Button";
 import classes from "./Carousel.module.css";
 
-const Carousel = ({ children, length, articleWidth, articleMargin, isShadow = true }) => {
+const Carousel = ({ children, length, articleWidth, articleMargin, isShadow = true, textLog }) => {
 
   const scrollRef = useRef();
   let alreadyScrolled = 0;
@@ -67,7 +67,7 @@ const Carousel = ({ children, length, articleWidth, articleMargin, isShadow = tr
     }
   };
 
-  
+  // console.log('render Carousel: ', textLog, length);
   const cx = classNamesBind.bind(classes);
   return (
     <div className={classes.body}>
@@ -121,4 +121,8 @@ const Carousel = ({ children, length, articleWidth, articleMargin, isShadow = tr
   );
 };
 
-export default memo(Carousel);
+function areEqual(prevProps, nextProps) {
+  return prevProps.children.length === nextProps.children.length;
+}
+
+export default memo(Carousel, areEqual);

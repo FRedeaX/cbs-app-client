@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { classJoin, throttler } from "../../constant/function";
+import { classJoin, throttler } from "../../helpers";
 import { setZoomImage } from "../../store/action/UI";
 import classes from "./Zoom-image.module.css";
 let zoom;
