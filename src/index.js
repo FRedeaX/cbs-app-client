@@ -1,11 +1,12 @@
 import {
   ApolloClient,
   ApolloProvider,
-  HttpLink,
+  createHttpLink,
   InMemoryCache,
 } from "@apollo/client";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
+import { createPersistedQueryLink } from "apollo-link-persisted-queries";
 import React from "react";
 import { isBrowser, isMobile } from "react-device-detect";
 import ReactDOM from "react-dom";
@@ -26,17 +27,26 @@ import rootReducer from "./store/rootReducer";
 //   document.getElementById("root")
 // );
 
-// const link = createPersistedQueryLink().concat(
-//   createHttpLink({ uri: "https://cbsbaikonur.ru/graphql" })
-//   // createHttpLink({ uri: "/graphql" })
-// );
+const link = createPersistedQueryLink().concat(
+  // createHttpLink({ uri: "https://cbsbaikonur.ru/graphql" })
+  createHttpLink({
+    uri: "https://cbsbaikonur.ru/graphql",
+    useGETForQueries: true,
+  })
+);
+// const client = new ApolloClient({
+//   cache: new InMemoryCache(),
+//   link: new HttpLink({ uri: "https://cbsbaikonur.ru/graphql" }),
+//   // link: new HttpLink({ uri: "/graphql" }),
+//   // link: link,
+//   //  resolvers
+//   //  typeDefs,
+// });
+
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  link: new HttpLink({ uri: "https://cbsbaikonur.ru/graphql" }),
-  // link: new HttpLink({ uri: "/graphql" }),
-  // link: link,
-  //  resolvers
-  //  typeDefs,
+  // link: new BatchHttpLink(link),
+  link,
 });
 
 if (process.env.NODE_ENV === "production") {
