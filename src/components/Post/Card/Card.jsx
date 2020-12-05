@@ -3,7 +3,7 @@ import React, { memo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { classJoin, createMarkup } from "../../../helpers";
 import Category from "../Category/Category";
-import BookImage from "./../../Book/BookImage/BookImage";
+import BookImage from "./../../book/BookImage/BookImage";
 import classes from "./Card.module.css";
 
 

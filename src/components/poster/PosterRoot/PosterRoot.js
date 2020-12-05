@@ -30,17 +30,20 @@ const PosterRoot = ({ limitRender = false, isCarousel = false, clsItem }) => {
   // if (lastPosterDay < day || (lastPosterDay === day && hours > 18))
   //   return isHeaderHendler(false);
 
-  const RenderPoster = () =>
-    posters.map((poster, index) => {
+  const RenderPoster = () => {
+    let index = 1;
+    return posters.map((poster) => {
       const posterDate = poster.posterDate.date.split("/")[0] * 1;
       if (
-        (limitRender && index + 1 > limitRender) ||
+        (limitRender && index > limitRender) ||
         posterDate < day ||
         (posterDate === day && hours > 18)
       )
         return null;
+      index++;
       return <PosterItem key={poster.id} data={poster} cls={clsItem} />;
     });
+  };
 
   // console.log("render PosterRoot");
   return isCarousel ? (
