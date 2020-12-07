@@ -37,9 +37,9 @@ const Carousel = ({ children, length, articleWidth, articleMargin, isShadow = tr
     const articleOffsetW = articleWidth;
     // const articleMargin = 20;
     const articleCountOfScreen = Math.floor(scrolledOffsetW / articleOffsetW);
-    console.log(articleCountOfScreen);
+    // console.log(articleCountOfScreen);
     const scrollTo = (articleOffsetW + articleMargin * 2) * articleCountOfScreen;
-    console.log(scrollTo);
+    // console.log(scrollTo);
 
     if (direction === "left") alreadyScrolled -= scrollTo;
     else if (direction === "right") alreadyScrolled += scrollTo;
