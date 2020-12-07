@@ -43,12 +43,11 @@
   .poster {
     max-width: 960px;
     /* width: 97.917%; */
-    margin-bottom: -30px;
+    /* margin-bottom: -30px; */
   }
 
-  .list {
-    display: flex;
-    flex-wrap: wrap;
+  .header {
+    padding-left: 10px;
   }
 
   .item:first-child {
@@ -95,7 +94,7 @@
   }
 
   .item {
-    margin: 10px 0 20px;
+    margin: 10px 0;
   }
 
   .item:last-child {

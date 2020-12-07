@@ -1,7 +1,9 @@
 import { gql, useQuery } from "@apollo/client";
 import React, { memo } from "react";
 import Carousel from "../../Carusel/Carousel";
+import SectionHeader from "../../SectionHeader/SectionHeader";
 import PosterItem, { posterItem } from "../PosterItem/PosterItem";
+import PosterList from "../PosterList/PosterList";
 
 const FETCH_POSTER = gql`
   query FetchPoster {
@@ -14,10 +16,17 @@ const FETCH_POSTER = gql`
   ${posterItem.fragments}
 `;
 
-const PosterRoot = ({ limitRender = false, isCarousel = false, clsItem }) => {
+const PosterRoot = ({
+  limitRender = false,
+  isCarousel = false,
+  isSkipPastEvent = false,
+  url,
+  clsHeader,
+  clsItem,
+}) => {
   const { data, loading, error } = useQuery(FETCH_POSTER);
   if (error) console.log(error);
-  if (loading) return null;
+  if (loading || error) return null;
 
   const posters = data.posters.nodes;
 
@@ -25,19 +34,19 @@ const PosterRoot = ({ limitRender = false, isCarousel = false, clsItem }) => {
   const day = date.getDate();
   const hours = date.getHours();
 
-  // const lastPosterDay =
-  //   posters[posters.length - 1].posterDate.date.split("/")[0] * 1;
-  // if (lastPosterDay < day || (lastPosterDay === day && hours > 18))
-  //   return isHeaderHendler(false);
+  const lastPosterDay =
+    posters[posters.length - 1].posterDate.date.split("/")[0] * 1;
+  if (lastPosterDay < day || (lastPosterDay === day && hours > 18)) return null;
 
   const RenderPoster = () => {
-    let index = 1;
+    let index = 0;
     return posters.map((poster) => {
       const posterDate = poster.posterDate.date.split("/")[0] * 1;
       if (
-        (limitRender && index > limitRender) ||
-        posterDate < day ||
-        (posterDate === day && hours > 18)
+        isSkipPastEvent &&
+        ((limitRender && index + 1 > limitRender) ||
+          posterDate < day ||
+          (posterDate === day && hours > 18))
       )
         return null;
       index++;
@@ -46,18 +55,27 @@ const PosterRoot = ({ limitRender = false, isCarousel = false, clsItem }) => {
   };
 
   // console.log("render PosterRoot");
-  return isCarousel ? (
-    <Carousel
-      length={posters.length}
-      articleWidth={window.innerWidth < 480 ? 280 : 440}
-      isShadow={true}
-      articleMargin={5}
-      // textLog="Anons"
-    >
-      <RenderPoster />
-    </Carousel>
-  ) : (
-    <RenderPoster />
+  return (
+    <>
+      <SectionHeader url={url} cls={clsHeader}>
+        Анонсы
+      </SectionHeader>
+      <PosterList>
+        {isCarousel ? (
+          <Carousel
+            length={posters.length}
+            articleWidth={window.innerWidth < 480 ? 280 : 440}
+            isShadow={true}
+            articleMargin={5}
+            // textLog="Anons"
+          >
+            <RenderPoster />
+          </Carousel>
+        ) : (
+          <RenderPoster />
+        )}
+      </PosterList>
+    </>
   );
 };
 
