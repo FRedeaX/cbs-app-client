@@ -1,12 +1,15 @@
 import classNames from "classnames";
 import React, { memo } from 'react';
+import { Link } from "react-router-dom";
 import Title from './../Title/Title';
-import classes from './SectionHeader.module.css';
+import classes from './Section-header.module.css';
 
-const SectionHeader = ({ children, cls }) => {
+const SectionHeader = ({ children, url, cls }) => {
   // let cx = classNames.bind(classes);
   return <div className={ classNames(classes.header, cls) }>    
-    <Title HtmlTeg="h2">{ children }</Title>
+    { url
+      ? <Title HtmlTeg="h2"><Link to={ url } className={ classes.link }>{ children }</Link></Title>
+      : <Title HtmlTeg="h2">{ children }</Title>}
   </div>
 }
 

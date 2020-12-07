@@ -1,7 +1,6 @@
 import React, { memo } from "react";
 import { useLocation } from "react-router-dom";
 import PosterRoot from '../../components/poster/PosterRoot/PosterRoot';
-import SectionHeader from "../../components/SectionHeader/SectionHeader";
 import SEO from "../../components/Seo/Seo";
 import Layout from "../../components/UI/Layout/Layout";
 import ModalRoot from "../ModalRoot/ModalRoot";
@@ -33,13 +32,10 @@ const HomePage = () => {
           
       <Layout page={ false } padingDisabled={ true }>
         <div className={classes.wrapper}>
-          <section className={ classes.poster }> 
-            <SectionHeader>Анонсы</SectionHeader>
+          <section className={ classes.poster }>
             { window.innerWidth < 1330 ?
-              <PosterRoot isCarousel={ true } clsItem={ classes.item } /> : (
-              <div className={ classes.list }>
-                <PosterRoot limitRender={ 2 } clsItem={ classes.item } />
-              </div>
+              <PosterRoot isCarousel={ true } isSkipPastEvent={ true } url={ '/poster' } clsHeader={ classes.header } clsItem={ classes.item } /> : (
+              <PosterRoot limitRender={ 2 } isSkipPastEvent={ true } url={ '/poster' } clsHeader={ classes.header } clsItem={ classes.item } />
             )}
           </section>
           <section className={classes.post}>

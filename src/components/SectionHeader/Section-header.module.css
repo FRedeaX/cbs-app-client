@@ -1,0 +1,27 @@
+.header {
+  padding-top: 25px;
+}
+
+.header:hover .link::before {
+  opacity: 0.8;
+}
+
+.link {
+  display: block;
+  position: relative;
+
+  color: rgba(30, 30, 30, 0.9);
+  text-decoration: none;
+}
+
+.link::before {
+  content: '';
+  background-image: url('/wp-content/themes/cbs-app/icons/arrow.svg');
+  position: absolute;
+  top: 6px;
+  right: 0;
+  width: 8px;
+  height: 14px;
+  opacity: 0;
+  transition: opacity 0.15s linear;
+}

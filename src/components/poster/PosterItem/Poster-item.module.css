@@ -99,7 +99,8 @@
 @media screen and (min-width: 480px) {
   .wrapper {
     flex-direction: row;
-    width: 330px;
+    min-width: 330px;
+    flex: 1;
     padding: 12px 12px 6px;
   }
 
