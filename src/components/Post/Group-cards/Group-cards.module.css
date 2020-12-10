@@ -10,9 +10,9 @@
   margin: 10px auto 30px;
 }
 
-.container:first-child {
+/* .container:first-child {
   margin: 0 auto 10px auto;
-}
+} */
 
 /* @media screen and (max-width: 1020px) { */
 @media screen and (max-width: 960px) {

@@ -1,0 +1,28 @@
+.link {
+  font-size: 14px;
+  /* font-weight: 500; */
+  line-height: 15px;
+  color: rgba(30, 30, 30, 0.92);
+  text-decoration: none;
+  /* padding: 9px 6px; */
+
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+
+  /* background-color: #fff;
+  border-radius: 8px;
+  box-shadow: rgba(30, 30, 30, 0.2) 0px 3px 6px 0px; */
+
+}
+
+.link::before {
+  content: '';
+  background-image: url('/wp-content/themes/cbs-app/icons/litres-app-logo.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 30px;
+  height: 30px;
+  display: block;
+  z-index: 1;
+}

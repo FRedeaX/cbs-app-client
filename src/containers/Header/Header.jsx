@@ -75,7 +75,6 @@ const Header = () => {
     else item.classList.remove("active");
   }
 
-  // if (loading) return null;
   if (error) return console.error(error);
 
   const RenderSocial = () => (
@@ -100,7 +99,7 @@ const Header = () => {
 
   const cx = classNamesBind.bind(classes);
   return (
-    <header className={cx({header: true, "header--scrolled": isScroll})}>
+    <header className={cx({ header: true, "header--scrolled": isScroll })}>
       <Layout page={false}>
         <div className={classes.grid}>
           <div className={classes.logo}>
@@ -122,7 +121,8 @@ const Header = () => {
                   />
                 </nav>
                 <div className={classes.secondary}>
-                  <div className={classes["social-desktop"]}>
+                  <div className={classes["desktop-icons"]}>
+                    {/* <Litres /> */}
                     <RenderSocial />
                   </div>
                   <Nav
@@ -130,6 +130,12 @@ const Header = () => {
                     data={data.menus.nodes[1].menuItems}
                     onClose={setOpen}
                   />
+                  {/* <div
+                    className={classes["tablet-icons"]}
+                    onClick={() => setOpen(false)}
+                  >
+                    <Litres />
+                  </div> */}
                 </div>
               </div>
               <div className={classes.controls}>

@@ -1,11 +1,11 @@
 import React, { memo } from "react";
 import { useLocation } from "react-router-dom";
-import PosterRoot from '../../components/poster/PosterRoot/PosterRoot';
+import PosterRoot from "../../components/poster/PosterRoot/PosterRoot";
 import SEO from "../../components/Seo/Seo";
 import Layout from "../../components/UI/Layout/Layout";
 import ModalRoot from "../ModalRoot/ModalRoot";
 import PostContainer from "./../Post/Post";
-import classes from './Home-Page.module.css';
+import classes from "./Home-Page.module.css";
 
 const HomePage = () => {
   const location = useLocation();
@@ -21,25 +21,38 @@ const HomePage = () => {
   return (
     <>
       {window.location.pathname === "/" && <SEO />}
-      
-        {/* {loading && <Loader isFullscreen={true} />} */}
-        {/* <section className={ classes.book }>
+
+      {/* {loading && <Loader isFullscreen={true} />} */}
+      {/* <section className={ classes.book }>
           <Layout padingDisabled={true}>
             <SectionHeader HtmlTeg="h2">Обзоры книг</SectionHeader>
             <BookPreviewRoot />
           </Layout>
         </section> */}
-          
-      <Layout page={ false } padingDisabled={ true }>
+
+      <Layout page={false} padingDisabled={true}>
         <div className={classes.wrapper}>
-          <section className={ classes.poster }>
-            { window.innerWidth < 1330 ?
-              <PosterRoot isCarousel={ true } isSkipPastEvent={ true } url={ '/poster' } clsHeader={ classes.header } clsItem={ classes.item } /> : (
-              <PosterRoot limitRender={ 2 } isSkipPastEvent={ true } url={ '/poster' } clsHeader={ classes.header } clsItem={ classes.item } />
+          <section className={classes.poster}>
+            {window.innerWidth < 1330 ? (
+              <PosterRoot
+                isCarousel={true}
+                isSkipPastEvent={true}
+                url={"/poster"}
+                clsHeader={classes.header}
+                clsItem={classes.item}
+              />
+            ) : (
+              <PosterRoot
+                limitRender={2}
+                isSkipPastEvent={true}
+                url={"/poster"}
+                clsHeader={classes.header}
+                clsItem={classes.item}
+              />
             )}
           </section>
           <section className={classes.post}>
-            <PostContainer/>
+            <PostContainer />
           </section>
         </div>
       </Layout>

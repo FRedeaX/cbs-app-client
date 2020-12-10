@@ -28,7 +28,16 @@ const App = () => {
   //   });
   // }, []);
 
-  return <ModalSwitch />;
+  return (
+    <>
+      <Header />
+      <main className={classes.main}>
+        <ModalSwitch />
+      </main>
+      <ZoomImage />
+      <Footer />
+    </>
+  );
 };
 
 const locationInitial = {
@@ -72,30 +81,23 @@ function ModalSwitch() {
 
   return (
     <>
-      <Header />
-      <main className={classes.main}>
-        <Switch location={background || location}>
-          <Route path="/" exact component={HomePage} />
-          <Route path="/post" exact component={RedirectToHome} />
-          <Route path="/post/category" exact component={RedirectToHome} />
-          <Route path="/post/category/:slug" component={Category} />
-          <Route path="/post/:slug" component={ModalRoot} />
+      <Switch location={background || location}>
+        <Route path="/" exact component={HomePage} />
+        <Route path="/post" exact component={RedirectToHome} />
+        <Route path="/post/category" exact component={RedirectToHome} />
+        <Route path="/post/category/:slug" component={Category} />
+        <Route path="/post/:slug" component={ModalRoot} />
 
-          <Route path="/book" exact component={RedirectToHome} />
-          <Route path="/book/:slug" component={BookPageRoot} />
+        <Route path="/book" exact component={RedirectToHome} />
+        <Route path="/book/:slug" component={BookPageRoot} />
 
-          <Route path="/poster" component={PosterPage} />
+        <Route path="/poster" component={PosterPage} />
 
-          <Route path="/biblioteki" exact component={Library} />
-          <Route path="/:slug" component={Page} />
-          <Redirect to="/" />
-        </Switch>
-        {/* <Route path="/o-nas" exact component={RedirectToHome} /> */}
-
-        {background && <Route path="/post/:slug" component={ModalRoot} />}
-      </main>
-      <ZoomImage />
-      <Footer />
+        <Route path="/biblioteki" exact component={Library} />
+        <Route path="/:slug" component={Page} />
+        <Redirect to="/" />
+      </Switch>
+      {background && <Route path="/post/:slug" component={ModalRoot} />}
     </>
   );
 }

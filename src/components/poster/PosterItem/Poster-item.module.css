@@ -67,7 +67,7 @@
 .description {
   font-size: 0.9em;
   font-weight: 300;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
   color: #4c4c4c;
 }
 
@@ -78,6 +78,15 @@
   color: var(--secondary-color);
 }
 
+.link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
 /* .info {
   padding-left: 8px;
 
@@ -85,7 +94,7 @@
 } */
 
 .info::before {
-  content: url('/wp-content/themes/cbs-app/icons/phone.svg');
+  content: url("/wp-content/themes/cbs-app/icons/phone.svg");
   display: inline-block;
   width: 10px;
   height: 10px;
