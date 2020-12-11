@@ -26,7 +26,7 @@ const PosterRoot = ({
 }) => {
   const { data, loading, error } = useQuery(FETCH_POSTER);
   if (error) console.log(error);
-  if (loading || error) return null;
+  if (loading || error || data.posters.nodes) return null;
 
   const posters = data.posters.nodes;
 

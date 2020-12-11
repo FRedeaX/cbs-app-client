@@ -1,0 +1,10 @@
+.wrapper {
+  width: 940px;
+  min-height: 300px;
+  padding-bottom: 14.2%;
+
+  background-color: #20673b52;
+  /* border: 1px solid; */
+
+  scroll-snap-align: start;
+}

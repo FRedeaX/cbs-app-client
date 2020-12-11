@@ -7,7 +7,7 @@
   /* background-color: hsla(199, 100%, 33%, 0.08); */
   border-radius: 4px;
   color: #0073aa;
-  transition: background-color 0.150s linear;
+  transition: background-color 0.15s linear;
 }
 
 .content-body a:not(.wp-block-file__button):hover {
@@ -60,7 +60,6 @@
 }
 
 @media screen and (max-width: 767px) {
-
   .content-body a,
   .content-body p,
   .content-body ul,
@@ -124,4 +123,18 @@ h5 {
 h6 {
   font-size: 1.6rem;
   margin-bottom: 0.8rem;
+}
+
+/* wp */
+.wp-block-gallery {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.wp-block-gallery ul {
+  margin-bottom: -16px !important;
+}
+
+.wp-block-gallery img {
+  border-radius: 0;
 }

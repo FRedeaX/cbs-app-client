@@ -1,7 +1,6 @@
 import React, { Fragment, memo, useCallback, useEffect, useState } from "react";
 import Card from "../Card/Card";
-import GroupCardsContainer from './../../../containers/Post/GroupCards/GroupCards';
-
+import GroupCardsContainer from "./../../../containers/Post/GroupCards/GroupCards";
 
 const PostAndGroupCards = ({ data }) => {
   let index = 0;
@@ -9,33 +8,34 @@ const PostAndGroupCards = ({ data }) => {
 
   const innerWidth = window.innerWidth;
   const [isTwoColumns, setTwoColumns] = useState(null);
-  
+
   const windowSize = useCallback(() => {
     if (innerWidth > 652 && innerWidth < 768 && !isTwoColumns) {
       setTwoColumns(true);
     } else if ((innerWidth <= 652 || innerWidth >= 768) && isTwoColumns) {
       setTwoColumns(false);
     }
-  }, [innerWidth, isTwoColumns])
-  
+  }, [innerWidth, isTwoColumns]);
+
   useEffect(() => {
-    windowSize()
+    windowSize();
   }, [windowSize, innerWidth, isTwoColumns, setTwoColumns]);
-  
+
   if (isTwoColumns === null) {
-    windowSize()
+    windowSize();
   }
 
   const filterPostsByTag = (tags) => {
-    return data.filter((post) =>
-      post.tags.nodes[0] && post.tags.nodes[0].id === tags.id);
-  }
-  
+    return data.filter(
+      (post) => post.tags.nodes[0] && post.tags.nodes[0].id === tags.id
+    );
+  };
+
   const indexIncrement = (isIncrement) => {
-    if (isIncrement) index++
-    else index = 0
-  }
-  
+    if (isIncrement) index++;
+    else index = 0;
+  };
+
   return data.map((post) => {
     const tags = post.tags.nodes[0];
     const isNewRow = !(index % 2);
@@ -49,33 +49,39 @@ const PostAndGroupCards = ({ data }) => {
       if (!isNewRow && isTwoColumns) return null;
 
       indexIncrement(false);
-      return <GroupCardsContainer key={ tags.id } postsByTag={ filterPostsByTag(tags) } tags={ tags } />;
+      return (
+        <GroupCardsContainer
+          key={tags.id}
+          postsByTag={filterPostsByTag(tags)}
+          tags={tags}
+        />
+      );
     }
 
     return (
-      <Fragment key={ `${post.id}-${index}` }>
-        {indexIncrement(true) }
-        <Card key={ post.id } data={ post } horizontal={ true } />
-        {(!isNewRow && isTwoColumns) &&
+      <Fragment key={`${post.id}-${index}`}>
+        {indexIncrement(true)}
+        <Card key={post.id} data={post} horizontal={true} />
+        {!isNewRow &&
+          isTwoColumns &&
           arrTags.map((skippedTag) => {
             return (
               skippedTag.isSkipped && (
-                <Fragment key={ `${skippedTag.tags.id}-${index}` }>
+                <Fragment key={`${skippedTag.tags.id}-${index}`}>
                   <GroupCardsContainer
-                    key={ skippedTag.tags.id }
-                    postsByTag={ filterPostsByTag(skippedTag.tags) }
-                    tags={ skippedTag.tags }
+                    key={skippedTag.tags.id}
+                    postsByTag={filterPostsByTag(skippedTag.tags)}
+                    tags={skippedTag.tags}
                   />
-                  {(skippedTag.isSkipped = false) }
-                  {indexIncrement(false) }
+                  {(skippedTag.isSkipped = false)}
+                  {indexIncrement(false)}
                 </Fragment>
               )
             );
-          })
-        }
+          })}
       </Fragment>
     );
-  })
+  });
 };
-  
+
 export default memo(PostAndGroupCards);

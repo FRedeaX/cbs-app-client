@@ -1,9 +1,12 @@
-import React, { memo } from "react";
+import React, { memo, useRef } from "react";
 import { useLocation } from "react-router-dom";
+import Carousel from "../../components/Carusel/Carousel";
 import PosterRoot from "../../components/poster/PosterRoot/PosterRoot";
 import SEO from "../../components/Seo/Seo";
+import Slider from "../../components/slider/Slider/Slider";
 import Layout from "../../components/UI/Layout/Layout";
 import ModalRoot from "../ModalRoot/ModalRoot";
+import SliderRoot from "./../../components/slider/SliderRoot";
 import PostContainer from "./../Post/Post";
 import classes from "./Home-Page.module.css";
 
@@ -11,6 +14,7 @@ const HomePage = () => {
   const location = useLocation();
   // const [isLoading, setLoading] = useState({ isLoadingBook: false, isLoadingPost: false });
   // console.log(isLoading);
+  const postRef = useRef();
 
   if (location.search) {
     return <ModalRoot />;
@@ -52,7 +56,12 @@ const HomePage = () => {
             )}
           </section>
           <section className={classes.post}>
-            <PostContainer />
+            <Slider>
+              <Carousel isHeightInherit={false} isShadow={false}>
+                <SliderRoot data={postRef.current} />
+              </Carousel>
+            </Slider>
+            <PostContainer setPostVar={postRef.current} />
           </section>
         </div>
       </Layout>

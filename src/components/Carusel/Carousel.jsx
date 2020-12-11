@@ -1,11 +1,18 @@
 import classNamesBind from "classnames/bind";
 import React, { memo, useLayoutEffect, useRef, useState } from "react";
-import { isBrowser } from 'react-device-detect';
+import { isBrowser } from "react-device-detect";
 import Button from "../UI/Button-arrow/Button";
 import classes from "./Carousel.module.css";
 
-const Carousel = ({ children, length, articleWidth, articleMargin, isShadow = true, textLog }) => {
-
+const Carousel = ({
+  children,
+  length,
+  articleWidth,
+  articleMargin,
+  isShadow = true,
+  isHeightInherit = false,
+  textLog,
+}) => {
   const scrollRef = useRef();
   let alreadyScrolled = 0;
 
@@ -20,12 +27,12 @@ const Carousel = ({ children, length, articleWidth, articleMargin, isShadow = tr
     // const articleWidth = scrolled.children[0].children[0].offsetWidth;
     // const itemsWidth = scrolled.childNodes[0] && scrolled.childNodes[0].offsetWidth;
     const l = length ? length : children.length;
-    
-    //TODO: до выпуская раздела книг заменить 308 на вычисляемое значение 
+
+    //TODO: до выпуская раздела книг заменить 308 на вычисляемое значение
     // решить проблему с вычислением значения при дозагрузке постов
     // console.log(wrapperWidth > (308 * l), scrolled.childNodes[0].offsetWidth);
-    if (wrapperWidth > ((articleWidth + 20) * l) ) setCenter(true);// && l <= 3 похоже что она больше не нужна
-    if (wrapperWidth < ((articleWidth + 20) * l) || l > 3) setRight(true);
+    if (wrapperWidth > (articleWidth + 20) * l) setCenter(true); // && l <= 3 похоже что она больше не нужна
+    if (wrapperWidth < (articleWidth + 20) * l || l > 3) setRight(true);
   }, [children.length, length, articleWidth, setLeft, setRight]);
 
   const hendleScroll = (direction) => {
@@ -38,7 +45,8 @@ const Carousel = ({ children, length, articleWidth, articleMargin, isShadow = tr
     // const articleMargin = 20;
     const articleCountOfScreen = Math.floor(scrolledOffsetW / articleOffsetW);
     // console.log(articleCountOfScreen);
-    const scrollTo = (articleOffsetW + articleMargin * 2) * articleCountOfScreen;
+    const scrollTo =
+      (articleOffsetW + articleMargin * 2) * articleCountOfScreen;
     // console.log(scrollTo);
 
     if (direction === "left") alreadyScrolled -= scrollTo;
@@ -52,13 +60,13 @@ const Carousel = ({ children, length, articleWidth, articleMargin, isShadow = tr
     const scroll = event.target.scrollLeft;
     const scrolled = scrollRef.current;
     alreadyScrolled = scroll;
-    
+
     if (alreadyScrolled <= 15) {
       setLeft(false);
     } else {
       setLeft(true);
     }
-    
+
     const scrolledScrollW = scrolled.scrollWidth - scrolled.offsetWidth;
     if (alreadyScrolled >= scrolledScrollW) {
       setRight(false);
@@ -70,17 +78,22 @@ const Carousel = ({ children, length, articleWidth, articleMargin, isShadow = tr
   // console.log('render Carousel: ', textLog, length);
   const cx = classNamesBind.bind(classes);
   return (
-    <div className={classes.body}>
+    <div className={cx({ body: true, "body--height": isHeightInherit })}>
       <div className={classes.wrapper}>
         <div
           ref={scrollRef}
-          onScroll={ hendleScrollEvent }
-          className={ cx({
+          onScroll={hendleScrollEvent}
+          className={cx({
             scrolled: true,
             "scrolled--center": isCenter,
           })}
         >
-          <div className={classes.items}>{children}</div>
+          <div
+            className={classes.items}
+            // style={{ height: `calc(100% + ${scrollbarWidth}px)` }}
+          >
+            {children}
+          </div>
         </div>
       </div>
       {(isLeft || isRight) && (
@@ -88,16 +101,16 @@ const Carousel = ({ children, length, articleWidth, articleMargin, isShadow = tr
           <div
             className={cx({
               "shadow-left": true,
-              "shadow-left--active": isLeft && isShadow
+              "shadow-left--active": isLeft && isShadow,
             })}
           />
           <div
             className={cx({
               "shadow-right": true,
-              "shadow-right--active": isRight && isShadow
+              "shadow-right--active": isRight && isShadow,
             })}
           />
-          { isBrowser && (
+          {isBrowser && (
             <>
               <Button
                 cls={(classes["button--inActive"], classes["button-left"])}

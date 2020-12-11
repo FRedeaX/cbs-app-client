@@ -42,7 +42,7 @@ import rootReducer from "./store/rootReducer";
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: new BatchHttpLink({
-    uri: "https://cbsbaikonur.ru/graphql",
+    uri: "/graphql",
     // useGETForQueries: true,
   }),
   // link,
