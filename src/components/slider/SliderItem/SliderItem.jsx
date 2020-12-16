@@ -1,8 +1,8 @@
 import React from "react";
 import classes from "./Slider-item.module.css";
 
-const SliderItem = ({ c }) => {
-  return <div className={classes.wrapper} style={{ backgroundColor: c }}></div>;
+const SliderItem = () => {
+  return <div className={classes.wrapper}></div>;
 };
 
 export default SliderItem;

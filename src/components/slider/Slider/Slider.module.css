@@ -1,8 +1,7 @@
 .wrapper {
   max-width: 940px;
-  /* height: 400px; */
+  height: 400px;
+  background-color: #20673b52;
 
   margin: 20px auto 0;
-
-  /* overflow: hidden; */
 }

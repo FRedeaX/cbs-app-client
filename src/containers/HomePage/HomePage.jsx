@@ -57,11 +57,11 @@ const HomePage = () => {
           </section>
           <section className={classes.post}>
             <Slider>
-              <Carousel isHeightInherit={false} isShadow={false}>
-                <SliderRoot data={postRef.current} />
+              <Carousel>
+                <SliderRoot />
               </Carousel>
             </Slider>
-            <PostContainer setPostVar={postRef.current} />
+            <PostContainer />
           </section>
         </div>
       </Layout>
