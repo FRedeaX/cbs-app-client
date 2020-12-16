@@ -63,7 +63,7 @@ const PosterRoot = ({
       <PosterList>
         {isCarousel ? (
           <Carousel
-            length={posters.length}
+            // length={posters.length}
             articleWidth={window.innerWidth < 480 ? 280 : 440}
             isShadow={true}
             articleMargin={5}
