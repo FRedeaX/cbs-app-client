@@ -96,7 +96,7 @@ export const Schedule = ({ schedule, scheduleSecondary }) => {
               className={classes.link}
               aria-current={"step"}
             >
-              Прездничные дни
+              Праздничные дни
             </NavLink>
           </div>
         )}
