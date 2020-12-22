@@ -23,7 +23,8 @@
     "react-yandex-metrika": "^2.6.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "smoothscroll-polyfill": "^0.4.4"
+    "smoothscroll-polyfill": "^0.4.4",
+    "url-search-params-polyfill": "^8.1.0"
   },
   "scripts": {
     "crabuild": "react-scripts build",

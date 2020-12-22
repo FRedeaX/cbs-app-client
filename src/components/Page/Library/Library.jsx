@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { asyncLoadScript } from "../../../helpers";
+import React, { useEffect, useMemo, useState } from "react";
+import { NavLink, useHistory, useLocation } from "react-router-dom";
+import { asyncLoadScript, classJoin } from "../../../helpers";
 import Title, { SUBTITLE } from "../../Title/Title";
 import Layout from "../../UI/Layout/Layout";
 import { urlMap as src } from "./../../../constant/api";
@@ -11,6 +12,11 @@ let map;
 
 const Library = () => {
   const [filial, setFilial] = useState(filials.cgb);
+  const history = useHistory();
+  const { search } = useLocation();
+  const isSchedule = useMemo(() => {
+    return new URLSearchParams(search).has("schedule");
+  }, [search]);
 
   // const isMapLoaded = useSelector((state) => state.UI.mapLoaded);
   // const dispatch = useDispatch();
@@ -51,7 +57,12 @@ const Library = () => {
         map.geoObjects.add(placemark);
         placemark.events.add("click", function (e) {
           const id = placemark.properties.get("id");
-          findFilial(id);
+
+          const s = new URLSearchParams(window.location.search).has("schedule");
+
+          history.push(
+            s ? `/biblioteki/?lib=${id}&schedule=1` : `/biblioteki/?lib=${id}`
+          );
 
           let targetObject = e.get("target");
           if (targetObject.geometry.getType() === "Point") {
@@ -67,11 +78,16 @@ const Library = () => {
     }
 
     asyncLoadScript(src, window.ymaps).then(function () {
-      window.ymaps.ready(init);
+      window.ymaps.ready(init).then(() => (document.body.style.minHeight = ""));
     });
-  }, []);
+  }, [history]);
 
   useEffect(() => {
+    const lib = new URLSearchParams(search);
+    if (lib.has("lib")) {
+      setFilial(filials[lib.get("lib")]);
+    }
+
     const selectPlacemark = () => {
       let geoObjects = window.ymaps.geoQuery(map.geoObjects);
 
@@ -85,27 +101,60 @@ const Library = () => {
     };
 
     if (map) selectPlacemark();
-  }, [filial]);
 
-  const findFilial = (id) => {
-    //console.log(id, "test");
-    const findFilial = Object.values(filials).find((item) => item.slug === id);
-    setFilial(findFilial);
-  };
+    // if (!filial.scheduleSecondary.length) {
+    //   console.log("1");
+    //   history.push(`/biblioteki/?lib=${lib}`);
+    // }
+  }, [search, filial.slug]);
+
+  // const findFilial = (id) => {
+  //   //console.log(id, "test");
+  //   const findFilial = Object.values(filials).find((item) => item.slug === id);
+  //   setFilial(findFilial);
+  // };
 
   const renderControls = () => {
     //console.log("button");
     return Object.values(filials).map((item) => {
       return (
-        <button
+        // <button
+        //   key={item.slug}
+        //   type="button"
+        //   className={filial.slug === item.slug ? classes.active : null}
+        //   data-slug={item.slug}
+        //   onClick={(e) => findFilial(e.target.attributes[1].value)}
+        // >
+        //   {item.shortName}
+        // </button>
+        <NavLink
           key={item.slug}
-          type="button"
-          className={filial.slug === item.slug ? classes.active : null}
-          data-slug={item.slug}
-          onClick={(e) => findFilial(e.target.attributes[1].value)}
+          to={{
+            pathname: "/biblioteki/",
+            search: isSchedule
+              ? `?lib=${item.slug}&schedule=1`
+              : `?lib=${item.slug}`,
+            state: {
+              scrollToTop: false,
+            },
+          }}
+          // isActive={(_, location) => {
+          //   const lib = new URLSearchParams(location.search).get("lib");
+          //   return filial.slug === lib;
+          // }}
+          isActive={() => false}
+          // activeClassName={classes.active}
+          className={
+            filial.slug === item.slug
+              ? classJoin([classes.link, classes.active])
+              : classes.link
+          }
+
+          // data-slug={item.slug}
+          // onClick={(e) => findFilial(e.target.attributes[1].value)}
         >
           {item.shortName}
-        </button>
+        </NavLink>
       );
     });
   };
@@ -114,7 +163,7 @@ const Library = () => {
       {/* {console.log("Library", filial)} */}
       <Seo title={"Библиотеки"} description={"График работы библиотек"} />
       <div className={classes.body}>
-        <Layout>
+        <Layout page={false}>
           <div className={classes.title}>
             <h2>{filial.name}</h2>
           </div>
@@ -129,6 +178,7 @@ const Library = () => {
             <aside className={classes.aside}>
               <ContactInfo
                 schedule={filial.schedule}
+                scheduleSecondary={filial.scheduleSecondary}
                 email={filial.email}
                 telefon={filial.telefon}
               />
@@ -197,6 +247,56 @@ const filials = {
         cleanupDay: true,
         weekday: weekday.cleanupDay,
         time: "Последняя среда месяца",
+      },
+    ],
+    scheduleSecondary: [
+      {
+        weekday: "30 дек",
+        time: "10:00-19:00",
+      },
+      {
+        weekday: "31 дек",
+        time: "Санитарный день",
+      },
+      {
+        weekday: "01 янв",
+        time: "Выходной день",
+      },
+      {
+        weekday: "02 янв",
+        time: "Выходной день",
+      },
+      {
+        weekday: "03 янв",
+        time: "Выходной день",
+      },
+      {
+        weekday: "04 янв",
+        time: "Выходной день",
+      },
+      {
+        weekday: "05 янв",
+        time: "10:00-16:00",
+      },
+      {
+        weekday: "06 янв",
+        time: "10:00-16:00",
+      },
+      {
+        weekday: "07 янв",
+        time: "Выходной день",
+      },
+      {
+        weekday: "08 янв",
+        time: "10:00-16:00",
+      },
+      {
+        weekday: "09 янв",
+        time: "Выходной день",
+      },
+      {
+        weekday: "10 янв",
+        time: "Выходной день",
       },
     ],
     email: "cbsbaikonur@yandex.ru",
@@ -297,6 +397,44 @@ const filials = {
         time: "Последняя среда месяца",
       },
     ],
+    scheduleSecondary: [
+      {
+        weekday: "31 дек",
+        time: "Санитарный день",
+      },
+      {
+        weekday: "01 янв",
+        time: "Выходной день",
+      },
+      {
+        weekday: "02 янв",
+        time: "Выходной день",
+      },
+      {
+        weekday: "03 янв",
+        time: "Выходной день",
+      },
+      {
+        weekday: "04 янв",
+        time: "Выходной день",
+      },
+      {
+        weekday: "05 янв",
+        time: "10:00-16:00",
+      },
+      {
+        weekday: "06 янв",
+        time: "10:00-16:00",
+      },
+      {
+        weekday: "07 янв",
+        time: "Выходной день",
+      },
+      {
+        weekday: "08 янв",
+        time: "10:00-16:00",
+      },
+    ],
     telefon: [
       {
         position: "Заведующая ЦГДБ им. А.С. Пушкина",
@@ -351,6 +489,52 @@ const filials = {
         time: "Последний четверг месяца",
       },
     ],
+    scheduleSecondary: [
+      {
+        weekday: "31 дек",
+        time: "Санитарный день",
+      },
+      {
+        weekday: "01 янв",
+        time: "Выходной день",
+      },
+      {
+        weekday: "02 янв",
+        time: "Выходной день",
+      },
+      {
+        weekday: "03 янв",
+        time: "Выходной день",
+      },
+      {
+        weekday: "04 янв",
+        time: "10:00-16:00",
+      },
+      {
+        weekday: "05 янв",
+        time: "10:00-16:00",
+      },
+      {
+        weekday: "06 янв",
+        time: "10:00-16:00",
+      },
+      {
+        weekday: "07 янв",
+        time: "Выходной день",
+      },
+      {
+        weekday: "08 янв",
+        time: "Выходной день",
+      },
+      {
+        weekday: "09 янв",
+        time: "Выходной день",
+      },
+      {
+        weekday: "10 янв",
+        time: "Выходной день",
+      },
+    ],
     telefon: [
       {
         position: "Заведующая библиотекой – филиал №1",
@@ -401,6 +585,36 @@ const filials = {
         cleanupDay: true,
         weekday: weekday.cleanupDay,
         time: "Последний четверг месяца",
+      },
+    ],
+    scheduleSecondary: [
+      {
+        weekday: "31 дек",
+        time: "Санитарный день",
+      },
+      {
+        weekday: "01 янв",
+        time: "Выходной день",
+      },
+      {
+        weekday: "02 янв",
+        time: "Выходной день",
+      },
+      {
+        weekday: "03 янв",
+        time: "Выходной день",
+      },
+      {
+        weekday: "04 янв",
+        time: "10:00-16:00",
+      },
+      {
+        weekday: "05 янв",
+        time: "10:00-16:00",
+      },
+      {
+        weekday: "06 янв",
+        time: "10:00-16:00",
       },
     ],
     telefon: [
@@ -455,6 +669,52 @@ const filials = {
         cleanupDay: true,
         weekday: weekday.cleanupDay,
         time: "Последняя среда месяца",
+      },
+    ],
+    scheduleSecondary: [
+      {
+        weekday: "31 дек",
+        time: "Санитарный день",
+      },
+      {
+        weekday: "01 янв",
+        time: "Выходной день",
+      },
+      {
+        weekday: "02 янв",
+        time: "Выходной день",
+      },
+      {
+        weekday: "03 янв",
+        time: "Выходной день",
+      },
+      {
+        weekday: "04 янв",
+        time: "10:00-16:00",
+      },
+      {
+        weekday: "05 янв",
+        time: "10:00-16:00",
+      },
+      {
+        weekday: "06 янв",
+        time: "10:00-16:00",
+      },
+      {
+        weekday: "07 янв",
+        time: "Выходной день",
+      },
+      {
+        weekday: "08 янв",
+        time: "Выходной день",
+      },
+      {
+        weekday: "09 янв",
+        time: "09:00-17:00",
+      },
+      {
+        weekday: "10 янв",
+        time: "Выходной день",
       },
     ],
     telefon: [

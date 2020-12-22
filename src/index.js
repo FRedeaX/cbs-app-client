@@ -11,6 +11,7 @@ import { YMInitializer } from "react-yandex-metrika";
 import { applyMiddleware, compose, createStore } from "redux";
 import thunk from "redux-thunk";
 import smoothscroll from "smoothscroll-polyfill";
+import "url-search-params-polyfill";
 import App from "./App";
 import { ScrollToTop } from "./components/ScrollToTop/ScrollToTop";
 import "./index.css";

@@ -8,14 +8,14 @@ export const setScrollToTop = (bool) => {
 };
 
 export const ScrollToTop = () => {
-  const location = useLocation();
+  const { pathname, state } = useLocation();
 
   //console.log("useHistory", useHistory());
   //console.log("useLocation", useLocation());
   //console.log("useParams", useParams());
   //console.log("useRouteMatch", useRouteMatch());
   useEffect(() => {
-    const scrollToTop = location.state && location.state.scrollToTop;
+    const scrollToTop = state && state.scrollToTop;
     //console.log("useLocation", location);
 
     // if (scrollToTop === false) {
@@ -44,7 +44,7 @@ export const ScrollToTop = () => {
     //   isPost = true;
     // console.log("11");
     // }
-  }, [location]);
+  }, [pathname, state]);
 
   return null;
 };

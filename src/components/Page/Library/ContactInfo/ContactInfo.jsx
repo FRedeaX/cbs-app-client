@@ -1,15 +1,17 @@
 import React, { Fragment } from "react";
-import classes from './Contact-info.module.css';
+import classes from "./Contact-info.module.css";
 import { Email } from "./Email/Email";
 import { Schedule } from "./Schedule/Schedule";
 import { Telefon } from "./Telefon/Telefon";
 
 const ContactInfo = (props) => {
-  const { schedule, email, telefon } = props;
+  const { schedule, scheduleSecondary, email, telefon } = props;
 
   return (
     <Fragment>
-      {schedule && <Schedule schedule={schedule} />}
+      {schedule && (
+        <Schedule schedule={schedule} scheduleSecondary={scheduleSecondary} />
+      )}
       {email && telefon ? (
         <div>
           {email && <Email email={email} cls={classes.link} />}

@@ -20,7 +20,7 @@
   position: relative;
   font-size: 1.5rem;
   color: var(--menuLink);
-  padding: 1.4rem 1rem;
+  padding: 1rem;
 }
 
 .link {
@@ -82,7 +82,7 @@
 }
 
 @media screen and (min-width: 993px) {
-  .item:hover>.link::after {
+  .item:hover > .link::after {
     transform-origin: right;
     transform: scaleX(1);
   }

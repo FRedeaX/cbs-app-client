@@ -93,7 +93,7 @@ function ModalSwitch() {
 
         <Route path="/poster" component={PosterPage} />
 
-        <Route path="/biblioteki" exact component={Library} />
+        <Route path="/biblioteki" component={Library} />
         <Route path="/:slug" component={Page} />
         <Redirect to="/" />
       </Switch>

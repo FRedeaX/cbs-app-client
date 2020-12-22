@@ -1,9 +1,10 @@
 import React, { memo } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import PosterRoot from "../../components/poster/PosterRoot/PosterRoot";
 import SEO from "../../components/Seo/Seo";
 import Layout from "../../components/UI/Layout/Layout";
 import ModalRoot from "../ModalRoot/ModalRoot";
+import Alert from "./../../components/Alert/Alert";
 import PostContainer from "./../Post/Post";
 import classes from "./Home-Page.module.css";
 
@@ -56,6 +57,14 @@ const HomePage = () => {
           </section>
         </div>
       </Layout>
+      <Alert>
+        <Link
+          to={"/biblioteki/?lib=cgb&schedule=1"}
+          className={classes["alert-link"]}
+        >
+          Изменение графика работ в период новогодних праздничных дней.
+        </Link>
+      </Alert>
     </>
   );
 };

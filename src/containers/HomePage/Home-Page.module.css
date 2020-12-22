@@ -20,6 +20,7 @@
   width: 100%;
   margin: auto;
   gap: 10px;
+  justify-content: center;
 }
 
 /*
@@ -88,7 +89,7 @@
  */
 @media screen and (min-width: 1330px) {
   .poster {
-    width: 330px;
+    max-width: 330px;
     order: 1;
     margin-right: 10px;
   }
@@ -104,4 +105,24 @@
 
 .post {
   max-width: 960px;
+}
+
+.alert-link {
+  color: #fff;
+  font-weight: 300;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+
+.alert-link:hover {
+  opacity: 0.8;
+}
+
+.alert-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
 }

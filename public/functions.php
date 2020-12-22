@@ -125,24 +125,24 @@ add_action( 'widgets_init', 'cbsApp_widgets_init' );
 // wp_register_style( 'cbsApp__swiper', get_template_directory_uri() . 'swiper.css', array(), '4.5.0' );
 function cbsApp_scripts() {
 	wp_enqueue_style( 'cbsApp-style', get_stylesheet_uri() );
-	wp_enqueue_style( 'swiper', get_template_directory_uri() . '/swiper.css' );
+	// wp_enqueue_style( 'swiper', get_template_directory_uri() . '/swiper.css' );
 
-	wp_enqueue_script( 'cbsApp-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
+	// wp_enqueue_script( 'cbsApp-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
 
-	wp_enqueue_script( 'cbsApp-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
+	// wp_enqueue_script( 'cbsApp-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
-	wp_enqueue_script( 'cbsApp__header', get_template_directory_uri() . '/js/header.js', array(), '1.0.0', true );
-	wp_enqueue_script( 'cbsApp__search', get_template_directory_uri() . '/js/search.js', array(), '1.0.0', true );
+	// wp_enqueue_script( 'cbsApp__header', get_template_directory_uri() . '/js/header.js', array(), '1.0.0', true );
+	// wp_enqueue_script( 'cbsApp__search', get_template_directory_uri() . '/js/search.js', array(), '1.0.0', true );
 	
 	// wp_enqueue_script( 'cbsApp__anons', get_template_directory_uri() . '/js/anons.js', array('cbsApp__swiper'), '1.0.0', true );
 	// wp_enqueue_script( 'cbsApp__book', get_template_directory_uri() . '/js/book.js', array('cbsApp__swiper'), '1.0.0', true );
 	// wp_enqueue_script( 'cbsApp__cssGridMasonry', get_template_directory_uri() . '/js/cssGridMasonry.js', array( ), '1.0.0', true );
 
 	
-	wp_enqueue_script( 'cbsApp-script', get_template_directory_uri() . '/js/functions.js', array(), '1.0.0', true );
+	// wp_enqueue_script( 'cbsApp-script', get_template_directory_uri() . '/js/functions.js', array(), '1.0.0', true );
 }
 add_action( 'wp_enqueue_scripts', 'cbsApp_scripts' );
 
@@ -251,19 +251,19 @@ function htm_remove_width_attribute($html) {
 /**
  * подключение jQuery с CDN google
  */
-add_action( 'wp_enqueue_scripts', 'switchjQueryCDN' );
-function switchjQueryCDN() {
-	// отменяем зарегистрированный jQuery
-	wp_deregister_script('jquery-core');
-	wp_deregister_script('jquery');
+// add_action( 'wp_enqueue_scripts', 'switchjQueryCDN' );
+// function switchjQueryCDN() {
+// 	// отменяем зарегистрированный jQuery
+// 	wp_deregister_script('jquery-core');
+// 	wp_deregister_script('jquery');
 
-	// регистрируем										 
-	wp_register_script( 'jquery-core', 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js', false, null, true );
-	wp_register_script( 'jquery', false, array('jquery-core'), null, true );
+// 	// регистрируем										 
+// 	wp_register_script( 'jquery-core', 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js', false, null, true );
+// 	wp_register_script( 'jquery', false, array('jquery-core'), null, true );
 
-	// подключаем
-	wp_enqueue_script( 'jquery' );
-}    
+// 	// подключаем
+// 	wp_enqueue_script( 'jquery' );
+// }    
 
 /**
  * metaboxes function.
