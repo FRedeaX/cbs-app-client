@@ -1,5 +1,5 @@
+// // import { makeVar } from "@apollo/client";
+
 // import { makeVar } from "@apollo/client";
 
-// // const cache = new InMemoryCache();
-
-// export const windowWidthVar = makeVar(window.innerWidth);
+// export const windowWidthVar = makeVar();

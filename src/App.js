@@ -19,14 +19,22 @@ import HomePage from "./containers/HomePage/HomePage";
 import ModalRoot from "./containers/ModalRoot/ModalRoot";
 import Page from "./containers/Page/Page";
 
+// export const windowWidthVar = makeVar(window.innerWidth);
 const App = () => {
   // const overlay = useSelector((state) => state.UI.overlay);
 
-  // useEffect(() => {
-  //   window.addEventListener("resize", () => {
-  //     windowWidthVar(window.innerWidth);
-  //   });
+  //   useEffect(() => {
+  //     // console.log("1");
+  //     // setTimeout(() => {
+  //     // console.log("2");
+  //     // windowWidthVar(window.innerWidth);
+  //     // }, 2000);
+
   // }, []);
+  // window.addEventListener("resize", () => {
+  //   console.log("3");
+  //   windowWidthVar(window.innerWidth);
+  // });
 
   return (
     <>

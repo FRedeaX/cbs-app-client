@@ -56,7 +56,7 @@ const FETCH_ARTICLES = gql`
 const PostContainer = () => {
   const { data, loading, error, fetchMore } = useQuery(FETCH_ARTICLES, {
     variables: {
-      first: 15,
+      first: 10,
     },
   });
 
