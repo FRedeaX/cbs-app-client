@@ -40,7 +40,7 @@
     -->
     <title>Библиотеки города Байконур</title>
   </head>
-  <body style="min-height: 6000px;" class="wp-embed-responsive">
+  <body style="min-height: 6000px; background-color: #f7f7f7;" class="wp-embed-responsive">
   <noscript>
       You need to enable JavaScript to run this app.
   </noscript>

@@ -1,13 +1,19 @@
 import classNamesBind from "classnames/bind";
 import React, { memo, useLayoutEffect, useRef, useState } from "react";
-import { isBrowser } from 'react-device-detect';
+import { isBrowser } from "react-device-detect";
 import Button from "../UI/Button-arrow/Button";
 import classes from "./Carousel.module.css";
 
-const Carousel = ({ children, length, articleWidth, articleMargin, isShadow = true, textLog }) => {
-
+const Carousel = ({
+  children,
+  length,
+  articleWidth,
+  articleMargin,
+  isShadow = true,
+  textLog,
+}) => {
   const scrollRef = useRef();
-  let alreadyScrolled = 0;
+  const alreadyScrolledRefVar = useRef(0);
 
   const [isLeft, setLeft] = useState(false);
   const [isRight, setRight] = useState(false);
@@ -20,47 +26,59 @@ const Carousel = ({ children, length, articleWidth, articleMargin, isShadow = tr
     // const articleWidth = scrolled.children[0].children[0].offsetWidth;
     // const itemsWidth = scrolled.childNodes[0] && scrolled.childNodes[0].offsetWidth;
     const l = length ? length : children.length;
-    
-    //TODO: до выпуская раздела книг заменить 308 на вычисляемое значение 
+
+    //TODO: до выпуская раздела книг заменить 308 на вычисляемое значение
     // решить проблему с вычислением значения при дозагрузке постов
     // console.log(wrapperWidth > (308 * l), scrolled.childNodes[0].offsetWidth);
-    if (wrapperWidth > ((articleWidth + 20) * l) ) setCenter(true);// && l <= 3 похоже что она больше не нужна
-    if (wrapperWidth < ((articleWidth + 20) * l) || l > 3) setRight(true);
+    if (wrapperWidth > (articleWidth + 20) * l) setCenter(true); // && l <= 3 похоже что она больше не нужна
+    if (wrapperWidth < (articleWidth + 20) * l || l > 3) setRight(true);
   }, [children.length, length, articleWidth, setLeft, setRight]);
 
-  const hendleScroll = (direction) => {
+  const hendleClick = (direction) => {
     if (!scrollRef.current) return;
+    console.log("1");
     const scrolled = scrollRef.current;
     // const article = scrolled.childNodes[0].childNodes[0];
 
     const scrolledOffsetW = scrolled.offsetWidth;
-    const articleOffsetW = articleWidth;
-    // const articleMargin = 20;
-    const articleCountOfScreen = Math.floor(scrolledOffsetW / articleOffsetW);
+    // console.log(scrolledOffsetW);
+
+    const articleCountOfScreen = Math.floor(scrolledOffsetW / articleWidth);
     // console.log(articleCountOfScreen);
-    const scrollTo = (articleOffsetW + articleMargin * 2) * articleCountOfScreen;
-    // console.log(scrollTo);
+    const scrollTo = (articleWidth + articleMargin * 2) * articleCountOfScreen;
 
-    if (direction === "left") alreadyScrolled -= scrollTo;
-    else if (direction === "right") alreadyScrolled += scrollTo;
+    if (direction === "left") alreadyScrolledRefVar.current -= scrollTo;
+    else if (direction === "right") alreadyScrolledRefVar.current += scrollTo;
 
-    scrolled.scroll({ left: alreadyScrolled, behavior: "smooth" });
+    scrolled.scroll({
+      left: alreadyScrolledRefVar.current,
+      behavior: "smooth",
+    });
+
+    if (alreadyScrolledRefVar.current < 5) setLeft(false);
+    else setLeft(true);
+
+    const scrolledScrollW = scrolled.scrollWidth - scrolled.offsetWidth;
+    if (alreadyScrolledRefVar.current >= scrolledScrollW) {
+      setRight(false);
+    } else {
+      setRight(true);
+    }
   };
 
-  const hendleScrollEvent = (event) => {
+  const hendleScroll = (event) => {
     event.stopPropagation();
-    const scroll = event.target.scrollLeft;
+    if (!scrollRef.current) return;
+
     const scrolled = scrollRef.current;
-    alreadyScrolled = scroll;
-    
-    if (alreadyScrolled <= 15) {
-      setLeft(false);
-    } else {
-      setLeft(true);
-    }
-    
+    alreadyScrolledRefVar.current = scrolled.scrollLeft;
+
+    if (alreadyScrolledRefVar.current < 5) setLeft(false);
+    else setLeft(true);
+
     const scrolledScrollW = scrolled.scrollWidth - scrolled.offsetWidth;
-    if (alreadyScrolled >= scrolledScrollW) {
+    // console.log(alreadyScrolled, scrolledScrollW);
+    if (alreadyScrolledRefVar.current >= scrolledScrollW) {
       setRight(false);
     } else {
       setRight(true);
@@ -74,8 +92,8 @@ const Carousel = ({ children, length, articleWidth, articleMargin, isShadow = tr
       <div className={classes.wrapper}>
         <div
           ref={scrollRef}
-          onScroll={ hendleScrollEvent }
-          className={ cx({
+          onWheel={hendleScroll}
+          className={cx({
             scrolled: true,
             "scrolled--center": isCenter,
           })}
@@ -83,35 +101,35 @@ const Carousel = ({ children, length, articleWidth, articleMargin, isShadow = tr
           <div className={classes.items}>{children}</div>
         </div>
       </div>
-      {(isLeft || isRight) && (
+      {(isLeft || isRight) && isShadow && isBrowser && (
         <>
           <div
             className={cx({
               "shadow-left": true,
-              "shadow-left--active": isLeft && isShadow
+              "shadow-left--active": isLeft && isShadow,
             })}
           />
           <div
             className={cx({
               "shadow-right": true,
-              "shadow-right--active": isRight && isShadow
+              "shadow-right--active": isRight && isShadow,
             })}
           />
-          { isBrowser && (
+          {isBrowser && (
             <>
               <Button
                 cls={(classes["button--inActive"], classes["button-left"])}
                 direction={"left"}
                 isDirection={true}
                 isVisible={isLeft}
-                onClick={hendleScroll}
+                onClick={hendleClick}
               />
               <Button
                 cls={(classes["button--inActive"], classes["button-right"])}
                 direction={"right"}
                 isDirection={true}
                 isVisible={isRight}
-                onClick={hendleScroll}
+                onClick={hendleClick}
               />
             </>
           )}

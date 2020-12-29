@@ -38,7 +38,8 @@ const ZoomImage = () => {
 
       let img = null;
 
-      const promoSelector = target.parentNode && target.parentNode.querySelector(".Promo__zoom");
+      const promoSelector =
+        target.parentNode && target.parentNode.querySelector(".Promo__zoom");
       if (promoSelector && target.nodeName === "A") {
         img = document.createElement("img");
         img.srcset =
@@ -62,6 +63,7 @@ const ZoomImage = () => {
         // image.parentNode.style.zIndex = "2";
         // image.style.objectFit = "contain";
         // image.style.transform = `translate(${centerX}px, ${centerY}px) scale(4.5)`;
+        image.style.maxHeight = "";
         zoom.appendChild(image);
         zoom.style.top = `${window.pageYOffset}px`;
         zoom.style.height = "100vh";
