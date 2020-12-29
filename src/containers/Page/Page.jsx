@@ -18,7 +18,7 @@ const FETCH_PAGE = gql`
         ... on DefaultTemplate {
           templateName
         }
-        ... on Template {
+        ... on Template_ {
           templateName
         }
       }
@@ -48,9 +48,9 @@ const Page = () => {
     <>
       <SEO title={data.page.title} description={data.page.excerpt} />
       <Layout>
-        {data.page.template.templateName === "Default" && (
-          <PageDefault page={data.page} />
-        )}
+        {/* {data.page.template.templateName === "Default" && ( */}
+        <PageDefault page={data.page} />
+        {/* )} */}
       </Layout>
     </>
   );

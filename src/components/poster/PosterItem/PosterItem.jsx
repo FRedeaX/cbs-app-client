@@ -37,12 +37,12 @@ const PosterItem = ({
       <div className={classes.header}>
         <span className={classes.date}>{date[0]}</span>
         <span className={classes.month}>{getStringMonth(date[1])}</span>
-        <span
+        {/* <span
           className={classes.type}
           title={"Мероприятие будет проведено в онлайн-режиме на сайте ГКУ ЦБС"}
         >
           онлайн
-        </span>
+        </span> */}
       </div>
       <div className={classes.body}>
         <h3 className={classes.title}>{title}</h3>
@@ -54,7 +54,7 @@ const PosterItem = ({
       </div>
       <div className={classes.footer}>
         <Link
-          to={`/biblioteki/?lib=${posterDepartments.nodes[0].slug}`}
+          to={`/biblioteki/?lib=${posterDepartments.nodes[0].slug}&schedule=1`}
           className={classes.link}
         >
           {posterDepartments.nodes[0].name}

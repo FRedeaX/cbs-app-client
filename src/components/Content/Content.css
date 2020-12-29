@@ -3,11 +3,12 @@
 } */
 
 .content-body a {
+  max-width: max-content;
   padding: 1px 4px;
   /* background-color: hsla(199, 100%, 33%, 0.08); */
   border-radius: 4px;
   color: #0073aa;
-  transition: background-color 0.150s linear;
+  transition: background-color 0.15s linear;
 }
 
 .content-body a:not(.wp-block-file__button):hover {
@@ -60,7 +61,6 @@
 }
 
 @media screen and (max-width: 767px) {
-
   .content-body a,
   .content-body p,
   .content-body ul,

@@ -1,5 +1,5 @@
-import { gql, useQuery } from "@apollo/client";
-import React, { memo } from "react";
+import { gql, useLazyQuery } from "@apollo/client";
+import React, { memo, useEffect, useState } from "react";
 import Carousel from "../../Carusel/Carousel";
 import SectionHeader from "../../SectionHeader/SectionHeader";
 import PosterItem, { posterItem } from "../PosterItem/PosterItem";
@@ -7,7 +7,7 @@ import PosterList from "../PosterList/PosterList";
 
 const FETCH_POSTER = gql`
   query FetchPoster {
-    posters(where: { dateQuery: { year: 2020, month: 11 } }, first: 100) {
+    posters(where: { dateQuery: { year: 2020, month: 12 } }, first: 10) {
       nodes {
         ...posterItem
       }
@@ -24,29 +24,66 @@ const PosterRoot = ({
   clsHeader,
   clsItem,
 }) => {
-  const { data, loading, error } = useQuery(FETCH_POSTER);
-  if (error) console.log(error);
-  if (loading || error) return null;
+  const [fetchPoster, { data, error }] = useLazyQuery(FETCH_POSTER);
 
-  const posters = data.posters.nodes;
+  const [poster, setPoster] = useState(null);
+  useEffect(() => {
+    const storage = JSON.parse(window.localStorage.getItem("poster"));
+    if (storage && storage.posters.nodes.length) setPoster(storage);
+
+    if (!storage) {
+      fetchPoster();
+    } else {
+      setTimeout(() => {
+        fetchPoster();
+      }, 800);
+    }
+  }, [fetchPoster]);
+
+  useEffect(() => {
+    if (!data) return;
+    window.localStorage.setItem("poster", JSON.stringify(data));
+  }, [data]);
+
+  if (error) return console.log(error);
+  // if (loading || error) return null;
+
+  const dataPosters = poster ? poster : data;
+  if (!dataPosters) return null;
+  const posters = dataPosters.posters.nodes;
 
   const date = new Date();
+  const month = date.getMonth() + 1;
   const day = date.getDate();
   const hours = date.getHours();
 
-  const lastPosterDay =
-    posters[posters.length - 1].posterDate.date.split("/")[0] * 1;
-  if (lastPosterDay < day || (lastPosterDay === day && hours > 18)) return null;
+  const lastPoster = posters[posters.length - 1].posterDate.date;
+  const lastPosterDay = lastPoster.split("/")[0] * 1;
+  const lastPosterMonth = lastPoster.split("/")[1] * 1;
+  if (
+    (lastPosterDay < day || (lastPosterDay === day && hours > 18)) &&
+    lastPosterMonth === month
+  )
+    return null;
 
   const RenderPoster = () => {
     let index = 0;
     return posters.map((poster) => {
-      const posterDate = poster.posterDate.date.split("/")[0] * 1;
+      const posterDate = poster.posterDate.date;
+      const posterDay = posterDate.split("/")[0] * 1;
+      const posterMonth = posterDate.split("/")[1] * 1;
+      // console.log(
+      //   posterMonth === month ||
+      //     (isSkipPastEvent &&
+      //       ((limitRender && index + 1 > limitRender) ||
+      //         posterDay < day ||
+      //         (posterDay === day && hours > 18)))
+      // );
       if (
-        isSkipPastEvent &&
-        ((limitRender && index + 1 > limitRender) ||
-          posterDate < day ||
-          (posterDate === day && hours > 18))
+        (limitRender && index + 1 > limitRender) ||
+        (isSkipPastEvent &&
+          posterMonth === month &&
+          (posterDay < day || (posterDay === day && hours > 18)))
       )
         return null;
       index++;
@@ -54,7 +91,7 @@ const PosterRoot = ({
     });
   };
 
-  // console.log("render PosterRoot");
+  // console.log(windowWidthVar());
   return (
     <>
       <SectionHeader url={url} cls={clsHeader}>
@@ -63,7 +100,7 @@ const PosterRoot = ({
       <PosterList>
         {isCarousel ? (
           <Carousel
-            // length={posters.length}
+            length={posters.length}
             articleWidth={window.innerWidth < 480 ? 280 : 440}
             isShadow={true}
             articleMargin={5}

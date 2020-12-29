@@ -33,16 +33,16 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  column-gap: 8px;
+  /* column-gap: 8px; */
   margin-bottom: 12px;
 }
 
 .title {
-  margin: 0;
+  margin: 0 14px 0 0;
 }
 
 .controls {
-  gap: 8px;
+  /* gap: 8px; */
   display: flex;
   margin-bottom: -8px;
 }
@@ -58,6 +58,10 @@
 
 .link:hover {
   color: var(--accentColor);
+}
+
+.link:first-child {
+  margin-right: 8px;
 }
 
 .active::after {

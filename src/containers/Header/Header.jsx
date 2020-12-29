@@ -1,6 +1,6 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql, useLazyQuery } from "@apollo/client";
 import classNamesBind from "classnames/bind";
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useEffect, useLayoutEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Logo from "../../components/Logo/Logo";
 import { MAIN, Nav, SECONDARY } from "../../components/Navigation/Nav/Nav";
@@ -11,7 +11,7 @@ import { classJoin } from "../../helpers";
 // import { fetchHeader } from "../../store/action/header";
 import classes from "./Header.module.css";
 
-const FETCHMENU = gql`
+const FETCH_MENU = gql`
   query FetchMenu {
     menus {
       nodes {
@@ -36,20 +36,40 @@ const FETCHMENU = gql`
 `;
 
 const Header = () => {
-  const { loading, error, data } = useQuery(FETCHMENU);
+  const [fetchMenu, { loading, error, data: dataMenu }] = useLazyQuery(
+    FETCH_MENU
+  );
+  const [menu, setMenu] = useState(null);
+  useLayoutEffect(() => {
+    const storage = JSON.parse(window.localStorage.getItem("hMenu"));
+    setMenu(storage);
 
-  const [isScroll, setScroll] = useState(false);
+    if (!storage) {
+      fetchMenu();
+    } else {
+      setTimeout(() => {
+        fetchMenu();
+      }, 1600);
+    }
+  }, [fetchMenu]);
+
   useEffect(() => {
-    const hendleScroll = () => {
-      if (window.pageYOffset >= 1 && !isScroll) {
-        setScroll(true);
-      } else if (window.pageYOffset < 1 && isScroll) {
-        setScroll(false);
-      }
-    };
-    document.addEventListener("scroll", hendleScroll);
-    return () => document.removeEventListener("scroll", hendleScroll);
-  }, [isScroll]);
+    if (!dataMenu) return;
+    window.localStorage.setItem("hMenu", JSON.stringify(dataMenu));
+  }, [dataMenu]);
+
+  // const [isScroll, setScroll] = useState(false);
+  // useEffect(() => {
+  //   const hendleScroll = () => {
+  //     if (window.pageYOffset >= 1 && !isScroll) {
+  //       setScroll(true);
+  //     } else if (window.pageYOffset < 1 && isScroll) {
+  //       setScroll(false);
+  //     }
+  //   };
+  //   document.addEventListener("scroll", hendleScroll);
+  //   return () => document.removeEventListener("scroll", hendleScroll);
+  // }, [isScroll]);
 
   const [isOpen, setOpen] = useState(false);
   const hendleOpenMenu = () => {
@@ -97,6 +117,7 @@ const Header = () => {
     </div>
   );
 
+  const data = menu ? menu : dataMenu;
   const cx = classNamesBind.bind(classes);
   return (
     <header className={cx({ header: true })}>

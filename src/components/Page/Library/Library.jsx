@@ -250,54 +250,10 @@ const filials = {
       },
     ],
     scheduleSecondary: [
-      {
-        weekday: "30 дек",
-        time: "10:00-19:00",
-      },
-      {
-        weekday: "31 дек",
-        time: "Санитарный день",
-      },
-      {
-        weekday: "01 янв",
-        time: "Выходной день",
-      },
-      {
-        weekday: "02 янв",
-        time: "Выходной день",
-      },
-      {
-        weekday: "03 янв",
-        time: "Выходной день",
-      },
-      {
-        weekday: "04 янв",
-        time: "Выходной день",
-      },
-      {
-        weekday: "05 янв",
-        time: "10:00-16:00",
-      },
-      {
-        weekday: "06 янв",
-        time: "10:00-16:00",
-      },
-      {
-        weekday: "07 янв",
-        time: "Выходной день",
-      },
-      {
-        weekday: "08 янв",
-        time: "10:00-16:00",
-      },
-      {
-        weekday: "09 янв",
-        time: "Выходной день",
-      },
-      {
-        weekday: "10 янв",
-        time: "Выходной день",
-      },
+      //   {
+      //     weekday: "",
+      //     time: "",
+      //   },
     ],
     email: "cbsbaikonur@yandex.ru",
     telefon: [
@@ -397,44 +353,7 @@ const filials = {
         time: "Последняя среда месяца",
       },
     ],
-    scheduleSecondary: [
-      {
-        weekday: "31 дек",
-        time: "Санитарный день",
-      },
-      {
-        weekday: "01 янв",
-        time: "Выходной день",
-      },
-      {
-        weekday: "02 янв",
-        time: "Выходной день",
-      },
-      {
-        weekday: "03 янв",
-        time: "Выходной день",
-      },
-      {
-        weekday: "04 янв",
-        time: "Выходной день",
-      },
-      {
-        weekday: "05 янв",
-        time: "10:00-16:00",
-      },
-      {
-        weekday: "06 янв",
-        time: "10:00-16:00",
-      },
-      {
-        weekday: "07 янв",
-        time: "Выходной день",
-      },
-      {
-        weekday: "08 янв",
-        time: "10:00-16:00",
-      },
-    ],
+    scheduleSecondary: [],
     telefon: [
       {
         position: "Заведующая ЦГДБ им. А.С. Пушкина",
@@ -489,52 +408,7 @@ const filials = {
         time: "Последний четверг месяца",
       },
     ],
-    scheduleSecondary: [
-      {
-        weekday: "31 дек",
-        time: "Санитарный день",
-      },
-      {
-        weekday: "01 янв",
-        time: "Выходной день",
-      },
-      {
-        weekday: "02 янв",
-        time: "Выходной день",
-      },
-      {
-        weekday: "03 янв",
-        time: "Выходной день",
-      },
-      {
-        weekday: "04 янв",
-        time: "10:00-16:00",
-      },
-      {
-        weekday: "05 янв",
-        time: "10:00-16:00",
-      },
-      {
-        weekday: "06 янв",
-        time: "10:00-16:00",
-      },
-      {
-        weekday: "07 янв",
-        time: "Выходной день",
-      },
-      {
-        weekday: "08 янв",
-        time: "Выходной день",
-      },
-      {
-        weekday: "09 янв",
-        time: "Выходной день",
-      },
-      {
-        weekday: "10 янв",
-        time: "Выходной день",
-      },
-    ],
+    scheduleSecondary: [],
     telefon: [
       {
         position: "Заведующая библиотекой – филиал №1",
@@ -587,36 +461,7 @@ const filials = {
         time: "Последний четверг месяца",
       },
     ],
-    scheduleSecondary: [
-      {
-        weekday: "31 дек",
-        time: "Санитарный день",
-      },
-      {
-        weekday: "01 янв",
-        time: "Выходной день",
-      },
-      {
-        weekday: "02 янв",
-        time: "Выходной день",
-      },
-      {
-        weekday: "03 янв",
-        time: "Выходной день",
-      },
-      {
-        weekday: "04 янв",
-        time: "10:00-16:00",
-      },
-      {
-        weekday: "05 янв",
-        time: "10:00-16:00",
-      },
-      {
-        weekday: "06 янв",
-        time: "10:00-16:00",
-      },
-    ],
+    scheduleSecondary: [],
     telefon: [
       {
         position: "Заведующая библиотекой – филиал №5",
@@ -671,52 +516,7 @@ const filials = {
         time: "Последняя среда месяца",
       },
     ],
-    scheduleSecondary: [
-      {
-        weekday: "31 дек",
-        time: "Санитарный день",
-      },
-      {
-        weekday: "01 янв",
-        time: "Выходной день",
-      },
-      {
-        weekday: "02 янв",
-        time: "Выходной день",
-      },
-      {
-        weekday: "03 янв",
-        time: "Выходной день",
-      },
-      {
-        weekday: "04 янв",
-        time: "10:00-16:00",
-      },
-      {
-        weekday: "05 янв",
-        time: "10:00-16:00",
-      },
-      {
-        weekday: "06 янв",
-        time: "10:00-16:00",
-      },
-      {
-        weekday: "07 янв",
-        time: "Выходной день",
-      },
-      {
-        weekday: "08 янв",
-        time: "Выходной день",
-      },
-      {
-        weekday: "09 янв",
-        time: "09:00-17:00",
-      },
-      {
-        weekday: "10 янв",
-        time: "Выходной день",
-      },
-    ],
+    scheduleSecondary: [],
     telefon: [
       {
         position: "Заведующая отделом ЕФКиТЛ",
