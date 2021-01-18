@@ -1,45 +1,20 @@
 import { gql, useQuery } from "@apollo/client";
+import classNamesBind from "classnames/bind";
 import React from "react";
-import { navItemGQL } from "../../components/nav/NavItem/NavItem";
+import Logo from "../../components/Logo/Logo";
+import { MenuGQL, NavList } from "../../components/nav/NavList/NavList";
+import Layout from "../../components/UI/Layout/Layout";
+import classes from "./Header.module.css";
 
 const FETCH_MENU = gql`
   query FetchMenu {
     menus {
       nodes {
-        id
-        menuItems {
-          nodes {
-            ...navItemGQL
-          }
-        }
+        ...MenuGQL
       }
     }
   }
-  ${navItemGQL.fragments}
-`;
-
-const FETCH_MENU_1 = gql`
-  query FetchMenu {
-    menus {
-      nodes {
-        id
-        menuItems(where: { parentId: "" }) {
-          nodes {
-            id
-            label
-            url
-            childItems {
-              nodes {
-                id
-                label
-                url
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+  ${MenuGQL.fragments}
 `;
 
 const Header = () => {
@@ -62,9 +37,38 @@ const Header = () => {
   //   if (!dataMenu) return;
   //   window.localStorage.setItem("hMenu", JSON.stringify(dataMenu));
   // }, [dataMenu]);
-  // const data = menu ? menu : dataMenu;
+  const data = dataMenu; //menu ? menu : dataMenu; // menu || dataMenu
   console.log(dataMenu);
-  return <div></div>;
+  const cx = classNamesBind.bind(classes);
+  return (
+    <header className={classes.header}>
+      <Layout page={false} cls={classes.wrapper}>
+        <div className={classes.logo}>
+          <Logo />
+        </div>
+        {data && (
+          <div
+            className={cx({
+              navigation: true,
+              // "navigation--active": isOpen,
+            })}
+          >
+            <nav className={classes.primary}>
+              {/* <Primary data={data} /> */}
+              <NavList data={data.menus.nodes[0].menuItems} />
+            </nav>
+            <div className={classes.secondary}>
+              <NavList
+                data={data.menus.nodes[1].menuItems}
+                className={classes.ul}
+                isRight={true}
+              />
+            </div>
+          </div>
+        )}
+      </Layout>
+    </header>
+  );
 };
 
 export default Header;

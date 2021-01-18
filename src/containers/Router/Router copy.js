@@ -1,7 +1,8 @@
 import React from "react";
 import { Redirect, Route, Switch, useLocation } from "react-router-dom";
-import { redirectRoutes } from "./";
+import Library from "./../../components/Page/Library/Library";
 import PosterPage from "./../../components/poster/PosterPage/PosterPage";
+import RedirectToHome from "./../../components/RedirectToHome";
 import Category from "./../Category/Category";
 import HomePage from "./../HomePage/HomePage";
 import ModalRoot from "./../ModalRoot/ModalRoot";
@@ -34,29 +35,28 @@ export const Router = () => {
   return (
     <>
       <Switch location={background || location}>
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/poster" component={PosterPage} />
-        {/* <Route exact path="/book/:slug" component={BookPageRoot} /> */}
-        <Route exact path="/post/:slug" component={ModalRoot} />
-        <Route exact path="/post/category/:slug" component={Category} />
-
-        {redirectRoutes.map((route, index) => (
-          <Redirect exact from={`/${route}`} to="/" key={`r${index}`} />
-        ))}
-
-        {/* <Route path="/biblioteki" component={Library} /> */}
+        {/* <Route path="/book" exact component={RedirectToHome} /> */}
+        <Route exact path="/post" component={RedirectToHome} />
+        <Route exact path="/post/category" component={RedirectToHome} />
+        <Route exact path="/o-nas" component={RedirectToHome} />
         <Route
           exact
-          path={[
-            "/:slug",
-            "/o-nas/:slug",
-            "/o-nas/my-v-pechati/:slug",
-            "/o-nas/my-v-pechati/gazeta-baykonur/:slug",
-            "/svedeniya-ob-organizaczii/:slug",
-            "/svedeniya-ob-organizaczii/dokumentatsiya/:slug",
-          ]}
-          component={Page}
+          path="/svedeniya-ob-organizaczii/"
+          component={RedirectToHome}
         />
+        <Route
+          exact
+          path="/svedeniya-ob-organizaczii/dokumentatsiya/"
+          component={RedirectToHome}
+        />
+
+        <Route exact path="/" component={HomePage} />
+        <Route path="/post/category/:slug" component={Category} />
+        <Route path="/post/:slug" component={ModalRoot} />
+        {/* <Route path="/book/:slug" component={BookPageRoot} /> */}
+        <Route path="/poster" component={PosterPage} />
+        <Route path="/biblioteki" component={Library} />
+        <Route path="/:slug" component={Page} />
         <Redirect to="/" />
       </Switch>
       {background && <Route path="/post/:slug" component={ModalRoot} />}

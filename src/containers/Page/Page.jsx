@@ -14,14 +14,6 @@ const FETCH_PAGE = gql`
       title
       excerpt
       content
-      template {
-        ... on DefaultTemplate {
-          templateName
-        }
-        ... on Template_ {
-          templateName
-        }
-      }
     }
   }
 `;

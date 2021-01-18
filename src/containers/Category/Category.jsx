@@ -10,7 +10,7 @@ const GET_ARTICLES_BY_CATEGORY = gql`
   query GetArticlesByCategory($slug: String!, $cursor: String) {
     categories(where: { slug: [$slug] }) {
       nodes {
-        posts(first: 20, after: $cursor) {
+        posts(first: 10, after: $cursor) {
           nodes {
             categories {
               nodes {
@@ -89,21 +89,24 @@ const Category = (props) => {
     isLoaded.current = true;
   }, [data]);
 
-  const handleOnScrollCategory = useCallback((event) => {
-    event.stopPropagation();
-    if (!data) return;
-    const scrolledToBottom =
-      Math.ceil(window.scrollY + window.innerHeight * 3) >=
-      document.body.scrollHeight;
-    if (
-      scrolledToBottom &&
-      isLoaded.current &&
-      data.categories.nodes[0].posts.pageInfo.hasNextPage
-    ) {
-      isLoaded.current = false;
-      fetchMoreArticles(isLoaded.current);
-    }
-  }, [data, fetchMoreArticles]);
+  const handleOnScrollCategory = useCallback(
+    (event) => {
+      event.stopPropagation();
+      if (!data) return;
+      const scrolledToBottom =
+        Math.ceil(window.scrollY + window.innerHeight * 3) >=
+        document.body.scrollHeight;
+      if (
+        scrolledToBottom &&
+        isLoaded.current &&
+        data.categories.nodes[0].posts.pageInfo.hasNextPage
+      ) {
+        isLoaded.current = false;
+        fetchMoreArticles(isLoaded.current);
+      }
+    },
+    [data, fetchMoreArticles]
+  );
 
   useEffect(() => {
     window.addEventListener("scroll", handleOnScrollCategory);
@@ -120,22 +123,12 @@ const Category = (props) => {
 
   return (
     <Fragment>
-      <SEO
-        title={
-          data.categories.nodes[0].description
-            ? data.categories.nodes[0].description
-            : "default"
-        }
-      />
+      <SEO title={`Категория: ${data.categories.nodes[0].name}`} />
       <Layout page={true}>
         {/* <Layout> */}
         <Post
           data={data.categories.nodes[0].posts.nodes}
-          title={
-            data.categories.nodes[0].description
-              ? data.categories.nodes[0].description
-              : data.categories.nodes[0].name
-          }
+          title={`Категория: ${data.categories.nodes[0].name}`}
           groupCards={false}
         />
         {/* <button onClick={hendleFetchMore}>Load</button> */}
