@@ -72,29 +72,29 @@ export default PosterItem;
 const getStringMonth = (month) => {
   switch (month) {
     case "01":
-      return "Январь";
+      return "Января";
     case "02":
-      return "Феваль";
+      return "Феваля";
     case "03":
-      return "Март";
+      return "Марта";
     case "04":
-      return "Апрель";
+      return "Апреля";
     case "05":
-      return "Май";
+      return "Мая";
     case "06":
-      return "Июнь";
+      return "Июня";
     case "07":
-      return "Июль";
+      return "Июля";
     case "08":
-      return "Август";
+      return "Августа";
     case "09":
-      return "Сентябрь";
+      return "Сентября";
     case "10":
-      return "Октябрь";
+      return "Октября";
     case "11":
-      return "Ноябрь";
+      return "Ноября";
     case "12":
-      return "Декабрь";
+      return "Декабря";
     default:
       break;
   }
