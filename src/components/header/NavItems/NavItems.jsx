@@ -113,7 +113,9 @@ const NavItems = ({
                       "link--cursor": !!childItems?.nodes.length,
                     })}
                     activeClassName={classes.link_active}
-                    aria-current={!!childItems?.nodes.length ? false : "page"}
+                    aria-current={
+                      !!childItems?.nodes.length ? undefined : "page"
+                    }
                     onClick={() => overlayVar({ isOpen: false })}
                   >
                     <span

@@ -7,7 +7,7 @@ import PosterList from "../PosterList/PosterList";
 
 const FETCH_POSTER = gql`
   query FetchPoster {
-    posters(where: { dateQuery: { year: 2021, month: 01 } }, first: 10) {
+    posters(where: { dateQuery: { year: 2021, month: 1 } }, first: 10) {
       nodes {
         ...posterItem
       }

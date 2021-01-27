@@ -45,7 +45,6 @@ const HomePage = () => {
       <Layout page={false} padingDisabled={true}>
         <div className={classes.wrapper}>
           <section className={classes.poster}>
-            {console.log(isTowColumn)}
             {isTowColumn ? (
               <PosterRoot
                 limitRender={2}
