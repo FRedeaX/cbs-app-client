@@ -1,6 +1,7 @@
 import React from "react";
 import { Redirect, Route, Switch, useLocation } from "react-router-dom";
-import { redirectRoutes } from "./";
+import { pageRoutes, redirectRoutes } from "./";
+import Library from "./../../components/Page/Library/Library";
 import PosterPage from "./../../components/poster/PosterPage/PosterPage";
 import Category from "./../Category/Category";
 import HomePage from "./../HomePage/HomePage";
@@ -44,19 +45,8 @@ export const Router = () => {
           <Redirect exact from={`/${route}`} to="/" key={`r${index}`} />
         ))}
 
-        {/* <Route path="/biblioteki" component={Library} /> */}
-        <Route
-          exact
-          path={[
-            "/:slug",
-            "/o-nas/:slug",
-            "/o-nas/my-v-pechati/:slug",
-            "/o-nas/my-v-pechati/gazeta-baykonur/:slug",
-            "/svedeniya-ob-organizaczii/:slug",
-            "/svedeniya-ob-organizaczii/dokumentatsiya/:slug",
-          ]}
-          component={Page}
-        />
+        <Route path="/biblioteki" component={Library} />
+        <Route exact path={pageRoutes} component={Page} />
         <Redirect to="/" />
       </Switch>
       {background && <Route path="/post/:slug" component={ModalRoot} />}

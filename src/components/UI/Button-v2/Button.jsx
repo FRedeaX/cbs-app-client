@@ -6,6 +6,7 @@ import classes from "./Button.module.css";
 
 const Button = ({
   cls,
+  className,
   view = "default",
 
   type,
@@ -22,7 +23,7 @@ const Button = ({
 
   let cx = classNames.bind(classes);
 
-  const btnClass = cx(cls, {
+  const btnClass = cx(cls, className, {
     button: true,
     inactiv: !isVisible && isLoading,
   });

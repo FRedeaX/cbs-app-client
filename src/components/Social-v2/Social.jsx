@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./Social.module.css";
 
-const Share = ({ type, url, cls, clsLink, clsSVG }) => {
+const Social = ({ type, url, cls, clsLink, clsSVG }) => {
   const style = [cls, clsLink, classes.link];
   const styleSVG = [clsSVG, classes.svg];
 
@@ -51,4 +51,4 @@ const Share = ({ type, url, cls, clsLink, clsSVG }) => {
     </a>
   );
 };
-export default Share;
+export default Social;

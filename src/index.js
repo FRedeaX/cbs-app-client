@@ -1,4 +1,4 @@
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import { ApolloClient, ApolloProvider } from "@apollo/client";
 import { BatchHttpLink } from "@apollo/link-batch-http";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
@@ -16,6 +16,7 @@ import App from "./App";
 import { ScrollToTop } from "./components/ScrollToTop/ScrollToTop";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
+import { cache } from "./store/cache";
 import rootReducer from "./store/rootReducer";
 // ReactDOM.render(
 //   <React.StrictMode>
@@ -41,7 +42,7 @@ import rootReducer from "./store/rootReducer";
 // });
 
 const client = new ApolloClient({
-  cache: new InMemoryCache(),
+  cache,
   link: new BatchHttpLink({
     uri: "/graphql",
     // useGETForQueries: true,
@@ -95,14 +96,14 @@ const app = (
         }}
       />
     )}
-    <ApolloProvider client={client}>
-      <Provider store={store}>
-        <BrowserRouter>
-          <ScrollToTop />
+    <Provider store={store}>
+      <BrowserRouter>
+        <ScrollToTop />
+        <ApolloProvider client={client}>
           <App />
-        </BrowserRouter>
-      </Provider>
-    </ApolloProvider>
+        </ApolloProvider>
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );
 

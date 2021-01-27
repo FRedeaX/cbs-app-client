@@ -1,5 +1,5 @@
 import classNamesBind from "classnames/bind";
-import React from "react";
+import React, { memo } from "react";
 import classes from "./Layout.module.css";
 
 const Layout = ({ page = true, padingDisabled = false, children, cls }) => {
@@ -16,4 +16,4 @@ const Layout = ({ page = true, padingDisabled = false, children, cls }) => {
   );
 };
 
-export default Layout;
+export default memo(Layout);

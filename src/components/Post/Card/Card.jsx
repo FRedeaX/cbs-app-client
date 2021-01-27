@@ -6,19 +6,25 @@ import Category from "../Category/Category";
 import BookImage from "./../../book/BookImage/BookImage";
 import classes from "./Card.module.css";
 
-
-const Card = ({ data:{ isSticky, featuredImage, uri, title, excerpt, categories }, horizontal, cls }) => {
+const Card = ({
+  data: { isSticky, featuredImage, uri, title, excerpt, categories },
+  horizontal,
+  cls,
+}) => {
   let cx = classNamesBind.bind(classes);
   // const style = [classes.item, cls];
   let location = useLocation();
+
   return (
     <article
-      className={cx({
+      className={cx(
+        {
           item: true,
           "item--horizontal": horizontal,
-          sticky: isSticky
-        }, cls)
-      }
+          sticky: isSticky,
+        },
+        cls
+      )}
     >
       {featuredImage && (
         <div
@@ -61,7 +67,7 @@ const Card = ({ data:{ isSticky, featuredImage, uri, title, excerpt, categories 
           />
         </div>
         <div className={classes.footer}>
-          <Category data={ categories } />
+          <Category data={categories} />
         </div>
       </div>
     </article>
