@@ -1,5 +1,4 @@
-import { ApolloClient, ApolloProvider } from "@apollo/client";
-import { BatchHttpLink } from "@apollo/link-batch-http";
+import { ApolloClient, ApolloProvider, HttpLink } from "@apollo/client";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
 import React from "react";
@@ -43,11 +42,10 @@ import rootReducer from "./store/rootReducer";
 
 const client = new ApolloClient({
   cache,
-  link: new BatchHttpLink({
+  link: new HttpLink({
     uri: "/graphql",
-    // useGETForQueries: true,
+    useGETForQueries: true,
   }),
-  // link,
 });
 
 if (process.env.NODE_ENV === "production") {

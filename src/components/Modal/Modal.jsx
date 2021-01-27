@@ -1,18 +1,10 @@
-import React, {
-  Fragment,
-  useCallback,
-  useEffect,
-  useRef,
-  useState
-} from "react";
-import { useDispatch } from "react-redux";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import Button from "../../components/UI/Button/Button";
 import { classJoin, createMarkup } from "../../helpers";
-import { toggleOverlay } from "../../store/action/UI";
+import { overlayVar } from "../../store/variables/overlay";
 import Content from "../Content/Content";
 import SEO from "../Seo/Seo";
 import Share from "../Share/Share";
-import Overlay from "../UI/Overlay/Overlay";
 import NotFound from "./../../components/NotFound/NotFound";
 import Category from "./../post/Category/Category";
 import classes from "./Modal.module.css";
@@ -29,33 +21,13 @@ const Modal = ({
 }) => {
   const [isScroll, setScroll] = useState(false);
 
-  const dispatch = useDispatch();
-  const toggle = useCallback(
-    (open, type) => {
-      dispatch(toggleOverlay(open, type));
-    },
-    [dispatch]
-  );
-
-  // const modalRef = useRef(null);
   const titleRef = useRef(null);
-  // const scroll = useRef(null);
   const titleOffsetHeight = useRef(null);
-
   useEffect(() => {
-    // modal = document.querySelector(`.${classes.modal}`);
+    overlayVar({ isOpen: true });
     if (titleRef.current)
       titleOffsetHeight.current = titleRef.current.offsetHeight;
-    // titleOffsetHeight = document.querySelector("[data-height]").offsetHeight;
-    // modalRef.current.addEventListener("scroll", hendleScroll, false);
-    return () => {
-      // setOpen(false); не работает
-      toggle(false, "modal");
-      // modal.current.removeEventListener("scroll", hendleScroll, false);
-      // scroll = null;
-      // modal = null;
-    };
-  }, [toggle]);
+  }, []);
 
   const hendleScroll = (event) => {
     event.stopPropagation();
@@ -77,13 +49,16 @@ const Modal = ({
       <SEO title={title} description={excerpt} image={image} />
       <div
         // ref={modalRef}
-        className={ classes.modal }
+        className={classes.modal}
         onScroll={hendleScroll}
-        onClick={ onCloseHendler }
+        onClick={onCloseHendler}
         data-close
       >
         <div className={classes.container}>
-          <div className={classes.header}>
+          <div
+            className={classes.header}
+            // style={ { right: scrollbarWidth } }
+          >
             <div
               className={
                 isScroll
@@ -142,7 +117,7 @@ const Modal = ({
                 className={classes.content}
                 dangerouslySetInnerHTML={createMarkup(content)}
               /> */}
-              <Content cls={ classes.content }>{content}</Content>
+              <Content cls={classes.content}>{content}</Content>
             </div>
           )}
           {notFound && (
@@ -152,7 +127,7 @@ const Modal = ({
             // <Redirect to="/" />
           )}
         </div>
-        <Overlay open={true} type={"modal"} noTouch={true}/>
+        {/* <Overlay open={true} type={"modal"} noTouch={true} /> */}
       </div>
     </Fragment>
   );

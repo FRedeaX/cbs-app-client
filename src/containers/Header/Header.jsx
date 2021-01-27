@@ -16,6 +16,8 @@ import {
 } from "../../components/header/NavList/NavList";
 import Logo from "../../components/Logo/Logo";
 import Layout from "../../components/UI/Layout/Layout";
+import { delay } from "../../helpers/delay";
+import { getLocalStorage, setLocalStorage } from "../../helpers/localStorage";
 import {
   GET_OVERLAY_FRAGMENT,
   overlayVar,
@@ -50,10 +52,9 @@ const Header = () => {
 
   const [isMobile, setMobile] = useState(isMobileDevice);
   useLayoutEffect(() => {
-    fetchMenus();
     if (windowWidth <= 950 && !isMobile) setMobile(true);
     else if (windowWidth > 950 && isMobile) setMobile(false);
-  }, [fetchMenus, windowWidth, isMobile]);
+  }, [windowWidth, isMobile]);
 
   const [isOpen, setOpen] = useState(false);
   useEffect(() => {
@@ -63,7 +64,12 @@ const Header = () => {
   const prevScrollYRef = useRef(0);
   const [isHeaderHidden, setHeaderHidden] = useState(false);
   useEffect(() => {
-    if (scrollY > 80 && prevScrollYRef.current < scrollY && !isHeaderHidden) {
+    if (
+      scrollY > 80 &&
+      prevScrollYRef.current !== 0 &&
+      prevScrollYRef.current < scrollY &&
+      !isHeaderHidden
+    ) {
       setHeaderHidden(true);
     } else if (
       (scrollY === 0 || prevScrollYRef.current > scrollY) &&
@@ -74,27 +80,23 @@ const Header = () => {
     prevScrollYRef.current = scrollY;
   }, [scrollY, isHeaderHidden]);
 
-  // const [menu, setMenu] = useState(null);
-  // useLayoutEffect(() => {
-  //   // const storage = JSON.parse(window.localStorage.getItem("hMenu"));
-  //   // setMenu(storage);
+  const [menu, setMenu] = useState(null);
+  useLayoutEffect(() => {
+    getLocalStorage("hMenu").then(
+      (result) => {
+        setMenu(result);
+        delay(1600).then(() => fetchMenus());
+      },
+      () => fetchMenus()
+    );
+  }, [fetchMenus]);
 
-  //   // if (!storage) {
-  //   //   fetchMenu();
-  //   // } else {
-  //   setTimeout(() => {
-  //     fetchMenu();
-  //   }, 1600);
-  //   // }
-  // }, [fetchMenu]);
+  useEffect(() => {
+    if (!menus) return;
+    setLocalStorage("hMenu", menus);
+  }, [menus]);
 
-  // useEffect(() => {
-  //   if (!dataMenu) return;
-  //   window.localStorage.setItem("hMenu", JSON.stringify(dataMenu));
-  // }, [dataMenu]);
-  const data = menus; //menu ? menu : dataMenu; // menu || dataMenu
-  // const cx = classNamesBind.bind(classes);
-
+  const data = menu || menus;
   return (
     <header
       className={classNames(classes.header, classes.position, {
@@ -147,7 +149,7 @@ const Header = () => {
                     [classes["controls_button--active"]]: isOpen,
                   })}
                   onClick={() => {
-                    overlayVar({ isOpen: !isOpen });
+                    overlayVar({ isOpen: !isOpen, zIndex: 2 });
                     setOpen(!isOpen);
                   }}
                   icon={() => <span className={classes.inner} />}

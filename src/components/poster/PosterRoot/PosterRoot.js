@@ -1,5 +1,10 @@
 import { gql, useLazyQuery } from "@apollo/client";
 import React, { memo, useEffect, useState } from "react";
+import { delay } from "../../../helpers/delay";
+import {
+  getLocalStorage,
+  setLocalStorage,
+} from "../../../helpers/localStorage";
 import Carousel from "../../Carusel/Carousel";
 import SectionHeader from "../../SectionHeader/SectionHeader";
 import PosterItem, { posterItem } from "../PosterItem/PosterItem";
@@ -28,21 +33,18 @@ const PosterRoot = ({
 
   const [poster, setPoster] = useState(null);
   useEffect(() => {
-    const storage = JSON.parse(window.localStorage.getItem("poster"));
-    if (storage && storage.posters.nodes.length) setPoster(storage);
-
-    if (!storage) {
-      fetchPoster();
-    } else {
-      setTimeout(() => {
-        fetchPoster();
-      }, 800);
-    }
+    getLocalStorage("poster").then(
+      (result) => {
+        if (result.posters.nodes.length) setPoster(result);
+        delay(800).then(() => fetchPoster());
+      },
+      () => fetchPoster()
+    );
   }, [fetchPoster]);
 
   useEffect(() => {
     if (!data) return;
-    window.localStorage.setItem("poster", JSON.stringify(data));
+    setLocalStorage("poster", data);
   }, [data]);
 
   if (error) return console.log(error);

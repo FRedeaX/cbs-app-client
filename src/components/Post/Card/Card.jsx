@@ -1,16 +1,28 @@
+import { useApolloClient } from "@apollo/client";
 import classNamesBind from "classnames/bind";
 import React, { memo } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { GET_ARTICLE } from "../../../containers/ModalRoot/ModalRoot";
 import { classJoin, createMarkup } from "../../../helpers";
 import Category from "../Category/Category";
 import BookImage from "./../../book/BookImage/BookImage";
 import classes from "./Card.module.css";
 
+// const GET_ARTICLE_CONTENT = gql`
+//   query GetArticleContent($id: ID!) {
+//     post(id: $id, idType: ID) {
+//       content
+//     }
+//   }
+// `;
+
 const Card = ({
-  data: { isSticky, featuredImage, uri, title, excerpt, categories },
+  data: { id, isSticky, featuredImage, uri, title, excerpt, categories },
   horizontal,
   cls,
 }) => {
+  const client = useApolloClient();
+
   let cx = classNamesBind.bind(classes);
   // const style = [classes.item, cls];
   let location = useLocation();
@@ -54,9 +66,20 @@ const Card = ({
                 state: {
                   background: location,
                   scrollToTop: false,
-                  // postData: data,
+                  id,
                 },
               }}
+              onMouseOver={() =>
+                client.query({
+                  query: GET_ARTICLE,
+                  variables: {
+                    id,
+                    type: "ID",
+                    isPreview: false,
+                  },
+                  fetchPolicy: "cache-first",
+                })
+              }
               className={classes.link}
               dangerouslySetInnerHTML={createMarkup(title)}
             />

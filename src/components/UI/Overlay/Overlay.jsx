@@ -1,30 +1,22 @@
-import React, { Fragment, useCallback, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { classJoin, scrollbarWidth } from "../../../helpers";
-import { toggleOverlay } from "../../../store/action/UI";
+import { useQuery } from "@apollo/client";
+import classnames from "classnames";
+import React, { memo, useLayoutEffect } from "react";
+import { scrollbarWidth } from "../../../helpers";
+import { delay } from "../../../helpers/delay";
+import { GET_OVERLAY, overlayVar } from "../../../store/variables/overlay";
 import classes from "./Overlay.module.css";
 
-const Overlay = (props) => {
-  const { open, type, noTouch, onClick } = props;
-
-  const overlay = useSelector((state) => state.UI.overlay);
-
-  const dispatch = useDispatch();
-  const toggle = useCallback(
-    (open, type) => {
-      dispatch(toggleOverlay(open, type));
+const Overlay = ({ isTouch = false }) => {
+  const {
+    data: {
+      overlay: { isOpen, zIndex },
     },
-    [dispatch]
-  );
+  } = useQuery(GET_OVERLAY);
 
-  useEffect(() => {
-    toggle(open, type);
-  }, [toggle, open, type]);
-
-  useEffect(() => {
-    if (overlay.isOpen) addStyle();
-    else removeStyle();
-  }, [overlay.isOpen]);
+  useLayoutEffect(() => {
+    if (isOpen) addStyle();
+    else delay(150).then(() => removeStyle());
+  }, [isOpen]);
 
   const addStyle = () => {
     document.body.style.overflow = "hidden";
@@ -36,27 +28,19 @@ const Overlay = (props) => {
     document.body.style.marginRight = "";
   };
 
+  // console.log("O_Render");
   return (
-    <Fragment>
-      <div
-        className={
-          noTouch && open
-            ? classJoin([
-                classes.overlay,
-                classes["overlay--active"],
-                classes["touch--none"],
-              ])
-            : open
-            ? classJoin([classes.overlay, classes["overlay--active"]])
-            : classJoin([classes.overlay, classes["touch--none"]])
-        }
-        style={{
-          marginRight: scrollbarWidth,
-        }}
-        onClick={onClick}
-      />
-    </Fragment>
+    <div
+      className={classnames(classes.overlay, {
+        [classes["overlay--active"]]: isOpen,
+        [classes["touch--none"]]: isTouch,
+      })}
+      style={{
+        zIndex: zIndex,
+      }}
+      onClick={() => overlayVar({ isOpen: false })}
+    />
   );
 };
 
-export default Overlay;
+export default memo(Overlay);

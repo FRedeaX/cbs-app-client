@@ -6,11 +6,12 @@ import { useHistory, useLocation, useParams } from "react-router-dom";
 import Modal from "../../components/Modal/Modal";
 import { setScrollToTop } from "../../components/ScrollToTop/ScrollToTop";
 import Loader from "../../components/UI/Loader/Loader";
+import { overlayVar } from "../../store/variables/overlay";
 // let isZoom;
 
-const GET_ARTICLE = gql`
-  query GetArticle($slug: ID!, $type: PostIdType, $isPreview: Boolean) {
-    post(id: $slug, idType: $type, asPreview: $isPreview) {
+export const GET_ARTICLE = gql`
+  query GetArticle($id: ID!, $type: PostIdType, $isPreview: Boolean) {
+    post(id: $id, idType: $type, asPreview: $isPreview) {
       categories {
         nodes {
           id
@@ -32,34 +33,37 @@ const GET_ARTICLE = gql`
 `;
 
 const ModalRoot = () => {
-  const location = useLocation();
-  let backUrl = "/";
-  let { slug } = useParams();
-  let type = "SLUG";
+  const { state, search } = useLocation();
+  let backUrl = state?.background.pathname || "/";
+  const { slug } = useParams();
+  let id = state?.id ? state.id : slug;
+  let type = state?.id ? "ID" : "SLUG";
   let isPreview = false;
 
-  if (location.state) backUrl = location.state.background.pathname;
-  if (location.search) {
-    const q = new URLSearchParams(location.search);
-    slug = q.has("preview_id") ? q.get("preview_id") : q.get("p");
+  if (search) {
+    const q = new URLSearchParams(search);
+    id = q.has("preview_id") ? q.get("preview_id") : q.get("p");
     type = "DATABASE_ID";
     isPreview = !!q.get("preview");
   }
 
   const { data, loading, error } = useQuery(GET_ARTICLE, {
-    variables: { slug, type, isPreview },
+    variables: { id, type, isPreview },
+    fetchPolicy: "cache-first",
+    returnPartialData: true,
   });
 
   const zoomImage = useSelector((state) => state.UI.zoomImage);
   const history = useHistory();
 
-  // useLocation().state.scrollToTop = false;
   useEffect(() => {
     const hendleCloseEsc = (event) => {
+      event.stopPropagation();
       setScrollToTop(false);
       if (!zoomImage.isZoom && event.keyCode === 27) {
         // if (history.length === 1) history.push("/");
         // else history.goBack();
+        overlayVar({ isOpen: false });
         history.push(backUrl);
       }
     };
@@ -69,20 +73,15 @@ const ModalRoot = () => {
   }, [zoomImage.isZoom, history, backUrl]);
 
   const hendleClose = (event) => {
+    event.stopPropagation();
     if (event.target.getAttribute("data-close")) {
-      // event.stopPropagation();
       setScrollToTop(false);
-      // history.push(backUrl);
-      // <SEO />;
-
+      overlayVar({ isOpen: false });
       history.push(backUrl);
-
-      // if (history.length === 1) history.push("/");
-      // else history.goBack();
     }
   };
 
-  if (loading) return <Loader isFullscreen={true} />;
+  if (loading && !state?.id) return <Loader isFullscreen={true} />;
   if (error) return console.error(error);
 
   const defaultPost = {
@@ -92,19 +91,18 @@ const ModalRoot = () => {
     featuredImage: null,
     terms: null,
   };
-  const { title, excerpt, content, categories, featuredImage } = data.post
-    ? data.post
-    : defaultPost;
+  const { title, excerpt, content, categories, featuredImage } =
+    data?.post || defaultPost;
 
   return createPortal(
     <Modal
       title={title}
       excerpt={excerpt}
       content={content}
-      image={featuredImage && featuredImage.node.sourceUrl}
+      image={featuredImage?.node.sourceUrl}
       categories={categories}
       onCloseHendler={hendleClose}
-      notFound={!data.post}
+      notFound={!data?.post}
     />,
     document.getElementById("modal_root")
   );

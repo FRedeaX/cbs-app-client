@@ -1,6 +1,6 @@
 import { gql, makeVar } from "@apollo/client";
 
-export const overlayVar = makeVar({ isOpen: false });
+export const overlayVar = makeVar({ isOpen: false, zIndex: "" });
 
 export const GET_OVERLAY_FRAGMENT = "overlay @client";
 export const GET_OVERLAY = gql`

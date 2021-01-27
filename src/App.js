@@ -2,7 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import classes from "./App.module.css";
 import Footer from "./components/Footer/Footer";
-import { default as Overlay } from "./components/UI/Overlay-v2/Overlay";
+import { default as Overlay } from "./components/UI/Overlay/Overlay";
 import ZoomImage from "./components/Zoom-image/Zoom-image";
 import Header from "./containers/Header/Header";
 import { Router } from "./containers/Router/Router";

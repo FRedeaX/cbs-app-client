@@ -2,7 +2,7 @@
   font-size: 15px;
   background-color: var(--bgWhite);
   border-bottom: 1px solid #dbdbdb;
-  z-index: 4;
+  z-index: 3;
 }
 
 .position {
@@ -10,7 +10,7 @@
   top: 0;
   left: 0;
   right: 0;
-  transition: transform 0.25s ease-in;
+  transition: transform 0.3s ease;
 }
 
 .wrapper {
@@ -65,7 +65,6 @@
   padding: 20px;
   transform: translateX(300px);
   transition: transform 0.25s ease-in;
-  z-index: 3;
 }
 
 .mobile--active {

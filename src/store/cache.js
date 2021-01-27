@@ -22,6 +22,14 @@ export const cache = new InMemoryCache({
             return overlayVar();
           },
         },
+
+        //Перенаправление кэша
+        post(_, { args, toReference }) {
+          return toReference({
+            __typename: "Post",
+            id: args.id,
+          });
+        },
       },
     },
   },
