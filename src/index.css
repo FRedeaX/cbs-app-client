@@ -88,14 +88,13 @@ figcaption {
   box-sizing: border-box;
 }
 
-button {
+/* button {
   background: transparent;
   border: none;
   cursor: pointer;
 
-  /* font-family: var(--fontC); */
   font-size: 1.8rem;
-}
+} */
 
 table {
   border-collapse: collapse;

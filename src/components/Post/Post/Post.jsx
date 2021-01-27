@@ -31,23 +31,28 @@ const Post = ({ data, title, groupCards = true }) => {
         {title ? title : "Мероприятия"}
       </SectionHeader>
       <div className={classes.container}>
-        { groupCards
-          ? <PostAndGroupCards data={ data } />
-          : <PostNotGroupCards data={ data } /> }
+        {groupCards ? (
+          <PostAndGroupCards data={data} />
+        ) : (
+          <PostNotGroupCards data={data} />
+        )}
       </div>
     </>
   );
 };
 
-function areEqual(prevProps, nextProps) {
-  if (prevProps.data.length === nextProps.data.length) {
-    return true
-  };
-  /*
-  возвращает true, если nextProps рендерит
-  тот же результат что и prevProps,
-  иначе возвращает false
-  */
-}
+// function areEqual(prevProps, nextProps) {
+//   if (
+//     prevProps.title === nextProps.title ||
+//     prevProps.data.length === nextProps.data.length
+//   ) {
+//     return true;
+//   }
+//   /*
+//   возвращает true, если nextProps рендерит
+//   тот же результат что и prevProps,
+//   иначе возвращает false
+//   */
+// }
 
-export default memo(Post, areEqual);
+export default memo(Post);

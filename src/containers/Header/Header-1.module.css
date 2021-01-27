@@ -1,0 +1,255 @@
+.header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: var(--bgWhite);
+  border-bottom: 1px solid #dbdbdb;
+  transition: transform 0.28s ease-out;
+  z-index: 4;
+}
+
+.header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 50px;
+  background-image: url("/wp-content/themes/cbs-app/girlanda@100.png");
+  background-repeat: repeat-x;
+  background-size: contain;
+  transition: transform 0.28s ease-out;
+  /* z-index: -1; */
+}
+
+.grid {
+  /* display: grid;
+  grid-template-columns: 0 0 0 0 0 0 1fr 4.5rem;
+  grid-template-rows: 4rem 4rem;
+  grid-column-gap: 1.84rem;
+  grid-row-gap: 1rem;
+  grid-template-areas: */
+  /* "logo logo logo logo logo logo . ." */
+  /* "logo logo logo logo logo logo menu menu"
+    "logo logo logo logo logo logo secondary social"; */
+  /* "logo logo logo logo logo logo . ."; */
+  /* align-items: center; */
+
+  display: flex;
+  width: 100%;
+  height: 115px;
+  /* padding: 0 15px; */
+  justify-content: space-between;
+  align-items: center;
+
+  /* padding: 1rem 0; */
+  box-sizing: border-box;
+  transition: transform 0.28s ease-out;
+}
+
+.logo {
+  /* grid-area: logo; */
+
+  flex: 0 0 80px;
+  transition: transform 0.28s ease-out;
+  margin-top: 15px;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  flex: 1;
+  padding-left: 0.6rem;
+  margin-top: 50px;
+}
+
+/* .nav { */
+/* margin-bottom: 4px; */
+/* grid-area: menu;
+  margin-top: auto;
+  padding-left: 0.6rem; */
+/* } */
+
+.controls {
+  display: none;
+}
+
+.secondary {
+  /* grid-area: secondary;*/
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 4px;
+}
+
+.social {
+  padding-right: 36px;
+}
+
+.svg {
+  width: 30px;
+  height: 30px;
+}
+
+.svg--vk {
+  fill: #4a76a8;
+}
+
+.svg--ok {
+  fill: #ee8208;
+}
+
+.svg--youtube {
+  fill: #cc0000;
+}
+
+@media screen and (min-width: 995px) {
+  .header--scrolled {
+    transform: translateY(-20px);
+  }
+
+  .header--scrolled::after {
+    transform: translateY(10px);
+  }
+
+  .header--scrolled .grid {
+    transform: translateY(10px); /*10*/
+  }
+
+  .header--scrolled .logo {
+    transform: scale(0.8);
+  }
+}
+
+.desktop-icons {
+  display: flex;
+  column-gap: 20px;
+}
+
+.tablet-icons {
+  display: none;
+}
+
+@media screen and (max-width: 995px) {
+  .header::after {
+    top: -8px;
+  }
+
+  .grid {
+    /* grid-row-gap: 7px;
+    grid-column-gap: 13px; */
+    height: 80px;
+  }
+
+  .logo {
+    flex: 0 0 60px;
+    margin-top: 4px;
+  }
+
+  .nav {
+    /* display: none; */
+    order: 1;
+    margin-top: 1.4rem;
+    overflow-y: auto;
+  }
+
+  .secondary {
+    /* display: none; */
+    width: 80%;
+    justify-content: start;
+  }
+
+  .navigation {
+    width: 30rem;
+    height: 100%;
+    justify-content: start;
+    padding: 1rem 2rem;
+    background-color: var(--bgWhite);
+    /*rgba(1,1,1,0.4)*/
+    position: fixed;
+    right: 0;
+    top: 0;
+    margin-top: 0;
+    will-change: transform;
+    transform: translateX(30rem);
+    transition: 0.35s;
+    box-sizing: border-box;
+    z-index: 3;
+  }
+
+  .navigation--active {
+    transform: translateX(0);
+  }
+
+  .desktop-icons {
+    display: none;
+  }
+
+  .tablet-icons {
+    display: block;
+  }
+
+  .controls {
+    display: block;
+    display: flex;
+    margin-top: 22px;
+    z-index: 1;
+  }
+
+  .button {
+    position: relative;
+    width: 3rem;
+    height: 3rem;
+    z-index: 22;
+    padding: 0;
+    outline: none;
+    will-change: transform;
+  }
+
+  /* all */
+  .button .line,
+  .button .line::before,
+  .button .line::after {
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    border-radius: 12px;
+    background-color: hsla(0, 0%, 34%, 1);
+    transition: transform 0.15s;
+  }
+
+  .button .line::before {
+    content: "";
+    right: 0;
+    top: -8px;
+  }
+
+  .button .line::after {
+    content: "";
+    right: 0;
+    top: 8px;
+  }
+
+  .button--active .line {
+    /* width: 70%; */
+    margin-left: 30%;
+    transform: scale(0.7);
+    transform-origin: left;
+  }
+
+  /* all */
+  .button--active .line::before,
+  .button--active .line::after {
+    transform-origin: right;
+  }
+
+  .button--active .line::before {
+    transform: rotate(45deg) scaleX(0.5) translate(12px, 7px);
+  }
+
+  .button--active .line::after {
+    transform: rotate(-45deg) scaleX(0.5) translate(12px, -7px);
+  }
+}

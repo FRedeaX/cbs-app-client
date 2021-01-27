@@ -1,0 +1,82 @@
+.body {
+  /* position: relative; */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  z-index: 3;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.subMenu-desktop,
+.subMenu-mobile {
+  position: absolute;
+  background-color: var(--bgWhite);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease-out;
+}
+
+.subMenu-desktop {
+  width: 300px;
+  border-radius: 8px;
+  z-index: 2;
+}
+
+.subMenu-mobile {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px;
+  z-index: 4;
+}
+
+.subMenu-mobile--active {
+  visibility: visible;
+  opacity: 1;
+  transition-property: opacity;
+  transition-duration: 0.175s;
+  transition-timing-function: ease-out;
+}
+
+/* .subMenu-mobile--padding {
+  padding: 63px 10px 10px;
+} */
+
+.body--right {
+  right: 0;
+  width: 250px;
+}
+
+.subMenu-desktop li {
+  padding: 0 6px;
+}
+
+.subMenu-desktop li:first-child {
+  border-radius: 0 8px 0 0;
+}
+.body--right li:first-child {
+  border-radius: 8px 0 0 0;
+}
+.subMenu-desktop li:last-child {
+  border-radius: 0 0 8px 8px;
+}
+
+.subMenu-desktop--lvl2 {
+  width: calc(100% - 50px);
+  right: 0;
+  border-radius: 0 0 0 8px;
+}
+.body--right .subMenu-desktop--lvl2 {
+  left: 0;
+}
+
+.subMenu-desktop--lvl3 {
+  left: 250px;
+  top: 0;
+  border-radius: 0 8px 8px 0;
+}

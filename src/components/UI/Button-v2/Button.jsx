@@ -6,11 +6,14 @@ import classes from "./Button.module.css";
 
 const Button = ({
   cls,
+  className,
+  view = "default",
+
   type,
   onClick,
   isVisible,
-  isLoading,
-  isDisabled,
+  isLoading = false,
+  isDisabled = false,
   children,
 }) => {
   // const style = [classes.button, cls];
@@ -20,7 +23,7 @@ const Button = ({
 
   let cx = classNames.bind(classes);
 
-  const btnClass = cx(cls, {
+  const btnClass = cx(cls, className, {
     button: true,
     inactiv: !isVisible && isLoading,
   });
@@ -32,7 +35,7 @@ const Button = ({
       className={btnClass}
       type={type ? type : "button"}
       onClick={onClick}
-      disabled={isDisabled ? isDisabled : false}
+      disabled={isDisabled}
     >
       {isLoading && (
         <span className={classes.loading}>

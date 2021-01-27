@@ -1,0 +1,30 @@
+.wrapper_desktop,
+.wrapper_mobile {
+  display: flex;
+  align-items: center;
+}
+
+.wrapper_desktop {
+  padding-right: 36px;
+}
+
+.wrapper_mobile {
+  padding-right: 6px;
+}
+
+.svg {
+  width: 30px;
+  height: 30px;
+}
+
+.svg--vk {
+  fill: #4a76a8;
+}
+
+.svg--ok {
+  fill: #ee8208;
+}
+
+.svg--youtube {
+  fill: #cc0000;
+}

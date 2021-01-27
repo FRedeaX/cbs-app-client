@@ -9,7 +9,7 @@ const Page = (props) => {
     <div className={classes.container}>
       <h1 className={classes.title}>{title}</h1>
       <div className={classes.content}>
-        {/* <Share cls={classes.share} /> */ }
+        {/* <Share cls={classes.share} /> */}
         <Content>{content}</Content>
       </div>
     </div>

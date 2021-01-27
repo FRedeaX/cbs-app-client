@@ -1,0 +1,98 @@
+:root {
+  --button-size-m-icon-indentLeft: 30px;
+  --button-size-m-icon-width: 30px;
+}
+
+.desktop--overlay::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--menuLink--medium);
+  border-radius: 0 8px 8px 8px;
+
+  transition: opacity 0.15s ease-out;
+  opacity: 0;
+  visibility: hidden;
+  z-index: -1;
+}
+
+.desktop--overlay-radius::after {
+  border-radius: 8px 0 8px 8px;
+}
+
+.mobile--margin-left {
+  margin-left: 5px;
+}
+
+.link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.link--cursor {
+  cursor: default;
+}
+
+.text {
+  display: inline-block;
+  padding: 6px;
+  position: relative;
+}
+
+.text--mb {
+  margin-bottom: 4px;
+}
+
+.text::after {
+  content: "";
+  position: absolute;
+  left: 7px;
+  right: 6px;
+  bottom: 4px;
+  height: 1px;
+  background-color: var(--borderLink);
+  transition: transform 0.2s, transform-origin 0.25s;
+  transform: scaleX(0);
+  transform-origin: left;
+  z-index: 1;
+}
+
+.button {
+  text-align: left;
+}
+
+.icon_width {
+  bottom: 0;
+}
+
+/**
+ *
+ * hover
+ *
+ */
+
+.desktop:hover {
+  background-color: var(--bgWhite);
+}
+.desktop--overlay:hover::after {
+  transition-delay: 0.08s;
+}
+.desktop:hover > ul,
+.desktop--overlay:hover::after {
+  visibility: visible;
+  opacity: 1;
+  transition-property: opacity;
+  transition-duration: 0.175s;
+  transition-timing-function: ease-out;
+}
+
+.desktop:hover > .link .text::after,
+.desktop:hover > .text::after,
+.link_active > .text::after {
+  transform-origin: right;
+  transform: scaleX(1);
+}

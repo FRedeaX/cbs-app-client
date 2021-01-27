@@ -2,3 +2,15 @@
   min-height: calc(100vh - (110px + 90px));
   margin-bottom: 20px;
 }
+
+@media screen and (max-width: 950px) {
+  .main {
+    padding-top: 80px;
+  }
+}
+
+@media screen and (min-width: 951px) {
+  .main {
+    padding-top: 100px;
+  }
+}
