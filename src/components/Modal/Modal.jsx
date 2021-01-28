@@ -1,10 +1,17 @@
-import React, { Fragment, useEffect, useRef, useState } from "react";
+import React, {
+  Fragment,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import Button from "../../components/UI/Button/Button";
 import { classJoin, createMarkup } from "../../helpers";
 import { overlayVar } from "../../store/variables/overlay";
 import Content from "../Content/Content";
 import SEO from "../Seo/Seo";
 import Share from "../Share/Share";
+import Loader from "../UI/Loader/Loader";
 import NotFound from "./../../components/NotFound/NotFound";
 import Category from "./../post/Category/Category";
 import classes from "./Modal.module.css";
@@ -14,6 +21,7 @@ const Modal = ({
   title,
   excerpt,
   content,
+  loading = false,
   image,
   categories,
   onCloseHendler,
@@ -24,9 +32,12 @@ const Modal = ({
   const titleRef = useRef(null);
   const titleOffsetHeight = useRef(null);
   useEffect(() => {
-    overlayVar({ isOpen: true });
     if (titleRef.current)
       titleOffsetHeight.current = titleRef.current.offsetHeight;
+  }, []);
+
+  useLayoutEffect(() => {
+    overlayVar({ isOpen: true });
   }, []);
 
   const hendleScroll = (event) => {
@@ -105,7 +116,7 @@ const Modal = ({
               dangerouslySetInnerHTML={createMarkup(title)}
             />
           )}
-          {content && (
+          {(content || loading) && (
             <div className={classes.wrapper}>
               <Share
                 cls={classes.share}
@@ -113,10 +124,7 @@ const Modal = ({
                 title={title}
                 image={image}
               />
-              {/* <div
-                className={classes.content}
-                dangerouslySetInnerHTML={createMarkup(content)}
-              /> */}
+              {loading && <Loader />}
               <Content cls={classes.content}>{content}</Content>
             </div>
           )}

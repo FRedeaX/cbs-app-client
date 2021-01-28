@@ -49,8 +49,8 @@ const ModalRoot = () => {
 
   const { data, loading, error } = useQuery(GET_ARTICLE, {
     variables: { id, type, isPreview },
-    fetchPolicy: "cache-first",
-    returnPartialData: true,
+    fetchPolicy: state?.id ? "cache-first" : "network-only",
+    returnPartialData: !!state?.id,
   });
 
   const zoomImage = useSelector((state) => state.UI.zoomImage);
@@ -99,6 +99,7 @@ const ModalRoot = () => {
       title={title}
       excerpt={excerpt}
       content={content}
+      loading={loading}
       image={featuredImage?.node.sourceUrl}
       categories={categories}
       onCloseHendler={hendleClose}
