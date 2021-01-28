@@ -5,6 +5,7 @@ import { overlayVar } from "../../store/variables/overlay";
 import Content from "../Content/Content";
 import SEO from "../Seo/Seo";
 import Share from "../Share/Share";
+import Loader from "../UI/Loader/Loader";
 import NotFound from "./../../components/NotFound/NotFound";
 import Category from "./../post/Category/Category";
 import classes from "./Modal.module.css";
@@ -14,6 +15,7 @@ const Modal = ({
   title,
   excerpt,
   content,
+  loading = false,
   image,
   categories,
   onCloseHendler,
@@ -105,7 +107,7 @@ const Modal = ({
               dangerouslySetInnerHTML={createMarkup(title)}
             />
           )}
-          {content && (
+          {(content || loading) && (
             <div className={classes.wrapper}>
               <Share
                 cls={classes.share}
@@ -113,10 +115,7 @@ const Modal = ({
                 title={title}
                 image={image}
               />
-              {/* <div
-                className={classes.content}
-                dangerouslySetInnerHTML={createMarkup(content)}
-              /> */}
+              {loading && <Loader />}
               <Content cls={classes.content}>{content}</Content>
             </div>
           )}

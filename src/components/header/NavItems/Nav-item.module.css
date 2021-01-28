@@ -35,6 +35,7 @@
 
 .link--cursor {
   cursor: default;
+  pointer-events: none;
 }
 
 .text {
