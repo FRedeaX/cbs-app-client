@@ -1,7 +1,3 @@
-.header {
-  padding-top: 25px;
-}
-
 .header:hover .link::before {
   opacity: 0.8;
 }
@@ -15,8 +11,8 @@
 }
 
 .link::before {
-  content: '';
-  background-image: url('/wp-content/themes/cbs-app/icons/arrow.svg');
+  content: "";
+  background-image: url("/wp-content/themes/cbs-app/icons/arrow.svg");
   position: absolute;
   top: 6px;
   right: 0;

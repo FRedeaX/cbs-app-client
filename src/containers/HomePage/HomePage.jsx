@@ -1,7 +1,9 @@
 import { useQuery } from "@apollo/client";
+import classnames from "classnames";
 import React, { memo, useLayoutEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import SEO from "../../components/Seo/Seo";
+import Today from "../../components/Today/Today";
 import Layout from "../../components/UI/Layout/Layout";
 import { GET_WIDTH } from "../../store/variables/windowWidth";
 import ModalRoot from "../ModalRoot/ModalRoot";
@@ -44,26 +46,29 @@ const HomePage = () => {
 
       <Layout page={false} padingDisabled={true}>
         <div className={classes.wrapper}>
-          <section className={classes.poster}>
-            {isTowColumn ? (
-              <PosterRoot
-                limitRender={2}
-                isSkipPastEvent={true}
-                clsHeader={classes.header}
-                clsItem={classes.item}
-              />
-            ) : (
-              <PosterRoot
-                isCarousel={true}
-                isSkipPastEvent={true}
-                clsHeader={classes.header}
-                clsItem={classes.item}
-              />
-            )}
-          </section>
-          <section className={classes.post}>
-            <PostContainer />
-          </section>
+          <Today className={classes.today} />
+          <div className={classes.body}>
+            <section className={classnames(classes.section, classes.poster)}>
+              {isTowColumn ? (
+                <PosterRoot
+                  limitRender={2}
+                  isSkipPastEvent={true}
+                  clsHeader={classes.header}
+                  clsItem={classes.item}
+                />
+              ) : (
+                <PosterRoot
+                  isCarousel={true}
+                  isSkipPastEvent={true}
+                  clsHeader={classes.header}
+                  clsItem={classes.item}
+                />
+              )}
+            </section>
+            <section className={classnames(classes.section, classes.post)}>
+              <PostContainer />
+            </section>
+          </div>
         </div>
       </Layout>
       {/* <Alert>

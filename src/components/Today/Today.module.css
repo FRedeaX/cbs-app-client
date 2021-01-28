@@ -1,0 +1,18 @@
+.wrapper {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+}
+
+.text {
+  font-size: 16px;
+  font-family: var(--font-R-S);
+  font-style: italic;
+  text-align: center;
+  line-height: 1.25;
+  background-color: rgb(207, 216, 220, 0.25);
+  padding: 6px 8px;
+  border-radius: 8px;
+}

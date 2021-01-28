@@ -13,14 +13,24 @@
 }
 
 .wrapper {
+  padding-top: 25px;
+}
+
+.body {
   display: flex;
-  /* flex-wrap: wrap; */
-  /* width: max-content; */
+  justify-content: center;
+  gap: 10px;
   max-width: 1310px;
   width: 100%;
   margin: auto;
-  gap: 10px;
-  justify-content: center;
+}
+
+.section {
+  margin: 10px 0 20px;
+}
+
+.today {
+  margin: 0 10px;
 }
 
 /*
@@ -36,7 +46,7 @@
  * width <= 1330
  */
 @media screen and (max-width: 1330px) {
-  .wrapper {
+  .body {
     max-width: 960px;
     flex-direction: column;
   }
@@ -79,7 +89,7 @@
  * width <= 1020
  */
 /* @media screen and (max-width: 1020px) {
-  .wrapper {
+  .body {
     width: 97.917%;
   }
 } */
