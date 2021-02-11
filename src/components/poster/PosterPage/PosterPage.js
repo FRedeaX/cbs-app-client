@@ -8,9 +8,7 @@ const PosterPage = () => {
   }, []);
   return (
     <Layout>
-      <div style={{ margin: "auto" }}>
-        <PosterRoot />
-      </div>
+      <PosterRoot />
     </Layout>
   );
 };

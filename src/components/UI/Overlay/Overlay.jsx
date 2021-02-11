@@ -2,7 +2,6 @@ import { useQuery } from "@apollo/client";
 import classnames from "classnames";
 import React, { memo, useLayoutEffect } from "react";
 import { scrollbarWidth } from "../../../helpers";
-import { delay } from "../../../helpers/delay";
 import { GET_OVERLAY, overlayVar } from "../../../store/variables/overlay";
 import classes from "./Overlay.module.css";
 
@@ -15,7 +14,7 @@ const Overlay = ({ isTouch = false }) => {
 
   useLayoutEffect(() => {
     if (isOpen) addStyle();
-    else delay(150).then(() => removeStyle());
+    else removeStyle();
   }, [isOpen]);
 
   const addStyle = () => {

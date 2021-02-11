@@ -4,8 +4,7 @@
 
 .title {
   text-align: center;
-  /* margin: 60px 0 40px; */
-  margin: 1.2em 0 1em;
+  margin: 0 0 1em;
   border-bottom: 1px solid var(--black-14);
 }
 

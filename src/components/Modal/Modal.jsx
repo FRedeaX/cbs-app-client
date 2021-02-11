@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import Button from "../../components/UI/Button/Button";
 import { classJoin, createMarkup } from "../../helpers";
+import { isHeaderPosResetVar } from "../../store/variables/header";
 import { overlayVar } from "../../store/variables/overlay";
 import Content from "../Content/Content";
 import SEO from "../Seo/Seo";
@@ -37,6 +38,7 @@ const Modal = ({
   }, []);
 
   useLayoutEffect(() => {
+    isHeaderPosResetVar(true);
     overlayVar({ isOpen: true });
   }, []);
 

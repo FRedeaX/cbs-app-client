@@ -44,31 +44,31 @@ const HomePage = () => {
             <BookPreviewRoot />
         </section> */}
 
-      <Layout page={false} padingDisabled={true}>
+      <Layout page={false} padingTop={false} cls={classes.layout}>
+        <Today className={classes.today} />
         <div className={classes.wrapper}>
-          <Today className={classes.today} />
-          <div className={classes.body}>
-            <section className={classnames(classes.section, classes.poster)}>
-              {isTowColumn ? (
-                <PosterRoot
-                  limitRender={2}
-                  isSkipPastEvent={true}
-                  clsHeader={classes.header}
-                  clsItem={classes.item}
-                />
-              ) : (
-                <PosterRoot
-                  isCarousel={true}
-                  isSkipPastEvent={true}
-                  clsHeader={classes.header}
-                  clsItem={classes.item}
-                />
-              )}
-            </section>
-            <section className={classnames(classes.section, classes.post)}>
-              <PostContainer />
-            </section>
-          </div>
+          <section className={classnames(classes.section, classes.poster)}>
+            {isTowColumn ? (
+              <PosterRoot
+                limitRender={2}
+                isSkipPastEvent={true}
+                url={"/poster"}
+                clsHeader={classes.header}
+                clsItem={classes.item}
+              />
+            ) : (
+              <PosterRoot
+                isCarousel={true}
+                isSkipPastEvent={true}
+                url={"/poster"}
+                clsHeader={classes.header}
+                clsItem={classes.item}
+              />
+            )}
+          </section>
+          <section className={classnames(classes.section, classes.post)}>
+            <PostContainer />
+          </section>
         </div>
       </Layout>
       {/* <Alert>

@@ -6,6 +6,7 @@ import { useHistory, useLocation, useParams } from "react-router-dom";
 import Modal from "../../components/Modal/Modal";
 import { setScrollToTop } from "../../components/ScrollToTop/ScrollToTop";
 import Loader from "../../components/UI/Loader/Loader";
+import { isHeaderPosResetVar } from "../../store/variables/header";
 import { overlayVar } from "../../store/variables/overlay";
 // let isZoom;
 
@@ -64,6 +65,7 @@ const ModalRoot = () => {
         // if (history.length === 1) history.push("/");
         // else history.goBack();
         overlayVar({ isOpen: false });
+        isHeaderPosResetVar(false);
         history.push(backUrl);
       }
     };
@@ -77,6 +79,7 @@ const ModalRoot = () => {
     if (event.target.getAttribute("data-close")) {
       setScrollToTop(false);
       overlayVar({ isOpen: false });
+      isHeaderPosResetVar(false);
       history.push(backUrl);
     }
   };
@@ -91,8 +94,10 @@ const ModalRoot = () => {
     featuredImage: null,
     terms: null,
   };
+
   const { title, excerpt, content, categories, featuredImage } =
     data?.post || defaultPost;
+  // const { title, excerpt, content, categories, featuredImage } = data.post;
 
   return createPortal(
     <Modal

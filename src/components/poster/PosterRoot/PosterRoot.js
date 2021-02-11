@@ -25,7 +25,7 @@ const PosterRoot = ({
   limitRender = false,
   isCarousel = false,
   isSkipPastEvent = false,
-  url,
+  url = false,
   clsHeader,
   clsItem,
 }) => {

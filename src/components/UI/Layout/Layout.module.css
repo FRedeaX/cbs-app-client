@@ -5,6 +5,10 @@
   padding: 0 15px;
 }
 
+.top {
+  padding-top: 25px;
+}
+
 .page {
   max-width: 960px;
 }

@@ -16,8 +16,10 @@ import {
 } from "../../components/header/NavList/NavList";
 import Logo from "../../components/Logo/Logo";
 import Layout from "../../components/UI/Layout/Layout";
+import { scrollbarWidth } from "../../helpers";
 import { delay } from "../../helpers/delay";
 import { getLocalStorage, setLocalStorage } from "../../helpers/localStorage";
+import { IS_HEADER_POS_RESET_FRAGMENT } from "../../store/variables/header";
 import {
   GET_OVERLAY_FRAGMENT,
   overlayVar,
@@ -39,12 +41,13 @@ const FETCH_MENU = gql`
 
 const Header = () => {
   const {
-    data: { windowWidth, overlay, scrollY },
+    data: { windowWidth, overlay, scrollY, isHeaderPosReset },
   } = useQuery(gql`
     query {
       ${GET_WIDTH_FRAGMENT}
       ${GET_OVERLAY_FRAGMENT}
       ${SCROLLY_FRAGMENT}
+      ${IS_HEADER_POS_RESET_FRAGMENT}
     }
   `);
 
@@ -99,12 +102,13 @@ const Header = () => {
   const data = menu || menus;
   return (
     <header
+      style={{ right: isHeaderPosReset ? `${scrollbarWidth}px` : "" }}
       className={classNames(classes.header, classes.position, {
         [classes["position--hidden"]]: isHeaderHidden,
       })}
     >
       {/* {console.log("H_Render")} */}
-      <Layout page={false} cls={classes.wrapper}>
+      <Layout page={false} padingTop={false} cls={classes.wrapper}>
         <div className={classes.logo}>
           <Logo />
         </div>
