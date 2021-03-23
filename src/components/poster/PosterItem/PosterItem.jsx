@@ -19,6 +19,7 @@ export const posterItem = {
       }
       posterDate {
         date
+        dataend
       }
       title
       id
@@ -31,11 +32,14 @@ const PosterItem = ({
   cls,
 }) => {
   const date = posterDate.date.split("/");
-
+  const dayEnd = posterDate.dataend?.split("/")[0];
+  
   return (
     <div className={classNames(classes.wrapper, cls)}>
       <div className={classes.header}>
-        <span className={classes.date}>{date[0]}</span>
+        <span className={classNames(classes.date, {[classes["date_size_small"]]: dayEnd})}>
+          {dayEnd ? `${date[0]}-${dayEnd}` : date[0]}
+        </span>
         <span className={classes.month}>{getStringMonth(date[1])}</span>
         {/* <span
           className={classes.type}
@@ -52,17 +56,19 @@ const PosterItem = ({
         />
         <div className={classes.description}>{excerpt}</div>
       </div>
-      <div className={classes.footer}>
-        <Link
-          to={`/biblioteki/?lib=${posterDepartments.nodes[0].slug}&schedule=1`}
-          className={classes.link}
-        >
-          {posterDepartments.nodes[0].name}
-        </Link>
-        <span className={classes.info} title={"Cправки по телефону"}>
-          {posterDepartments.nodes[0].description}
-        </span>
-      </div>
+      {posterDepartments.nodes[0] &&
+        <div className={classes.footer}>
+          <Link
+            to={`/biblioteki/?lib=${posterDepartments.nodes[0].slug}`}
+            className={classes.link}
+          >
+            {posterDepartments.nodes[0].name}
+          </Link>
+          <span className={classes.info} title={"Cправки по телефону"}>
+            {posterDepartments.nodes[0].description}
+          </span>
+        </div>
+      }
     </div>
   );
 };

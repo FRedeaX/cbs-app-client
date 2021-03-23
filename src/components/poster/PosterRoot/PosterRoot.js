@@ -12,7 +12,7 @@ import PosterList from "../PosterList/PosterList";
 
 const FETCH_POSTER = gql`
   query FetchPoster {
-    posters(where: { dateQuery: { year: 2021, month: 1 } }, first: 10) {
+    posters(where: { dateQuery: { year: 2021, month: 3 } }, first: 10) {
       nodes {
         ...posterItem
       }
@@ -50,7 +50,7 @@ const PosterRoot = ({
   if (error) return console.log(error);
   // if (loading || error) return null;
 
-  const dataPosters = poster ? poster : data;
+  const dataPosters = poster || data;  
   if (!dataPosters) return null;
   const posters = dataPosters.posters.nodes;
 
@@ -59,7 +59,8 @@ const PosterRoot = ({
   const day = date.getDate();
   const hours = date.getHours();
 
-  const lastPoster = posters[posters.length - 1].posterDate.date;
+  const lastPoster = posters[posters.length - 1]?.posterDate.date;
+  if (!lastPoster) return null;
   const lastPosterDay = lastPoster.split("/")[0] * 1;
   const lastPosterMonth = lastPoster.split("/")[1] * 1;
   if (
@@ -73,21 +74,23 @@ const PosterRoot = ({
     return posters.map((poster) => {
       const posterDate = poster.posterDate.date;
       const posterDay = posterDate.split("/")[0] * 1;
+      const posterDayEnd = poster.posterDate.dataend?.split("/")[0] * 1;
       const posterMonth = posterDate.split("/")[1] * 1;
-      // console.log(
-      //   posterMonth === month ||
-      //     (isSkipPastEvent &&
-      //       ((limitRender && index + 1 > limitRender) ||
-      //         posterDay < day ||
-      //         (posterDay === day && hours > 18)))
+      // console.log(poster.title, (limitRender && index + 1 > limitRender) ||
+      //   (isSkipPastEvent &&
+      //     posterMonth === month &&
+      //     ((!posterDayEnd && (posterDay < day || (posterDay === day && hours > 18))) || 
+      //     (posterDayEnd < day || (posterDayEnd === day && hours > 18))))
       // );
       if (
         (limitRender && index + 1 > limitRender) ||
         (isSkipPastEvent &&
           posterMonth === month &&
-          (posterDay < day || (posterDay === day && hours > 18)))
+          ((!posterDayEnd && (posterDay < day || (posterDay === day && hours > 18))) || 
+          (posterDayEnd < day || (posterDayEnd === day && hours > 18))))
       )
         return null;
+      // console.log(posterDayEnd);
       index++;
       return <PosterItem key={poster.id} data={poster} cls={clsItem} />;
     });

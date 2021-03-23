@@ -1,5 +1,6 @@
 .main {
-  min-height: calc(100vh - (110px + 90px));
+  /* min-height: calc(100vh - (110px + 90px)); */
+  flex: 1;
   margin-bottom: 20px;
 }
 

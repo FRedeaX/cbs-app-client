@@ -17,7 +17,7 @@
     "@yandex/ui": "^2.61.1",
     "apollo-link-persisted-queries": "^0.2.2",
     "classnames": "^2.2.6",
-    "graphql": "^15.4.0",
+    "graphql": "^15.5.0",
     "react": "^16.14.0",
     "react-device-detect": "^1.15.0",
     "react-dom": "^16.14.0",

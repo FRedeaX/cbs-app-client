@@ -38,8 +38,12 @@ const Modal = ({
   }, []);
 
   useLayoutEffect(() => {
-    isHeaderPosResetVar(true);
-    overlayVar({ isOpen: true });
+    const toggle = (bool) => {
+      isHeaderPosResetVar(bool);
+      overlayVar({ isOpen: bool });
+    }
+    toggle(true);
+    return () => toggle(false);
   }, []);
 
   const hendleScroll = (event) => {

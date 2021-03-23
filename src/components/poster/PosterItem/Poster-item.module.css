@@ -29,6 +29,10 @@
   /* color: var(--dark-gray); */
 }
 
+.date_size_small {
+  font-size: 1.71em;
+}
+
 .month {
   font-weight: 300;
 }
