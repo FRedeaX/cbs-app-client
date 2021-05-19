@@ -12,7 +12,7 @@ import PosterList from "../PosterList/PosterList";
 
 const FETCH_POSTER = gql`
   query FetchPoster {
-    posters(where: { dateQuery: { year: 2021, month: 3 } }, first: 10) {
+    posters(first: 20) {
       nodes {
         ...posterItem
       }
@@ -50,7 +50,7 @@ const PosterRoot = ({
   if (error) return console.log(error);
   // if (loading || error) return null;
 
-  const dataPosters = poster || data;  
+  const dataPosters = poster || data;
   if (!dataPosters) return null;
   const posters = dataPosters.posters.nodes;
 
@@ -79,15 +79,17 @@ const PosterRoot = ({
       // console.log(poster.title, (limitRender && index + 1 > limitRender) ||
       //   (isSkipPastEvent &&
       //     posterMonth === month &&
-      //     ((!posterDayEnd && (posterDay < day || (posterDay === day && hours > 18))) || 
+      //     ((!posterDayEnd && (posterDay < day || (posterDay === day && hours > 18))) ||
       //     (posterDayEnd < day || (posterDayEnd === day && hours > 18))))
       // );
       if (
         (limitRender && index + 1 > limitRender) ||
         (isSkipPastEvent &&
           posterMonth === month &&
-          ((!posterDayEnd && (posterDay < day || (posterDay === day && hours > 18))) || 
-          (posterDayEnd < day || (posterDayEnd === day && hours > 18))))
+          ((!posterDayEnd &&
+            (posterDay < day || (posterDay === day && hours > 18))) ||
+            posterDayEnd < day ||
+            (posterDayEnd === day && hours > 18)))
       )
         return null;
       // console.log(posterDayEnd);

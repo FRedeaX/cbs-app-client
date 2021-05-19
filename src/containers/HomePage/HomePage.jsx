@@ -1,12 +1,12 @@
 import { useQuery } from "@apollo/client";
 import classnames from "classnames";
 import React, { memo, useLayoutEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import SEO from "../../components/Seo/Seo";
-import Today from "../../components/Today/Today";
 import Layout from "../../components/UI/Layout/Layout";
 import { GET_WIDTH } from "../../store/variables/windowWidth";
 import ModalRoot from "../ModalRoot/ModalRoot";
+import Alert from "./../../components/Alert/Alert";
 import PosterRoot from "./../../components/poster/PosterRoot/PosterRoot";
 import PostContainer from "./../Post/Post";
 import classes from "./Home-Page.module.css";
@@ -45,7 +45,7 @@ const HomePage = () => {
         </section> */}
 
       <Layout page={false} padingTop={false} cls={classes.layout}>
-        <Today className={classes.today} />
+        {/* <Today className={classes.today} /> */}
         <div className={classes.wrapper}>
           <section className={classnames(classes.section, classes.poster)}>
             {isTowColumn ? (
@@ -76,7 +76,7 @@ const HomePage = () => {
           to={"/biblioteki/?lib=cgb&schedule=1"}
           className={classes["alert-link"]}
         >
-          Изменение графика работ в период новогодних праздничных дней.
+          Изменение графика работ с 1 по 10 мая.
         </Link>
       </Alert> */}
     </>

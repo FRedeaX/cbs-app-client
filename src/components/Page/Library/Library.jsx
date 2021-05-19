@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
 import { asyncLoadScript, classJoin } from "../../../helpers";
 import Title, { SUBTITLE } from "../../Title/Title";
@@ -17,6 +17,18 @@ const Library = () => {
   const isSchedule = useMemo(() => {
     return new URLSearchParams(search).has("schedule");
   }, [search]);
+
+  const selectPlacemark = useCallback(() => {
+    let geoObjects = window.ymaps.geoQuery(map.geoObjects);
+
+    // выделим выбранный
+    let selected = geoObjects
+      .search(`properties.id = '${filial.slug}'`)
+      .setOptions("preset", "islands#redIcon");
+
+    // все остальные перекрасим обратно
+    geoObjects.remove(selected).setOptions("preset", "islands#blueIcon");
+  }, [filial]);
 
   // const isMapLoaded = useSelector((state) => state.UI.mapLoaded);
   // const dispatch = useDispatch();
@@ -75,6 +87,7 @@ const Library = () => {
           map.setCenter([45.6246, 63.308]);
         });
       });
+      selectPlacemark();
     }
 
     asyncLoadScript(src, window.ymaps).then(function () {
@@ -87,18 +100,6 @@ const Library = () => {
     if (lib.has("lib")) {
       setFilial(filials[lib.get("lib")]);
     }
-
-    const selectPlacemark = () => {
-      let geoObjects = window.ymaps.geoQuery(map.geoObjects);
-
-      // выделим выбранный
-      let selected = geoObjects
-        .search(`properties.id = '${filial.slug}'`)
-        .setOptions("preset", "islands#redIcon");
-
-      // все остальные перекрасим обратно
-      geoObjects.remove(selected).setOptions("preset", "islands#blueIcon");
-    };
 
     if (map) selectPlacemark();
 
@@ -474,8 +475,7 @@ const filials = {
   },
   ooef: {
     shortName: "ОЕФКиТЛ",
-    name:
-      "Отдел организации Единого фонда, книгохранения и технической литературы",
+    name: "Отдел организации Единого фонда, книгохранения и технической литературы",
     title:
       "Отдела организации Единого фонда, книгохранения и технической литературы",
     address: "ул. Титова, дом 6",
@@ -519,7 +519,7 @@ const filials = {
     scheduleSecondary: [],
     telefon: [
       {
-        position: "Заведующая отделом ЕФКиТЛ",
+        position: "Заведующая отделом ОЕФКиТЛ",
         position_desc:
           "Заведующая отделом Единого фонда, книгохранения и технической литературы",
         name: "Савина Лариса Геннадьевна",

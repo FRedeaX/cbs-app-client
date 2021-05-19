@@ -19,7 +19,7 @@
 .wrapper {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  /* gap: 10px; */
   max-width: 1310px;
   width: 100%;
   margin: auto;
@@ -102,6 +102,11 @@
     max-width: 330px;
     order: 1;
     margin-right: 10px;
+    margin-left: 10px;
+
+    position: sticky;
+    top: 10px;
+    height: max-content;
   }
 
   .item {
@@ -122,6 +127,7 @@
   font-weight: 300;
   text-decoration: none;
   transition: opacity 0.15s;
+  user-select: none;
 }
 
 .alert-link:hover {

@@ -1,6 +1,6 @@
+import classNames from "classnames";
 import React, { useMemo } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { classJoin } from "../../../../../helpers";
 import classesInfo from "../Contact-info.module.css";
 import classes from "./Schedule.module.css";
 
@@ -29,22 +29,15 @@ export const Schedule = ({ schedule, scheduleSecondary }) => {
       return (
         <div
           key={item.weekday}
-          className={
-            item.cleanupDay
-              ? classJoin([
-                  classesInfo.item,
-                  classes.item,
-                  classes["item--cleanup-day"],
-                ])
-              : classJoin([classesInfo.item, classes.item])
-          }
+          className={classNames(classesInfo.item, classes.item, {
+            [classes["item--cleanup-day"]]: item.cleanupDay,
+          })}
         >
           <span
-            className={
-              isSchedule
-                ? classJoin([classesInfo["left-column"], classes.day])
-                : classJoin([classesInfo["left-column"], classes.weekday])
-            }
+            className={classNames(classesInfo["left-column"], {
+              [classes.day]: isSchedule,
+              [classes.weekday]: !isSchedule,
+            })}
           >
             {item.weekday}
           </span>
@@ -53,10 +46,12 @@ export const Schedule = ({ schedule, scheduleSecondary }) => {
       );
     });
   }
+  console.log(lib);
+  //&& new URLSearchParams(search).has("lib")
   return (
     <div className={classesInfo.info}>
       <div className={classes.header}>
-        <h4 className={classJoin([classesInfo.title, classes.title])}>
+        <h4 className={classNames(classesInfo.title, classes.title)}>
           График работы
         </h4>
         {!!scheduleSecondary.length && (
@@ -64,10 +59,7 @@ export const Schedule = ({ schedule, scheduleSecondary }) => {
             <NavLink
               to={{
                 pathname: "/biblioteki/",
-                search:
-                  isSchedule && new URLSearchParams(search).has("lib")
-                    ? `?lib=${new URLSearchParams(search).get("lib")}`
-                    : search,
+                search: isSchedule ? `?${lib || "lib=cgb"}` : search,
                 state: {
                   scrollToTop: false,
                 },

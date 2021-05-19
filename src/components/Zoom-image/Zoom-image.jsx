@@ -36,23 +36,25 @@ const ZoomImage = () => {
         return setIsZoom(false);
       }
 
-      let img = null;
+      // let img = null;
 
-      const promoSelector =
-        target.parentNode && target.parentNode.querySelector(".Promo__zoom");
-      if (promoSelector && target.nodeName === "A") {
-        img = document.createElement("img");
-        img.srcset =
-          "https://cbsbaikonur.ru/wp-content/uploads/2020/10/20201013@768.jpg 769w, https://cbsbaikonur.ru/wp-content/uploads/2020/10/20201013@1600.jpg 1600w";
-        img.src =
-          "https://cbsbaikonur.ru/wp-content/uploads/2020/10/20201013@1600.jpg";
-        img.alt =
-          "«Королева Книга» – торжественное награждение лучших читателей.";
-      }
+      // const promoSelector =
+      //   target.parentNode && target.parentNode.querySelector(".Promo__zoom");
+      // if (promoSelector && target.nodeName === "A") {
+      //   img = document.createElement("img");
+      //   img.srcset =
+      //     "https://cbsbaikonur.ru/wp-content/uploads/2020/10/20201013@768.jpg 769w, https://cbsbaikonur.ru/wp-content/uploads/2020/10/20201013@1600.jpg 1600w";
+      //   img.src =
+      //     "https://cbsbaikonur.ru/wp-content/uploads/2020/10/20201013@1600.jpg";
+      //   img.alt =
+      //     "«Королева Книга» – торжественное награждение лучших читателей.";
+      // }
 
-      if (target.nodeName === "IMG" || img) {
+      // if (target.nodeName === "IMG" || img) {
+      if (target.nodeName === "IMG") {
         event.preventDefault();
-        const image = img ? img : target.cloneNode(false);
+        // const image = img || target.cloneNode(false);
+        const image = target.cloneNode(false);
 
         // const clientWidth = document.documentElement.clientWidth / 2;
         // const clientHeight = document.documentElement.clientHeight / 2;
@@ -63,7 +65,7 @@ const ZoomImage = () => {
         // image.parentNode.style.zIndex = "2";
         // image.style.objectFit = "contain";
         // image.style.transform = `translate(${centerX}px, ${centerY}px) scale(4.5)`;
-        image.style.maxHeight = "";
+        image.style = "";
         zoom.appendChild(image);
         zoom.style.top = `${window.pageYOffset}px`;
         zoom.style.height = "100vh";

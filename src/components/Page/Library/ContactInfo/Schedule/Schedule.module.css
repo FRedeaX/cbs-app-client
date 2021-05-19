@@ -9,6 +9,12 @@
   text-transform: none;
 }
 
+.item_secondary {
+  display: flex;
+  justify-content: space-between;
+  min-width: 140px;
+}
+
 .item--cleanup-day .time {
   font-size: 1.46rem;
 }
@@ -23,6 +29,7 @@
 .day {
   font-size: 14px;
   font-weight: 300;
+  width: 45px;
 }
 
 .time {

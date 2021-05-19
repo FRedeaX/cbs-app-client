@@ -42,9 +42,9 @@
 }
 
 @media screen and (max-width: 320px) {
-  .link {
+  /* .link {
     margin: 0;
-  }
+  } */
 
   .link::after {
     margin: 0px 4px;

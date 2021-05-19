@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import Button from "../UI/Button/Button";
 import Layout from "../UI/Layout/Layout";
 import classes from "./Alert.module.css";
@@ -18,7 +18,7 @@ const Alert = ({ children }) => {
   return (
     isVisible && (
       <div className={classes.wrapper}>
-        <Layout page={false}>
+        <Layout page={false} padingTop={false} cls={classes.layout}>
           {children}
           <Button cls={classes.close} type="button" onClick={onCloseHendler} />
         </Layout>
@@ -27,4 +27,4 @@ const Alert = ({ children }) => {
   );
 };
 
-export default Alert;
+export default memo(Alert);
