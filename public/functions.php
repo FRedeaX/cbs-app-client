@@ -136,27 +136,45 @@ function cbsApp_scripts() {
 	}
 	// wp_enqueue_script( 'cbsApp__header', get_template_directory_uri() . '/js/header.js', array(), '1.0.0', true );
 	// wp_enqueue_script( 'cbsApp__search', get_template_directory_uri() . '/js/search.js', array(), '1.0.0', true );
-	
+
 	// wp_enqueue_script( 'cbsApp__anons', get_template_directory_uri() . '/js/anons.js', array('cbsApp__swiper'), '1.0.0', true );
 	// wp_enqueue_script( 'cbsApp__book', get_template_directory_uri() . '/js/book.js', array('cbsApp__swiper'), '1.0.0', true );
 	// wp_enqueue_script( 'cbsApp__cssGridMasonry', get_template_directory_uri() . '/js/cssGridMasonry.js', array( ), '1.0.0', true );
 
-	
+
 	// wp_enqueue_script( 'cbsApp-script', get_template_directory_uri() . '/js/functions.js', array(), '1.0.0', true );
 }
 add_action( 'wp_enqueue_scripts', 'cbsApp_scripts' );
 
+//Preview url
+add_filter( 'preview_post_link', 'the_preview_fix' );
+function the_preview_fix() {
+	$slug = get_permalink();
+	return "/preview/" + "$slug";
+}
+
+// отключаем создание миниатюр файлов для указанных размеров
+add_filter( 'intermediate_image_sizes', 'delete_intermediate_image_sizes' );
+function delete_intermediate_image_sizes( $sizes ){
+	// размеры которые нужно удалить
+	return array_diff( $sizes, [
+		'medium_large',
+		'1536x1536',
+		'2048x2048',
+	] );
+}
+
 // Отключение замены символов в содержимом поста:
-remove_filter('the_content', 'wptexturize');
+// remove_filter('the_content', 'wptexturize');
 // В заголовке поста:
-remove_filter('the_title', 'wptexturize');
+// remove_filter('the_title', 'wptexturize');
 // В тексте комментария:
 remove_filter('comment_text', 'wptexturize');
 // В цитате:
 remove_filter('the_excerpt', 'wptexturize');
 
 // Отключаем автоформатирование в кратком(анонсе) посте
-remove_filter( 'the_excerpt', 'wpautop' ); 
+remove_filter( 'the_excerpt', 'wpautop' );
 /**
  * Удаление конструкции [...] на конце краткого описания
  */
@@ -179,6 +197,11 @@ add_action( 'after_setup_theme', 'gutenberg_setup_theme' );
 function gutenberg_setup_theme(){
 	add_theme_support( 'editor-styles' );
 	add_editor_style( 'editor-style.css' );
+}
+
+add_action('admin_head', 'style_admin');
+function style_admin(){
+	wp_enqueue_style("style-admin", get_bloginfo('stylesheet_directory')."/style-admin.css");
 }
 
 /**
@@ -229,7 +252,7 @@ function plug_disable_emoji() {
   add_filter( 'tiny_mce_plugins', 'plug_disable_tinymce_emoji' );
 }
 add_action( 'init', 'plug_disable_emoji', 1 );
- 
+
 /**
  * Очистить в tinymce
  */
@@ -257,13 +280,13 @@ function htm_remove_width_attribute($html) {
 // 	wp_deregister_script('jquery-core');
 // 	wp_deregister_script('jquery');
 
-// 	// регистрируем										 
+// 	// регистрируем
 // 	wp_register_script( 'jquery-core', 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js', false, null, true );
 // 	wp_register_script( 'jquery', false, array('jquery-core'), null, true );
 
 // 	// подключаем
 // 	wp_enqueue_script( 'jquery' );
-// }    
+// }
 
 /**
  * metaboxes function.
@@ -278,21 +301,21 @@ function htm_remove_width_attribute($html) {
  * Добавление чекбокса в меню (не выводится в GraphiQL)
  */
 // add_action( 'wp_nav_menu_item_custom_fields', 'true_menu_field', 10, 5 );
-// function true_menu_field( $item_id, $item, $depth, $args, $id ) { 
-// 	// можете сюда также вкинуть wp_nonce_field и его проверку в следующем шаге  
+// function true_menu_field( $item_id, $item, $depth, $args, $id ) {
+// 	// можете сюда также вкинуть wp_nonce_field и его проверку в следующем шаге
 // 	$is_logged_in = get_post_meta( $item_id, '_menu_loggedin', true );
- 
+
 // 	echo '<p class="description">
 // 		<label>
 // 			<input type="checkbox" ' . checked( 'yes', $is_logged_in, false ) . ' name="menu-item-loggedin[' . $item_id . ']">
 // 			Только для зарегистрированных пользователей
 // 		</label>
-// 	</p>'; 
+// 	</p>';
 // }
-// add_action( 'wp_update_nav_menu_item', 'true_update_menu', 10, 2 ); 
-// function true_update_menu( $menu_id, $menu_item_db_id ) { 
+// add_action( 'wp_update_nav_menu_item', 'true_update_menu', 10, 2 );
+// function true_update_menu( $menu_id, $menu_item_db_id ) {
 // 	// если добавляли nonce-поле, то тут его валидация
- 
+
 // 	$meta_value = isset( $_POST[ 'menu-item-loggedin' ][ $menu_item_db_id ] ) && 'on' == $_POST[ 'menu-item-loggedin' ][ $menu_item_db_id ] ? 'yes' : 'no';
 // 	update_post_meta( $menu_item_db_id, '_menu_loggedin', $meta_value );
 // }
@@ -501,7 +524,7 @@ function register_poster_post_type() {
 		'description'           => 'Рубрики для раздела вопросов', // описание таксономии
 		'public'                => true,
 		// 'show_in_nav_menus'     => false, // равен аргументу public
-		// 'show_ui'               => true, // равен аргументу public		
+		// 'show_ui'               => true, // равен аргументу public
 		'show_in_rest' 					=> true, // Таксономи в редакторе Гутенберг
 		// 'show_tagcloud'         => false, // равен аргументу show_ui
 		'hierarchical'          => true,
@@ -542,7 +565,7 @@ function register_poster_post_type() {
 		'menu_position'       => 5,
 		'supports'            => array( 'title', 'editor', 'excerpt' ),
 		'taxonomies'          => array( 'posterDepartment' ),
-		
+
 		'show_in_graphql' 			=> true,
 		'graphql_single_name' 	=> 'poster',
 		'graphql_plural_name' 	=> 'posters',
@@ -553,7 +576,7 @@ function register_poster_post_type() {
  * Добавление произвольного поля в рубрику "филиалы"
  */
 // add_action('init', 'register_additional_term_fields');
-// function register_additional_term_fields(){ 
+// function register_additional_term_fields(){
 // 	new trueTaxonomyMetaBox( array(
 // 		'id'       => 'location', // id играет роль префикса названий полей
 // 		'taxonomy' => array('taxonomyAnons'), // названия таксономий, для которых нужно добавить ниже перечисленные поля
