@@ -179,6 +179,9 @@ remove_filter( 'the_excerpt', 'wpautop' );
  * Удаление конструкции [...] на конце краткого описания
  */
 add_filter('excerpt_more', function($more) {
+	if (is_singular( 'poster' )) {
+		return false;
+	}
 	return '...';
 });
 
@@ -189,6 +192,16 @@ add_action('init', 'page_excerpt');
 function page_excerpt() {
 	add_post_type_support( 'page', 'excerpt' );
 }
+
+/**
+ * Удаление формирования описания из контента
+ */
+add_filter( 'excerpt_length', function() {
+	if (is_singular( 'poster' )) {
+		return 0;
+	}
+	return 55;
+} );
 
 /**
  * подключение кастомных стилей для гутенберга
